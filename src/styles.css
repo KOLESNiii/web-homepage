@@ -1,0 +1,99 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #0b0d10;
+  color: #e6e6eb;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}
+
+/* Screens */
+.screen-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8rem;
+  background: radial-gradient(circle at top, #141823, #0b0d10);
+}
+
+.screen h1 {
+  font-size: 4rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.screen p {
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+  opacity: 0.8;
+  max-width: 40rem;
+}
+
+/* Navigation */
+.nav {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.nav button {
+  background: transparent;
+  border: 1px solid #2a2f45;
+  color: #e6e6eb;
+  width: 2.75rem;
+  height: 2.75rem;
+  cursor: pointer;
+  transition: background 0.2s, border 0.2s;
+}
+
+.nav button:hover:not(:disabled) {
+  background: #1a1f33;
+  border-color: #3a4180;
+}
+
+.nav button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/* Transitions */
+.screen-enter-active,
+.screen-leave-active {
+  transition: opacity 0.45s ease, transform 0.45s ease;
+}
+
+.screen-enter-from {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.screen-leave-to {
+  opacity: 0;
+  transform: translateY(-40px);
+}

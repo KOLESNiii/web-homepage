@@ -209,11 +209,7 @@ const handleScroll = () => {
 
   const totalProjects = projects.value.length
 
-  if (rawProgress == 1) {
-    activeProject.value = totalProjects - 1
-  } else {
-    activeProject.value = Math.round((totalProjects - 1) * rawProgress)
-  }
+  activeProject.value = Math.round((totalProjects - 1) * rawProgress)
 }
 
 onMounted(() => {

@@ -153,7 +153,9 @@ const projects = ref<Project[]>([
 const getProjectStyle = (index: number): CSSProperties => {
   const totalProjects = projects.value.length
   const anglePerProject = (Math.PI * 2) / totalProjects
-  const baseAngle = index * anglePerProject
+  const targetAngle = Math.PI
+
+  const baseAngle = index * anglePerProject + targetAngle
 
   const rotationOffset = scrollProgress.value * Math.PI * 2
   const angle = baseAngle - rotationOffset
@@ -166,7 +168,6 @@ const getProjectStyle = (index: number): CSSProperties => {
   const x = centerX + Math.cos(angle) * radius
   const y = centerY + Math.sin(angle) * radius
 
-  const targetAngle = Math.PI
   let angleDiff = angle - targetAngle
 
   while (angleDiff > Math.PI) angleDiff -= Math.PI * 2

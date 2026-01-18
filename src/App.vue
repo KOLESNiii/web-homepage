@@ -4,8 +4,8 @@
     <section class="hero-section">
       <div class="hero-gradient"></div>
       <div class="hero-content">
-        <h1 class="hero-title">John Doe</h1>
-        <p class="hero-subtitle">Full Stack Developer & Creative Technologist</p>
+        <h1 class="hero-title">Tim Kolesnichenko</h1>
+        <p class="hero-subtitle">Full Stack Developer</p>
         <div class="hero-divider"></div>
       </div>
       <div class="scroll-indicator">
@@ -20,26 +20,22 @@
       <div class="about-content">
         <h2 class="section-title">About Me</h2>
         <p class="about-text">
-          I'm a passionate developer who crafts digital experiences that merge cutting-edge
-          technology with thoughtful design. With over 8 years of experience, I specialize in
-          building scalable applications that solve real-world problems.
+          I'm a passionate Computing student at Imperial College London with strong software
+          engineering and mathematical foundations. Several years of experience in collaborative
+          software projects, problem-solving and delivering end-to-end technical solutions.
         </p>
         <p class="about-text">
-          My approach combines technical excellence with creative innovation, ensuring every project
+          My approach combines technical excellence with creative solutions, ensuring every project
           not only functions flawlessly but also delivers an exceptional user experience.
         </p>
         <div class="stats-grid">
           <div class="stat-item">
-            <h3 class="stat-number">50+</h3>
-            <p class="stat-label">Projects Delivered</p>
+            <h3 class="stat-number">9</h3>
+            <p class="stat-label">Projects</p>
           </div>
           <div class="stat-item">
-            <h3 class="stat-number">8+</h3>
+            <h3 class="stat-number">3+</h3>
             <p class="stat-label">Years Experience</p>
-          </div>
-          <div class="stat-item">
-            <h3 class="stat-number">25+</h3>
-            <p class="stat-label">Happy Clients</p>
           </div>
         </div>
       </div>
@@ -83,20 +79,9 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact-section">
-      <div class="contact-content">
-        <h2 class="section-title">Let's Work Together</h2>
-        <p class="contact-text">
-          I'm always interested in hearing about new projects and opportunities.
-        </p>
-        <a href="mailto:hello@johndoe.com" class="contact-button"> Get In Touch </a>
-      </div>
-    </section>
-
     <!-- Footer -->
     <footer class="footer">
-      <p>© 2026 John Doe. All rights reserved.</p>
+      <p>© 2026 Tim Kolesnichenko. All rights reserved.</p>
     </footer>
   </div>
 </template>
@@ -118,39 +103,50 @@ const containerRef = ref<HTMLElement | null>(null)
 
 const projects = ref<Project[]>([
   {
-    title: 'E-Commerce Platform',
-    description:
-      'A modern, scalable e-commerce solution built with microservices architecture. Features real-time inventory management and AI-powered recommendations.',
-    image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop',
-    tech: ['React', 'Node.js', 'MongoDB'],
-  },
-  {
-    title: 'AI Analytics Dashboard',
-    description:
-      'Real-time analytics platform leveraging machine learning to provide actionable business insights. Processes millions of data points per second.',
+    title: 'Roomie',
+    description: 'Android App to match flatmates and submit joint rental offers.',
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop',
-    tech: ['Vue.js', 'Python', 'TensorFlow'],
+    tech: ['Kotlin', 'Jetpack Compose', 'Firebase, TypeScript'],
   },
   {
-    title: 'Mobile Fitness App',
-    description:
-      'Cross-platform fitness application with personalized workout plans and nutrition tracking. Used by over 100k active users.',
+    title: 'ARMv8 Emulator & Assembler',
+    description: 'Built an ARMv8 emulator and assembler in C',
     image: 'https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?w=600&h=400&fit=crop',
-    tech: ['React Native', 'Firebase', 'Swift'],
+    tech: ['C', 'ARMv8 Assembly'],
   },
   {
-    title: 'Blockchain Wallet',
+    title: 'Classy Unit Mixer',
     description:
-      'Secure cryptocurrency wallet with multi-signature support and hardware integration. Manages over $50M in digital assets.',
+      'Cocktail-making machine running on a Raspberry Pi 3B with software in C. Presented to Arm engineers.',
     image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?w=600&h=400&fit=crop',
-    tech: ['TypeScript', 'Web3.js', 'Solidity'],
+    tech: ['C', 'CAD', 'Electronics'],
   },
   {
-    title: 'Video Streaming Platform',
+    title: 'Technical Interview Practice App',
     description:
-      'Netflix-style streaming service with adaptive bitrate streaming and content delivery optimization across global CDN.',
+      'Web app with AI-driven facial-cue detection, transcription and analytics to simulate technical interviews and provide instant feedback.',
     image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&h=400&fit=crop',
-    tech: ['Next.js', 'AWS', 'Redis'],
+    tech: ['HTML/CSS', 'JavaScript', 'Python', 'Flask', 'Keras'],
+  },
+  {
+    title: 'Guitar Scar',
+    description:
+      'Unity dungeon-crawler game with procedurally-generated dungeons designed to help learn guitar playing.',
+    image: '',
+    tech: ['C#', 'Unity'],
+  },
+  {
+    title: 'PintOS',
+    description:
+      'Improved a base OS by implementing priority inversion, user programs and virtual memory.',
+    image: '',
+    tech: ['C', 'QEMU'],
+  },
+  {
+    title: 'DemocraTune',
+    description: 'Fork of SongUp, with support for voting and alternate music queues.',
+    image: '',
+    tech: ['TypeScript', 'React', 'Convex', 'Python', 'FastAPI'],
   },
 ])
 

@@ -157,7 +157,7 @@ const getProjectStyle = (index: number): CSSProperties => {
 
   const baseAngle = index * anglePerProject + targetAngle
 
-  const rotationOffset = scrollProgress.value * Math.PI * 2
+  const rotationOffset = scrollProgress.value * (totalProjects - 1) * anglePerProject
   const angle = baseAngle - rotationOffset
 
   const radius = Math.min(window.innerWidth * 0.25, 350)

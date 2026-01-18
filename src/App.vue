@@ -212,7 +212,7 @@ const handleScroll = () => {
   if (rawProgress == 1) {
     activeProject.value = totalProjects - 1
   } else {
-    activeProject.value = Math.floor(totalProjects * rawProgress)
+    activeProject.value = Math.round((totalProjects - 1) * rawProgress)
   }
 }
 

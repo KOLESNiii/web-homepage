@@ -207,31 +207,12 @@ const handleScroll = () => {
   scrollProgress.value = rawProgress
 
   const totalProjects = projects.value.length
-  const anglePerProject = (Math.PI * 2) / totalProjects
-  const rotationOffset = rawProgress * Math.PI * 2
 
-  let closestIndex = 0
-  let minDistance = Infinity
-
-  const targetAngle = Math.PI
-
-  for (let i = 0; i < totalProjects; i++) {
-    const baseAngle = i * anglePerProject
-    const angle = baseAngle - rotationOffset
-
-    let angleDiff = angle - targetAngle
-    while (angleDiff > Math.PI) angleDiff -= Math.PI * 2
-    while (angleDiff < -Math.PI) angleDiff += Math.PI * 2
-
-    const distanceFromMain = Math.abs(angleDiff)
-
-    if (distanceFromMain < minDistance) {
-      minDistance = distanceFromMain
-      closestIndex = i
-    }
+  if (rawProgress == 1) {
+    activeProject.value = totalProjects - 1
+  } else {
+    activeProject.value = Math.floor(totalProjects * rawProgress)
   }
-
-  activeProject.value = closestIndex
 }
 
 onMounted(() => {

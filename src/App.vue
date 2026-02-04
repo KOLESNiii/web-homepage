@@ -41,8 +41,8 @@
       </div>
     </section>
 
-    <!-- Projects Wheel Section -->
-    <section ref="containerRef" class="projects-section">
+    <!-- Projects Section - Desktop Wheel -->
+    <section ref="containerRef" class="projects-section desktop-projects">
       <div class="projects-sticky">
         <div class="projects-container">
           <!-- Project Images Wheel -->
@@ -79,6 +79,50 @@
       </div>
     </section>
 
+    <!-- Projects Section - Mobile Carousel -->
+    <section class="mobile-projects">
+      <div class="mobile-carousel-wrapper">
+        <div 
+          ref="carouselRef"
+          class="mobile-carousel"
+          @scroll="handleCarouselScroll"
+        >
+          <div
+            v-for="(project, index) in projects"
+            :key="index"
+            class="mobile-slide"
+          >
+            <div class="mobile-slide-content">
+              <div class="mobile-slide-image">
+                <img :src="project.image" :alt="project.title" />
+                <div class="mobile-image-overlay"></div>
+              </div>
+              <div class="mobile-slide-info">
+                <h3 class="mobile-slide-title">{{ project.title }}</h3>
+                <p class="mobile-slide-text">{{ project.description }}</p>
+                <div class="mobile-slide-tech">
+                  <span v-for="(tech, i) in project.tech" :key="i" class="tech-tag">
+                    {{ tech }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Progress Indicator -->
+        <div class="carousel-progress">
+          <div 
+            v-for="(project, index) in projects"
+            :key="index"
+            class="progress-dot"
+            :class="{ active: currentSlide === index }"
+            @click="scrollToSlide(index)"
+          ></div>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
       <p>© 2026 Tim Kolesnichenko. All rights reserved.</p>
@@ -100,6 +144,8 @@ interface Project {
 const scrollProgress = ref(0)
 const activeProject = ref(0)
 const containerRef = ref<HTMLElement | null>(null)
+const carouselRef = ref<HTMLElement | null>(null)
+const currentSlide = ref(0)
 
 const projects = ref<Project[]>([
   {
@@ -210,6 +256,28 @@ const handleScroll = () => {
   const totalProjects = projects.value.length
 
   activeProject.value = Math.round((totalProjects - 1) * rawProgress)
+}
+
+const handleCarouselScroll = () => {
+  if (!carouselRef.value) return
+  
+  const carousel = carouselRef.value
+  const slideWidth = carousel.offsetWidth
+  const scrollLeft = carousel.scrollLeft
+  
+  currentSlide.value = Math.round(scrollLeft / slideWidth)
+}
+
+const scrollToSlide = (index: number) => {
+  if (!carouselRef.value) return
+  
+  const carousel = carouselRef.value
+  const slideWidth = carousel.offsetWidth
+  
+  carousel.scrollTo({
+    left: slideWidth * index,
+    behavior: 'smooth'
+  })
 }
 
 onMounted(() => {

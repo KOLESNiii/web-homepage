@@ -1,67 +1,37 @@
 <template>
-  <section id="stack" class="stack section">
-    <div class="section__head">
-      <p v-reveal class="eyebrow">03 / Stack</p>
-      <h2 v-reveal="60" class="section__title">Four lines, and what they call at.</h2>
-    </div>
+  <MapLine section="stack">
+    <MapPanel v-for="(group, index) in skills" :key="group.label" section="stack" :stop="index">
+      <h2 class="panel-title">{{ group.label }}</h2>
 
-    <div class="stack__lines">
-      <div
-        v-for="(group, index) in skills"
-        :key="group.label"
-        v-reveal="index * 90"
-        class="line"
-        :style="{ '--stop': lineColour(group.line) }"
-      >
-        <!-- The group name is the line name; each item is a station on it. -->
-        <span class="line__name">{{ group.label }}</span>
-
-        <span v-for="item in group.items" :key="item" class="station">
+      <!-- The items are stations on the same line the panel hangs off, so the
+           branch keeps the section's colour all the way along. -->
+      <ul class="branch">
+        <li v-for="item in group.items" :key="item" class="station">
           <span class="station__track" aria-hidden="true"></span>
           <span class="stop stop--across" aria-hidden="true"></span>
           <span class="station__label">{{ item }}</span>
-        </span>
-      </div>
-    </div>
-  </section>
+        </li>
+      </ul>
+    </MapPanel>
+  </MapLine>
 </template>
 
 <script setup lang="ts">
-import { lineColour, skills } from '../data/portfolio'
+import MapLine from './MapLine.vue'
+import MapPanel from './MapPanel.vue'
+import { skills } from '../data/portfolio'
 </script>
 
 <style scoped>
-.stack {
-  --accent: var(--tube-district-ink);
-  --accent-solid: var(--tube-district);
-}
-
-.stack__lines {
-  display: flex;
-  flex-direction: column;
-  gap: clamp(1.75rem, 4vw, 2.5rem);
-}
-
-.line {
+.branch {
+  --stop: var(--line);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  row-gap: 1rem;
-}
-
-/* Line name set the way the map sets it: colour block, plain label. */
-.line__name {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  border-radius: 999px;
-  background: var(--stop);
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  white-space: nowrap;
+  row-gap: 0.9rem;
+  list-style: none;
+  margin: 0.9rem 0 0;
+  padding: 0;
 }
 
 .station {
@@ -70,49 +40,28 @@ import { lineColour, skills } from '../data/portfolio'
 }
 
 .station__track {
-  width: clamp(1rem, 2.5vw, 2rem);
+  width: clamp(0.8rem, 3cqw, 1.6rem);
   height: var(--track);
-  background: var(--stop);
+  background: var(--line);
 }
 
 .station__label {
-  margin-left: 0.6rem;
-  font-size: 0.9rem;
+  margin: 0 0.35rem 0 0.55rem;
+  font-size: 0.88rem;
   color: var(--muted-strong);
   white-space: nowrap;
-  transition: color 0.35s var(--ease);
 }
 
-.station:hover .stop {
-  transform: scaleY(1.3);
-}
-
-.station:hover .station__label {
-  color: var(--text);
-}
-
-/**
- * Terminus stub, so the line runs off the diagram rather than being cut dead.
- * It hangs off the last station rather than being its own flex item, otherwise
- * it can wrap onto a row by itself and read as a stray mark.
- */
+/* Terminus stub, so the branch runs off the panel rather than being cut dead.
+   It hangs off the last station rather than being its own item, otherwise it
+   can wrap onto a row by itself and read as a stray mark. */
 .station:last-child::after {
   content: '';
-  width: clamp(1rem, 2.5vw, 2rem);
+  width: clamp(0.8rem, 3cqw, 1.6rem);
   height: var(--track);
-  margin-left: 0.6rem;
-  background: var(--stop);
+  margin-left: 0.55rem;
+  background: var(--line);
   -webkit-mask-image: linear-gradient(90deg, #000 20%, transparent 100%);
   mask-image: linear-gradient(90deg, #000 20%, transparent 100%);
-}
-
-@media (max-width: 600px) {
-  .station__label {
-    font-size: 0.82rem;
-  }
-
-  .station__track {
-    width: 0.75rem;
-  }
 }
 </style>

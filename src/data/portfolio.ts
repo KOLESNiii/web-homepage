@@ -44,12 +44,15 @@ export const lineColour = (key: LineKey) => `var(--tube-${key})`
 /** Small text and hairlines: the variant that survives the current ground. */
 export const lineInk = (key: LineKey) => `var(--tube-${key}-ink)`
 
-/**
- * The line the site itself runs on. The nav, the hero strip and the spine of
- * the background map are all this one line, so the page reads as a single
- * journey with the section lines interchanging off it.
- */
-export const spine: LineKey = 'victoria'
+/** A line of the site: one section, one colour, one run of the map. */
+export interface SectionLine {
+  id: string
+  label: string
+  /** The full name as the legend prints it. */
+  line: LineKey
+  /** How many platforms it calls at — one panel each. */
+  stops: number
+}
 
 /* =========================================================================
    Profile
@@ -133,15 +136,6 @@ export interface TimelineEntry {
   /** Renders the white interchange circle instead of a plain station dash. */
   interchange?: boolean
 }
-
-/**
- * Two lines run side by side down the timeline rather than one line changing
- * colour halfway, which is not a thing a tube map does.
- */
-export const timelineLines = {
-  work: 'central',
-  education: 'victoria',
-} as const satisfies Record<TimelineEntry['kind'], LineKey>
 
 export const timeline: TimelineEntry[] = [
   {
@@ -334,17 +328,21 @@ export const projects: Project[] = [
 ]
 
 /* =========================================================================
-   Navigation
+   The lines of the site
    -------------------------------------------------------------------------
-   The sections are the stations on the spine, so they share its colour. Each
-   section's own line — the one it draws its internal diagram in — is set as
-   `--accent` at the top of that component's scoped styles.
+   One section, one line, one official colour, end to end. `stops` is how many
+   platforms the line calls at, which is how many panels the section renders —
+   it is derived from the content above so the two can never disagree.
+
+   The order here is the order of the journey: the map is laid out left to
+   right in it, and scrolling off the end of one line flies you to the next.
    ========================================================================= */
 
 export const sections = [
-  { id: 'about', label: 'About' },
-  { id: 'path', label: 'Path' },
-  { id: 'stack', label: 'Stack' },
-  { id: 'work', label: 'Work' },
-  { id: 'contact', label: 'Contact' },
-] as const satisfies readonly { id: string; label: string }[]
+  { id: 'home', label: 'Start', line: 'victoria', stops: 2 },
+  { id: 'about', label: 'About', line: 'piccadilly', stops: 2 },
+  { id: 'path', label: 'Path', line: 'central', stops: timeline.length + 1 },
+  { id: 'stack', label: 'Stack', line: 'district', stops: skills.length },
+  { id: 'work', label: 'Work', line: 'elizabeth', stops: projects.length },
+  { id: 'contact', label: 'Contact', line: 'bakerloo', stops: 3 },
+] as const satisfies readonly SectionLine[]

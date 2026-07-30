@@ -40,18 +40,17 @@
   --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
-  --measure: 74rem;
+  --measure: 78rem;
   --gutter: clamp(1.25rem, 5vw, 4rem);
-  --section-pad: clamp(4.5rem, 11vh, 8rem);
   --radius: 12px;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Standard line weight for route diagrams drawn in CSS. */
+  /* Standard line weight for track drawn in CSS. */
   --track: 7px;
   /* A station on a single line: one dash across the track. Long enough to
      read as a mark in its own right, not as a bump in the line. */
   --tick: 5px;
-  --tick-reach: 20px;
+  --tick-reach: 18px;
 }
 
 /* -------------------------------------------------------------------------
@@ -72,8 +71,6 @@
   --rule: rgba(255, 255, 255, 0.09);
   --rule-strong: rgba(255, 255, 255, 0.18);
   --wash: rgba(255, 255, 255, 0.03);
-  /* How strongly the background map prints on this ground. */
-  --map-opacity: 0.62;
 
   --tube-bakerloo-ink: #e0913b;
   --tube-central-ink: #ff5a48;
@@ -107,7 +104,6 @@
   --rule: rgba(20, 24, 31, 0.11);
   --rule-strong: rgba(20, 24, 31, 0.24);
   --wash: rgba(20, 24, 31, 0.035);
-  --map-opacity: 0.5;
 
   /* Darkened where the official colour can't carry 12px text on paper. */
   --tube-bakerloo-ink: #8d4e04;
@@ -125,10 +121,10 @@
   --tube-dlr-ink: #007977;
 }
 
-/* The site runs on one line; sections override --accent to their own. */
+/* Fallback for anything drawn outside a panel; panels set their own line. */
 :root {
-  --accent: var(--tube-victoria-ink);
-  --accent-solid: var(--tube-victoria);
+  --line: var(--tube-victoria);
+  --line-ink: var(--tube-victoria-ink);
 }
 
 /* =========================================================================
@@ -147,9 +143,8 @@
 }
 
 html {
-  scroll-behavior: smooth;
-  /* Anchor targets clear the fixed nav. */
-  scroll-padding-top: 6rem;
+  /* The camera does the travelling; the scrollbar only says how far. */
+  scroll-behavior: auto;
   -webkit-text-size-adjust: 100%;
   background: var(--bg);
 }
@@ -180,12 +175,12 @@ button {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--accent) 26%, transparent);
+  background: color-mix(in srgb, var(--line-ink) 26%, transparent);
   color: var(--text);
 }
 
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--line-ink);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -197,12 +192,12 @@ button {
   z-index: 100;
   padding: 0.6rem 1rem;
   background: var(--bg-raise);
-  border: 1px solid var(--accent);
+  border: 1px solid var(--tube-victoria);
   border-radius: 8px;
   color: var(--text);
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  text-decoration: none;
+  cursor: pointer;
   transform: translateY(-180%);
   transition: transform 0.25s var(--ease);
 }
@@ -211,52 +206,45 @@ button {
   transform: none;
 }
 
+/* The scroll rail: the length of the journey, and the only thing in flow. */
+.rail {
+  width: 1px;
+  pointer-events: none;
+}
+
 /* =========================================================================
-   Layout primitives
+   Panels
+   -------------------------------------------------------------------------
+   Only the line you are riding shows its panels. The rest are faded out,
+   which keeps the diagram readable, and made inert, which keeps the tab
+   order down to the same one line.
    ========================================================================= */
 
-.section {
-  position: relative;
-  max-width: var(--measure);
-  margin: 0 auto;
-  padding: var(--section-pad) var(--gutter);
+.world .route[data-active='false'] .panel,
+.world.world--travelling .panel {
+  opacity: 0;
+  pointer-events: none;
 }
 
-.section__head {
-  margin-bottom: clamp(2.25rem, 5vw, 3.25rem);
-}
-
-.section__title {
+.panel-title {
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  font-size: clamp(1.3rem, 6.5cqw, 2rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: 0.7rem;
+}
+
+.panel-lede {
+  font-size: clamp(0.95rem, 3.4cqw, 1.05rem);
+  line-height: 1.7;
+  color: var(--muted-strong);
   font-weight: 300;
-  letter-spacing: -0.03em;
-  line-height: 1.05;
 }
 
-/* Section label as a line-diagram stub: a length of track and a station tick. */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1rem;
-}
-
-.eyebrow::before {
-  content: '';
-  width: 2.5rem;
-  height: var(--track);
-  background: var(--accent-solid);
-}
-
-.lede {
-  font-size: clamp(1rem, 2.1vw, 1.125rem);
-  line-height: 1.75;
+.panel-body {
+  font-size: 0.95rem;
+  line-height: 1.7;
   color: var(--muted-strong);
   font-weight: 300;
 }
@@ -269,10 +257,10 @@ button {
   display: inline-flex;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.8rem 1.4rem;
+  padding: 0.72rem 1.25rem;
   border-radius: 999px;
   border: 1px solid transparent;
-  font-size: 0.9375rem;
+  font-size: 0.9rem;
   font-weight: 400;
   text-decoration: none;
   cursor: pointer;
@@ -315,17 +303,17 @@ button {
 
 .btn--ghost:hover {
   transform: translateY(-2px);
-  border-color: var(--accent);
-  color: var(--accent);
+  border-color: var(--line-ink);
+  color: var(--line-ink);
 }
 
 .link {
   position: relative;
   font-family: var(--font-mono);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--line-ink);
   text-decoration: none;
 }
 
@@ -361,8 +349,7 @@ button {
 .stop {
   width: var(--tick-reach);
   height: var(--tick);
-  background: var(--stop, var(--accent-solid));
-  transition: transform 0.35s var(--ease);
+  background: var(--stop, var(--line));
 }
 
 /* Station on a horizontal run: the dash stands up instead. */
@@ -372,34 +359,16 @@ button {
 }
 
 .stop--change {
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   border-radius: 50%;
   background: var(--interchange-fill);
   border: 3px solid var(--interchange-ring);
 }
 
 .stop--change.stop--across {
-  width: 17px;
-  height: 17px;
-}
-
-/* =========================================================================
-   Reveal-on-scroll (see composables/reveal.ts)
-   ========================================================================= */
-
-.reveal {
-  opacity: 0;
-  transform: translateY(18px);
-  transition:
-    opacity 0.7s var(--ease),
-    transform 0.7s var(--ease);
-  transition-delay: var(--reveal-delay, 0ms);
-}
-
-.reveal.is-revealed {
-  opacity: 1;
-  transform: none;
+  width: 15px;
+  height: 15px;
 }
 
 /* =========================================================================
@@ -407,16 +376,6 @@ button {
    ========================================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
   *,
   *::before,
   *::after {

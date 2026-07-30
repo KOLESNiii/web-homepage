@@ -11,7 +11,7 @@
     <div class="work__sticky">
       <div class="work__head">
         <p class="eyebrow">04 / Work</p>
-        <h2 id="work-title" class="section__title">Nine stations.</h2>
+        <h2 id="work-title" class="section__title">{{ heading }}</h2>
       </div>
 
       <div class="platform">
@@ -20,7 +20,6 @@
           :key="project.title"
           class="plate"
           :class="{ 'is-active': index === activeIndex }"
-          :style="{ '--stop': lines[project.line].hex, '--stop-ink': lines[project.line].ink }"
           :aria-hidden="index !== activeIndex"
           :inert="index !== activeIndex"
         >
@@ -60,12 +59,16 @@
             type="button"
             class="node"
             :class="{ 'is-active': index === activeIndex }"
-            :style="nodeStyle(index, project.line)"
+            :style="nodeStyle(index)"
             :aria-current="index === activeIndex ? 'true' : undefined"
             @click="jumpTo(index)"
           >
             <span class="node__track" aria-hidden="true"></span>
-            <span class="node__marker" aria-hidden="true"></span>
+            <span
+              class="stop node__marker"
+              :class="index === activeIndex ? 'stop--change' : 'stop--across'"
+              aria-hidden="true"
+            ></span>
             <span class="node__label">{{ project.title }}</span>
           </button>
         </div>
@@ -77,19 +80,19 @@
   <section v-else id="work" class="work-compact section" aria-labelledby="work-compact-title">
     <div class="section__head">
       <p v-reveal class="eyebrow">04 / Work</p>
-      <h2 id="work-compact-title" v-reveal="60" class="section__title">Nine stations.</h2>
+      <h2 id="work-compact-title" v-reveal="60" class="section__title">{{ heading }}</h2>
     </div>
 
     <ol class="vroute">
+      <span class="vroute__line" aria-hidden="true"></span>
+
       <li
         v-for="(project, index) in projects"
         :key="project.title"
         v-reveal="Math.min(index, 3) * 70"
         class="vstop"
-        :style="{ '--stop': lines[project.line].hex, '--stop-ink': lines[project.line].ink }"
       >
-        <span class="vstop__track" aria-hidden="true"></span>
-        <span class="vstop__marker" aria-hidden="true"></span>
+        <span class="stop vstop__stop" aria-hidden="true"></span>
 
         <div class="vstop__body">
           <p class="vstop__meta">
@@ -119,11 +122,12 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import type { CSSProperties } from 'vue'
-import type { LineKey } from '../data/portfolio'
-import { lines, projects } from '../data/portfolio'
+import { projects } from '../data/portfolio'
 import { rafThrottle, useReducedMotion } from '../composables/useMotion'
 
 const sectionRef = ref<HTMLElement | null>(null)
+
+const heading = `${projects.length} stations, one line.`
 
 /**
  * The panning strip needs real horizontal room, so below this width we render
@@ -162,14 +166,10 @@ const smoothstep = (from: number, to: number, value: number) => {
   return t * t * (3 - 2 * t)
 }
 
-function nodeStyle(index: number, line: LineKey): CSSProperties {
-  // Continuous distance from the pointer, in stations.
+/** Stations fade with distance from the pointer. The line's colour never changes. */
+function nodeStyle(index: number): CSSProperties {
   const distance = Math.abs(index - eased.value * steps)
-  return {
-    '--stop': lines[line].hex,
-    '--stop-ink': lines[line].ink,
-    opacity: (1 - 0.72 * smoothstep(0, 2.6, distance)).toFixed(3),
-  }
+  return { opacity: (1 - 0.66 * smoothstep(0, 2.6, distance)).toFixed(3) }
 }
 
 let frame = 0
@@ -242,10 +242,13 @@ onUnmounted(() => {
 <style scoped>
 /* ---------- shared ---------- */
 
+/* Every project is a station on the same line, so there is exactly one colour
+   in this section and the track never changes it. */
 .work,
 .work-compact {
   --accent: var(--tube-elizabeth-ink);
   --accent-solid: var(--tube-elizabeth);
+  --stop: var(--tube-elizabeth);
 }
 
 .tags {
@@ -257,7 +260,7 @@ onUnmounted(() => {
   padding: 0;
 }
 
-/* Connections read as little stubs of the project's own line. */
+/* Connections read as little stubs of the line. */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -275,7 +278,6 @@ onUnmounted(() => {
   content: '';
   width: 14px;
   height: 4px;
-  border-radius: 999px;
   background: var(--stop);
 }
 
@@ -283,13 +285,8 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  margin-top: 1.6rem;
+  margin-top: 1.5rem;
   min-height: 1rem;
-}
-
-/* Links take the project's own line colour rather than the section accent. */
-.plate__links .link {
-  color: var(--stop-ink);
 }
 
 /* ---------- desktop: pinned line ---------- */
@@ -328,7 +325,7 @@ onUnmounted(() => {
 .plate {
   position: absolute;
   top: 50%;
-  width: min(46rem, 68%);
+  width: min(44rem, 68%);
   transform: translateY(-46%);
   opacity: 0;
   pointer-events: none;
@@ -348,21 +345,19 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   gap: 1.1rem;
-  margin-bottom: 0.9rem;
+  margin-bottom: 0.85rem;
 }
 
 .plate__band {
   flex: none;
   width: clamp(2.5rem, 6vw, 4.5rem);
   height: 10px;
-  border-radius: 999px;
   background: var(--stop);
-  box-shadow: 0 0 22px color-mix(in srgb, var(--stop) 60%, transparent);
 }
 
 .plate__name {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4vw, 3.25rem);
+  font-size: clamp(2rem, 3.8vw, 3rem);
   font-weight: 300;
   letter-spacing: -0.035em;
   line-height: 1.02;
@@ -379,9 +374,9 @@ onUnmounted(() => {
 
 .plate__blurb {
   font-size: 1.05rem;
-  color: var(--stop-ink);
+  color: var(--tube-elizabeth-ink);
   font-weight: 300;
-  margin-bottom: 1.3rem;
+  margin-bottom: 1.25rem;
   padding-left: calc(clamp(2.5rem, 6vw, 4.5rem) + 1.1rem);
 }
 
@@ -390,8 +385,8 @@ onUnmounted(() => {
   line-height: 1.7;
   color: var(--muted-strong);
   font-weight: 300;
-  margin-bottom: 1.6rem;
-  max-width: 44rem;
+  margin-bottom: 1.5rem;
+  max-width: 42rem;
 }
 
 .plate__connections {
@@ -454,11 +449,11 @@ onUnmounted(() => {
   transition: color 0.4s var(--ease);
 }
 
-/* Each station owns the length of track to the next one, in its own colour. */
+/* One line, one colour: each station owns the length of track to the next. */
 .node__track {
   position: absolute;
   left: 50%;
-  top: 6px;
+  top: 5px;
   width: 100%;
   height: var(--track);
   background: var(--stop);
@@ -472,15 +467,6 @@ onUnmounted(() => {
 .node__marker {
   position: relative;
   z-index: 2;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border: 4px solid var(--stop);
-  background: var(--bg);
-  transition:
-    transform 0.4s var(--ease),
-    border-color 0.4s var(--ease),
-    box-shadow 0.4s var(--ease);
 }
 
 .node__label {
@@ -496,74 +482,48 @@ onUnmounted(() => {
   color: var(--text);
 }
 
-.node:hover .node__marker {
-  transform: scale(1.15);
+.node:hover .stop--across {
+  transform: scaleY(1.3);
 }
 
 .node.is-active {
   color: var(--text);
 }
 
-/* Current station takes the white interchange ring. */
-.node.is-active .node__marker {
-  border-color: var(--text);
-  transform: scale(1.25);
-  box-shadow: 0 0 22px color-mix(in srgb, var(--stop) 80%, transparent);
-}
-
 /* ---------- mobile: vertical route ---------- */
 
 .vroute {
+  position: relative;
   list-style: none;
   margin: 0;
-  padding: 0;
+  padding: 0.5rem 0 1.5rem;
+}
+
+.vroute__line {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  bottom: 0;
+  width: var(--track);
+  background: var(--stop);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 3%, #000 95%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 3%, #000 95%, transparent);
 }
 
 .vstop {
   position: relative;
-  padding: 0 0 clamp(2.75rem, 6vw, 3.5rem) clamp(2.5rem, 5vw, 3.75rem);
+  padding: 0 0 clamp(2.5rem, 6vw, 3.25rem) clamp(2.5rem, 5vw, 3.25rem);
 }
 
-.vstop__track {
+.vstop:last-child {
+  padding-bottom: 0;
+}
+
+.vstop__stop {
   position: absolute;
-  left: 5px;
-  top: 8px;
-  bottom: -8px;
-  width: var(--track);
-  border-radius: 999px;
-  background: var(--stop);
-  opacity: 0.28;
-  transition: opacity 0.8s var(--ease);
-}
-
-.vstop.is-revealed .vstop__track {
-  opacity: 1;
-}
-
-.vstop:last-child .vstop__track {
-  bottom: auto;
-  height: 3rem;
-  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
-}
-
-.vstop__marker {
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 4px solid var(--rule-strong);
-  background: var(--bg);
-  transition:
-    border-color 0.7s var(--ease),
-    box-shadow 0.7s var(--ease);
-}
-
-.vstop.is-revealed .vstop__marker {
-  border-color: var(--stop);
-  box-shadow: 0 0 18px color-mix(in srgb, var(--stop) 55%, transparent);
+  left: 4px;
+  top: 7px;
+  width: 24px;
 }
 
 .vstop__meta {
@@ -578,7 +538,7 @@ onUnmounted(() => {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.16em;
-  color: var(--stop-ink);
+  color: var(--tube-elizabeth-ink);
 }
 
 .vstop__index {
@@ -599,7 +559,7 @@ onUnmounted(() => {
 
 .vstop__blurb {
   font-size: 0.92rem;
-  color: var(--stop-ink);
+  color: var(--tube-elizabeth-ink);
   font-weight: 300;
   margin-bottom: 1rem;
 }

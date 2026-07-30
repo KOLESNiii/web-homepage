@@ -11,14 +11,14 @@
         :key="group.label"
         v-reveal="index * 90"
         class="line"
-        :style="{ '--stop': lines[group.line].hex }"
+        :style="{ '--stop': lineColour(group.line) }"
       >
         <!-- The group name is the line name; each item is a station on it. -->
         <span class="line__name">{{ group.label }}</span>
 
         <span v-for="item in group.items" :key="item" class="station">
           <span class="station__track" aria-hidden="true"></span>
-          <span class="station__stop" aria-hidden="true"></span>
+          <span class="stop stop--across" aria-hidden="true"></span>
           <span class="station__label">{{ item }}</span>
         </span>
       </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { lines, skills } from '../data/portfolio'
+import { lineColour, skills } from '../data/portfolio'
 </script>
 
 <style scoped>
@@ -39,14 +39,14 @@ import { lines, skills } from '../data/portfolio'
 .stack__lines {
   display: flex;
   flex-direction: column;
-  gap: clamp(2rem, 5vw, 3rem);
+  gap: clamp(1.75rem, 4vw, 2.5rem);
 }
 
 .line {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  row-gap: 1.1rem;
+  row-gap: 1rem;
 }
 
 /* Line name set the way the map sets it: colour block, plain label. */
@@ -75,29 +75,16 @@ import { lines, skills } from '../data/portfolio'
   background: var(--stop);
 }
 
-.station__stop {
-  width: 13px;
-  height: 13px;
-  margin-left: -3px;
-  border-radius: 50%;
-  border: 3px solid var(--stop);
-  background: var(--bg);
-  transition:
-    transform 0.35s var(--ease),
-    box-shadow 0.35s var(--ease);
-}
-
 .station__label {
-  margin-left: 0.55rem;
+  margin-left: 0.6rem;
   font-size: 0.9rem;
   color: var(--muted-strong);
   white-space: nowrap;
   transition: color 0.35s var(--ease);
 }
 
-.station:hover .station__stop {
-  transform: scale(1.25);
-  box-shadow: 0 0 16px color-mix(in srgb, var(--stop) 70%, transparent);
+.station:hover .stop {
+  transform: scaleY(1.3);
 }
 
 .station:hover .station__label {
@@ -113,7 +100,7 @@ import { lines, skills } from '../data/portfolio'
   content: '';
   width: clamp(1rem, 2.5vw, 2rem);
   height: var(--track);
-  margin-left: 0.55rem;
+  margin-left: 0.6rem;
   background: var(--stop);
   -webkit-mask-image: linear-gradient(90deg, #000 20%, transparent 100%);
   mask-image: linear-gradient(90deg, #000 20%, transparent 100%);

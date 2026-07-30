@@ -2,30 +2,38 @@
   <section id="path" class="path section">
     <div class="section__head">
       <p v-reveal class="eyebrow">02 / Path</p>
-      <h2 v-reveal="60" class="section__title">Stations so far.</h2>
+      <h2 v-reveal="60" class="section__title">Two lines, running together.</h2>
     </div>
 
+    <!-- Line key, as printed in the corner of the map. -->
+    <ul v-reveal="90" class="key">
+      <li v-for="entry in key" :key="entry.kind" class="key__item">
+        <span class="key__bar" :style="{ '--stop': entry.colour }" aria-hidden="true"></span>
+        {{ entry.label }}
+      </li>
+    </ul>
+
     <ol class="route">
+      <span class="route__line route__line--education" aria-hidden="true"></span>
+      <span class="route__line route__line--work" aria-hidden="true"></span>
+
       <li
         v-for="(entry, index) in timeline"
         :key="entry.title"
         v-reveal="index * 80"
         class="stopcard"
-        :style="{ '--stop': lines[entry.line].hex, '--stop-ink': lines[entry.line].ink }"
+        :class="`stopcard--${entry.kind}`"
       >
-        <span class="stopcard__track" aria-hidden="true"></span>
         <span
-          class="stopcard__marker"
-          :class="{ 'stopcard__marker--interchange': entry.interchange }"
+          class="stop stopcard__stop"
+          :class="{ 'stop--change': entry.interchange }"
           aria-hidden="true"
         ></span>
 
         <div class="stopcard__body">
           <p class="stopcard__meta">
             <span class="stopcard__period">{{ entry.period }}</span>
-            <span class="stopcard__kind">{{
-              entry.kind === 'education' ? 'Education' : 'Work'
-            }}</span>
+            <span class="stopcard__kind">{{ lines[timelineLines[entry.kind]].name }} line</span>
           </p>
           <h3 class="stopcard__title">{{ entry.title }}</h3>
           <p class="stopcard__org">{{ entry.org }}</p>
@@ -62,11 +70,16 @@
 </template>
 
 <script setup lang="ts">
-import { academics, lines, timeline } from '../data/portfolio'
+import { academics, lineColour, lineInk, lines, timeline, timelineLines } from '../data/portfolio'
+
+const key = [
+  { kind: 'work', label: 'Work', colour: lineColour(timelineLines.work) },
+  { kind: 'education', label: 'Education', colour: lineColour(timelineLines.education) },
+]
 
 const markColour = (mark: number) => {
-  if (mark >= 80) return lines.district.ink
-  if (mark >= 70) return lines.victoria.ink
+  if (mark >= 80) return lineInk('district')
+  if (mark >= 70) return lineInk('victoria')
   return 'var(--muted-strong)'
 }
 </script>
@@ -75,75 +88,114 @@ const markColour = (mark: number) => {
 .path {
   --accent: var(--tube-central-ink);
   --accent-solid: var(--tube-central);
+  /* Where the two tracks sit in the gutter, and how wide that gutter is. */
+  --education-x: 8px;
+  --work-x: 48px;
+  --gutter-width: 5.25rem;
 }
 
-.route {
+/* -------------------------------------------------------------------------
+   Line key
+   ------------------------------------------------------------------------- */
+
+.key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
   list-style: none;
-  margin: 0 0 clamp(3.5rem, 8vw, 5.5rem);
+  margin: 0 0 2.25rem;
   padding: 0;
+}
+
+.key__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.key__bar {
+  width: 1.75rem;
+  height: var(--track);
+  background: var(--stop);
+}
+
+/* -------------------------------------------------------------------------
+   The two lines
+   ------------------------------------------------------------------------- */
+
+.route {
+  position: relative;
+  list-style: none;
+  margin: 0 0 clamp(3.5rem, 8vw, 5rem);
+  padding: 0.5rem 0 1.5rem;
+}
+
+/* Each line runs the whole length in its own colour and fades off-diagram at
+   both ends, because both of them started before this list and continue past
+   it. Neither ever changes colour. */
+.route__line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--track);
+  -webkit-mask-image: linear-gradient(180deg, transparent, #000 4%, #000 94%, transparent);
+  mask-image: linear-gradient(180deg, transparent, #000 4%, #000 94%, transparent);
+}
+
+.route__line--education {
+  left: var(--education-x);
+  background: var(--tube-victoria);
+}
+
+.route__line--work {
+  left: var(--work-x);
+  background: var(--tube-central);
 }
 
 .stopcard {
   position: relative;
-  padding: 0 0 clamp(2.5rem, 5vw, 3.5rem) clamp(2.5rem, 5vw, 3.75rem);
+  padding: 0 0 clamp(2.25rem, 5vw, 3.25rem) var(--gutter-width);
 }
 
-/* Each entry owns its length of track, so the line changes colour where the
-   thread of the story does. */
-.stopcard__track {
+.stopcard:last-child {
+  padding-bottom: 0;
+}
+
+/* The station sits on its own line and reaches out towards its label. */
+.stopcard__stop {
   position: absolute;
-  left: 5px;
-  top: 8px;
-  bottom: -8px;
-  width: var(--track);
-  border-radius: 999px;
-  background: var(--stop);
-  opacity: 0.22;
-  transition: opacity 0.8s var(--ease);
+  top: 6px;
+  /* Reaches clear of its own track so it reads as a station, not a kink. */
+  width: 24px;
 }
 
-.stopcard:last-child .stopcard__track {
-  bottom: auto;
-  height: 2.5rem;
-  /* Terminus: the line fades out rather than stopping dead. */
-  -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
-  mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
+.stopcard--education .stopcard__stop {
+  left: var(--education-x);
+  --stop: var(--tube-victoria);
 }
 
-.stopcard.is-revealed .stopcard__track {
-  opacity: 1;
+.stopcard--work .stopcard__stop {
+  left: var(--work-x);
+  --stop: var(--tube-central);
 }
 
-.stopcard__marker {
-  position: absolute;
-  left: 0;
-  top: 4px;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 4px solid var(--rule-strong);
-  background: var(--bg);
-  transition:
-    border-color 0.7s var(--ease),
-    box-shadow 0.7s var(--ease);
+/* An interchange straddles its line rather than reaching off it. */
+.stopcard__stop.stop--change {
+  top: 0;
+  width: 17px;
 }
 
-.stopcard.is-revealed .stopcard__marker {
-  border-color: var(--stop);
-  box-shadow: 0 0 18px color-mix(in srgb, var(--stop) 55%, transparent);
+.stopcard--education .stopcard__stop.stop--change {
+  left: calc(var(--education-x) - 5px);
 }
 
-/* Interchange: the white double-ring, exactly as on the map. */
-.stopcard__marker--interchange {
-  left: -2px;
-  top: 2px;
-  width: 20px;
-  height: 20px;
-}
-
-.stopcard.is-revealed .stopcard__marker--interchange {
-  border-color: var(--text);
-  box-shadow: 0 0 22px color-mix(in srgb, var(--stop) 70%, transparent);
+.stopcard--work .stopcard__stop.stop--change {
+  left: calc(var(--work-x) - 5px);
 }
 
 .stopcard__meta {
@@ -151,7 +203,7 @@ const markColour = (mark: number) => {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.9rem;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.6rem;
 }
 
 .stopcard__period {
@@ -159,13 +211,17 @@ const markColour = (mark: number) => {
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--stop-ink);
+}
+
+.stopcard--education .stopcard__period {
+  color: var(--tube-victoria-ink);
+}
+
+.stopcard--work .stopcard__period {
+  color: var(--tube-central-ink);
 }
 
 .stopcard__kind {
-  padding: 0.15rem 0.6rem;
-  border: 1px solid var(--rule-strong);
-  border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 0.62rem;
   letter-spacing: 0.14em;
@@ -175,7 +231,7 @@ const markColour = (mark: number) => {
 
 .stopcard__title {
   font-family: var(--font-display);
-  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  font-size: clamp(1.25rem, 3vw, 1.6rem);
   font-weight: 400;
   letter-spacing: -0.02em;
   margin-bottom: 0.2rem;
@@ -184,14 +240,14 @@ const markColour = (mark: number) => {
 .stopcard__org {
   font-size: 0.9rem;
   color: var(--muted);
-  margin-bottom: 0.8rem;
+  margin-bottom: 0.75rem;
 }
 
 .stopcard__detail {
   font-size: 1rem;
   line-height: 1.7;
   color: var(--muted-strong);
-  max-width: 46rem;
+  max-width: 44rem;
   font-weight: 300;
 }
 
@@ -199,12 +255,12 @@ const markColour = (mark: number) => {
    Results board
    ------------------------------------------------------------------------- */
 
+/* The board belongs to the education line, so it wears its colour on top. */
 .board {
   border: 1px solid var(--rule);
+  border-top: var(--track) solid var(--tube-victoria);
   border-radius: var(--radius);
-  background: color-mix(in srgb, var(--bg-raise) 75%, transparent);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  background: var(--bg-raise);
   overflow: hidden;
 }
 
@@ -216,8 +272,6 @@ const markColour = (mark: number) => {
   gap: 1.25rem;
   padding: 1.4rem clamp(1.1rem, 3vw, 1.75rem);
   border-bottom: 1px solid var(--rule);
-  /* Line-colour rule across the top of the board. */
-  box-shadow: inset 0 var(--track) 0 -3px var(--tube-central);
 }
 
 .board__eyebrow {
@@ -277,7 +331,7 @@ const markColour = (mark: number) => {
 }
 
 .row:hover {
-  background: rgba(255, 255, 255, 0.025);
+  background: var(--wash);
 }
 
 .row__code {
@@ -300,6 +354,16 @@ const markColour = (mark: number) => {
 }
 
 @media (max-width: 620px) {
+  .path {
+    --education-x: 6px;
+    --work-x: 36px;
+    --gutter-width: 4rem;
+  }
+
+  .stopcard__stop {
+    width: 20px;
+  }
+
   .row {
     grid-template-columns: minmax(0, 1fr) 4rem;
     row-gap: 0.15rem;

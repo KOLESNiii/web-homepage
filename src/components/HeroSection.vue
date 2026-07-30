@@ -37,20 +37,18 @@
       </div>
     </div>
 
-    <!-- Platform-sign route strip: the whole site as one line, and the only
-         scroll cue the page needs. -->
+    <!-- Platform sign: the whole site as one line, one colour, five stations. -->
     <div class="calls">
       <p class="calls__label">This line calls at</p>
       <div class="calls__route" :style="{ '--n': sections.length }">
         <span class="calls__track" aria-hidden="true"></span>
         <a
-          v-for="(section, index) in sections"
+          v-for="section in sections"
           :key="section.id"
           class="calls__stop"
           :href="`#${section.id}`"
-          :style="{ '--i': index, '--stop': lines[section.line].hex }"
         >
-          <span class="calls__marker" aria-hidden="true"></span>
+          <span class="stop stop--across calls__marker" aria-hidden="true"></span>
           <span class="calls__name">{{ section.label }}</span>
         </a>
       </div>
@@ -60,7 +58,7 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { contact, lines, profile, sections } from '../data/portfolio'
+import { contact, profile, sections } from '../data/portfolio'
 import { rafThrottle, useReducedMotion } from '../composables/useMotion'
 
 const titleWords = profile.name.split(' ')
@@ -93,6 +91,7 @@ onUnmounted(() => {
 
 <style scoped>
 .hero {
+  --stop: var(--tube-victoria);
   position: relative;
   min-height: 100svh;
   display: flex;
@@ -101,20 +100,6 @@ onUnmounted(() => {
   max-width: var(--measure);
   margin: 0 auto;
   padding: 8rem var(--gutter) 11rem;
-  overflow: hidden;
-}
-
-/* Soft platform glow behind the name. */
-.hero::before {
-  content: '';
-  position: absolute;
-  left: 12%;
-  top: 40%;
-  width: min(900px, 130vw);
-  aspect-ratio: 1;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(0, 152, 212, 0.16) 0%, transparent 62%);
-  pointer-events: none;
 }
 
 .hero__inner {
@@ -132,12 +117,6 @@ onUnmounted(() => {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.9rem;
-  padding: 0.5rem 1rem 0.5rem 0.5rem;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--bg-raise) 70%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
   margin-bottom: 2.25rem;
   opacity: 0;
   animation: rise 0.8s var(--ease) 0.1s forwards;
@@ -146,9 +125,7 @@ onUnmounted(() => {
 .hero__status-bar {
   width: 2.5rem;
   height: var(--track);
-  border-radius: 999px;
   background: var(--tube-district);
-  box-shadow: 0 0 16px rgba(0, 120, 42, 0.7);
 }
 
 .hero__status-name {
@@ -167,7 +144,7 @@ onUnmounted(() => {
 .hero__title {
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: clamp(2.6rem, 9.5vw, 7.5rem);
+  font-size: clamp(2.6rem, 9vw, 7rem);
   line-height: 0.95;
   letter-spacing: -0.04em;
   margin-bottom: 1.75rem;
@@ -199,9 +176,7 @@ onUnmounted(() => {
   flex: none;
   width: clamp(2rem, 7vw, 3.5rem);
   height: var(--track);
-  border-radius: 999px;
-  background: var(--tube-victoria);
-  box-shadow: 0 0 16px rgba(0, 152, 212, 0.6);
+  background: var(--stop);
 }
 
 .hero__tagline {
@@ -233,6 +208,8 @@ onUnmounted(() => {
   left: 0;
   right: 0;
   bottom: 2.5rem;
+  max-width: var(--measure);
+  margin: 0 auto;
   padding: 0 var(--gutter);
   opacity: 0;
   animation: rise 0.9s var(--ease) 1s forwards;
@@ -244,7 +221,7 @@ onUnmounted(() => {
   letter-spacing: 0.26em;
   text-transform: uppercase;
   color: var(--faint);
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.5rem;
 }
 
 .calls__route {
@@ -258,18 +235,9 @@ onUnmounted(() => {
   position: absolute;
   left: calc(100% / var(--n) / 2);
   right: calc(100% / var(--n) / 2);
-  top: 7px;
-  height: 4px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    var(--tube-victoria),
-    var(--tube-central),
-    var(--tube-district),
-    var(--tube-elizabeth),
-    var(--tube-bakerloo)
-  );
-  opacity: 0.55;
+  top: 5px;
+  height: 5px;
+  background: var(--stop);
 }
 
 .calls__stop {
@@ -277,23 +245,16 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.85rem;
+  gap: 0.9rem;
+  padding-top: 0;
   text-decoration: none;
   color: var(--muted);
   font-size: 0.8rem;
-  letter-spacing: 0.02em;
   transition: color 0.3s var(--ease);
 }
 
 .calls__marker {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 4px solid var(--stop);
-  background: var(--bg);
-  transition:
-    transform 0.35s var(--ease),
-    box-shadow 0.35s var(--ease);
+  flex: none;
 }
 
 .calls__stop:hover {
@@ -301,8 +262,7 @@ onUnmounted(() => {
 }
 
 .calls__stop:hover .calls__marker {
-  transform: scale(1.2);
-  box-shadow: 0 0 18px color-mix(in srgb, var(--stop) 75%, transparent);
+  transform: scaleY(1.35);
 }
 
 .calls__name {
@@ -322,21 +282,15 @@ onUnmounted(() => {
 
 @media (max-width: 700px) {
   .hero {
-    padding-bottom: 12rem;
+    padding-bottom: 11rem;
   }
 
-  /* The status row wraps at this width; a pill shape around two stacked lines
-     reads as a mistake, so square it off and left-align it. */
   .hero__status {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 0.4rem 0.9rem;
-    border-radius: 12px;
-    padding: 0.75rem 1rem;
+    gap: 0.55rem 0.9rem;
   }
 
   .hero__status-note {
-    grid-column: 1 / -1;
+    flex-basis: 100%;
   }
 
   .hero__tagline,

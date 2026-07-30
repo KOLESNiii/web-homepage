@@ -46,8 +46,7 @@ const year = new Date().getFullYear()
 /* End of the line. */
 .footer__terminus {
   width: 1.75rem;
-  height: 4px;
-  border-radius: 999px;
+  height: var(--track);
   background: var(--tube-bakerloo);
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 60%);
   mask-image: linear-gradient(90deg, transparent, #000 60%);

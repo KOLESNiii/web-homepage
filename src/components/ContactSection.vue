@@ -26,13 +26,7 @@
 
     <ul v-reveal="230" class="contact__links">
       <li v-for="channel in channels" :key="channel.label">
-        <a
-          :href="channel.href"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="channel"
-          :style="{ '--stop': channel.colour }"
-        >
+        <a :href="channel.href" target="_blank" rel="noopener noreferrer" class="channel">
           <span class="channel__bar" aria-hidden="true"></span>
           <span class="channel__label">{{ channel.label }}</span>
           <span class="channel__handle">{{ channel.handle }}</span>
@@ -43,7 +37,7 @@
 </template>
 
 <script setup lang="ts">
-import { contact, lines, profile } from '../data/portfolio'
+import { contact, profile } from '../data/portfolio'
 
 const handleOf = (url: string) => url.replace(/\/+$/, '').split('/').pop() || url
 
@@ -52,13 +46,11 @@ const channels = [
     label: 'GitHub',
     href: profile.github,
     handle: `@${handleOf(profile.github)}`,
-    colour: lines.jubilee.hex,
   },
   {
     label: 'LinkedIn',
     href: profile.linkedin,
     handle: profile.name,
-    colour: lines.victoria.hex,
   },
 ]
 </script>
@@ -80,9 +72,7 @@ const channels = [
 .status__bar {
   width: 3rem;
   height: var(--track);
-  border-radius: 999px;
   background: var(--tube-district);
-  box-shadow: 0 0 18px rgba(0, 120, 42, 0.75);
 }
 
 .status__line {
@@ -129,13 +119,13 @@ const channels = [
   align-items: center;
   gap: 1rem;
   padding: 1.35rem 1.5rem 1.35rem 2rem;
-  background: var(--bg);
+  background: var(--bg-raise);
   text-decoration: none;
   transition: background-color 0.35s var(--ease);
 }
 
 .channel:hover {
-  background: var(--bg-raise);
+  background: var(--bg-sunk);
 }
 
 .channel__bar {
@@ -144,12 +134,7 @@ const channels = [
   top: 0;
   bottom: 0;
   width: var(--track);
-  background: var(--stop);
-  transition: box-shadow 0.35s var(--ease);
-}
-
-.channel:hover .channel__bar {
-  box-shadow: 0 0 20px color-mix(in srgb, var(--stop) 75%, transparent);
+  background: var(--accent-solid);
 }
 
 .channel__label {

@@ -23,7 +23,6 @@
           :key="stat.label"
           v-reveal="160 + index * 80"
           class="stat"
-          :style="{ '--stop': stat.colour }"
         >
           <span class="stat__bar" aria-hidden="true"></span>
           <dt class="stat__label">{{ stat.label }}</dt>
@@ -35,26 +34,23 @@
 </template>
 
 <script setup lang="ts">
-import { about, academics, lines, profile, projects } from '../data/portfolio'
+import { about, academics, profile, projects } from '../data/portfolio'
 
 /** Derived from the data so the numbers can't drift out of sync with the page. */
 const stats = [
-  {
-    value: `${academics.average}%`,
-    label: `${academics.year} average`,
-    colour: lines.central.hex,
-  },
-  { value: academics.classification, label: 'Classification', colour: lines.victoria.hex },
-  { value: String(projects.length), label: 'Projects shipped', colour: lines.district.hex },
-  {
-    value: profile.graduates.split(' ')[1] ?? '',
-    label: 'Graduating',
-    colour: lines.elizabeth.hex,
-  },
+  { value: `${academics.average}%`, label: `${academics.year} average` },
+  { value: academics.classification, label: 'Classification' },
+  { value: String(projects.length), label: 'Projects shipped' },
+  { value: profile.graduates.split(' ')[1] ?? '', label: 'Graduating' },
 ]
 </script>
 
 <style scoped>
+.about {
+  --accent: var(--tube-victoria-ink);
+  --accent-solid: var(--tube-victoria);
+}
+
 .about__body {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
@@ -77,18 +73,19 @@ const stats = [
 
 .stat {
   position: relative;
-  background: var(--bg);
-  padding: 1.35rem 1.5rem;
+  background: var(--bg-raise);
+  padding: 1.35rem 1.5rem 1.35rem 1.75rem;
 }
 
-/* Line-colour bar down the edge of each cell, board-style. */
+/* The section's own line, down the edge of the board. Every cell is the same
+   colour because it is the same line. */
 .stat__bar {
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: var(--track);
-  background: var(--stop);
+  background: var(--accent-solid);
 }
 
 .stat__label {

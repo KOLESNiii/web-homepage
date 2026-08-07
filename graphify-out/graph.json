@@ -1903,19 +1903,19 @@
       "norm_label": "gauge()"
     },
     {
-      "label": "drawSmoothRoute()",
+      "label": "drawRoundedRoute()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
       "source_location": "L79",
-      "id": "components_tubemap_drawsmoothroute",
+      "id": "components_tubemap_drawroundedroute",
       "community": 5,
-      "norm_label": "drawsmoothroute()"
+      "norm_label": "drawroundedroute()"
     },
     {
       "label": "drawRoute()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L103",
+      "source_location": "L108",
       "id": "components_tubemap_drawroute",
       "community": 5,
       "norm_label": "drawroute()"
@@ -1924,7 +1924,7 @@
       "label": "onScreen()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L118",
+      "source_location": "L121",
       "id": "components_tubemap_onscreen",
       "community": 5,
       "norm_label": "onscreen()"
@@ -1933,7 +1933,7 @@
       "label": "drawStops()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L125",
+      "source_location": "L128",
       "id": "components_tubemap_drawstops",
       "community": 5,
       "norm_label": "drawstops()"
@@ -1942,7 +1942,7 @@
       "label": "drawInterchanges()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L153",
+      "source_location": "L156",
       "id": "components_tubemap_drawinterchanges",
       "community": 5,
       "norm_label": "drawinterchanges()"
@@ -1951,7 +1951,7 @@
       "label": "drawTrain()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L174",
+      "source_location": "L177",
       "id": "components_tubemap_drawtrain",
       "community": 5,
       "norm_label": "drawtrain()"
@@ -1960,7 +1960,7 @@
       "label": "draw()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L210",
+      "source_location": "L213",
       "id": "components_tubemap_draw",
       "community": 5,
       "norm_label": "draw()"
@@ -1969,7 +1969,7 @@
       "label": "signature()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L277",
+      "source_location": "L280",
       "id": "components_tubemap_signature",
       "community": 5,
       "norm_label": "signature()"
@@ -1978,7 +1978,7 @@
       "label": "render()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L283",
+      "source_location": "L286",
       "id": "components_tubemap_render",
       "community": 5,
       "norm_label": "render()"
@@ -1987,7 +1987,7 @@
       "label": "stop()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L304",
+      "source_location": "L307",
       "id": "components_tubemap_stop",
       "community": 5,
       "norm_label": "stop()"
@@ -1996,7 +1996,7 @@
       "label": "start()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L309",
+      "source_location": "L312",
       "id": "components_tubemap_start",
       "community": 5,
       "norm_label": "start()"
@@ -2005,7 +2005,7 @@
       "label": "resize()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L315",
+      "source_location": "L318",
       "id": "components_tubemap_resize",
       "community": 5,
       "norm_label": "resize()"
@@ -2014,7 +2014,7 @@
       "label": "onResize()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L337",
+      "source_location": "L340",
       "id": "components_tubemap_onresize",
       "community": 5,
       "norm_label": "onresize()"
@@ -2023,7 +2023,7 @@
       "label": "onVisibility()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L345",
+      "source_location": "L348",
       "id": "components_tubemap_onvisibility",
       "community": 5,
       "norm_label": "onvisibility()"
@@ -2387,6 +2387,15 @@
       "id": "web_homepage_readme_codeblock_2",
       "community": 7,
       "norm_label": "code:sh (bun install)"
+    },
+    {
+      "label": "drawSmoothRoute()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L79",
+      "community": 5,
+      "norm_label": "drawsmoothroute()",
+      "id": "components_tubemap_drawsmoothroute"
     }
   ],
   "links": [
@@ -5291,6 +5300,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/TubeMap.vue",
+      "source_location": "L79",
+      "weight": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_drawroundedroute",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
       "source_location": "L78",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5487,6 +5506,17 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/components/TubeMap.vue",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "components_tubemap_drawroute",
+      "target": "components_tubemap_drawroundedroute",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
       "source_location": "L114",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5597,9 +5627,9 @@
       "source_file": "public/profile.json",
       "source_location": "L24",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_about",
-      "confidence_score": 1.0
+      "target": "public_profile_about"
     },
     {
       "relation": "contains",
@@ -5607,9 +5637,9 @@
       "source_file": "public/profile.json",
       "source_location": "L6",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_alternatename",
-      "confidence_score": 1.0
+      "target": "public_profile_alternatename"
     },
     {
       "relation": "contains",
@@ -5617,9 +5647,9 @@
       "source_file": "public/profile.json",
       "source_location": "L17",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_availability",
-      "confidence_score": 1.0
+      "target": "public_profile_availability"
     },
     {
       "relation": "contains",
@@ -5627,9 +5657,9 @@
       "source_file": "public/profile.json",
       "source_location": "L2",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_context",
-      "confidence_score": 1.0
+      "target": "public_profile_context"
     },
     {
       "relation": "contains",
@@ -5637,9 +5667,9 @@
       "source_file": "public/profile.json",
       "source_location": "L191",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_documents",
-      "confidence_score": 1.0
+      "target": "public_profile_documents"
     },
     {
       "relation": "contains",
@@ -5647,9 +5677,9 @@
       "source_file": "public/profile.json",
       "source_location": "L28",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_education",
-      "confidence_score": 1.0
+      "target": "public_profile_education"
     },
     {
       "relation": "contains",
@@ -5657,9 +5687,9 @@
       "source_file": "public/profile.json",
       "source_location": "L11",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_email",
-      "confidence_score": 1.0
+      "target": "public_profile_email"
     },
     {
       "relation": "contains",
@@ -5667,9 +5697,9 @@
       "source_file": "public/profile.json",
       "source_location": "L75",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_experience",
-      "confidence_score": 1.0
+      "target": "public_profile_experience"
     },
     {
       "relation": "contains",
@@ -5677,9 +5707,9 @@
       "source_file": "public/profile.json",
       "source_location": "L7",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_initials",
-      "confidence_score": 1.0
+      "target": "public_profile_initials"
     },
     {
       "relation": "contains",
@@ -5687,9 +5717,9 @@
       "source_file": "public/profile.json",
       "source_location": "L8",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_jobtitle",
-      "confidence_score": 1.0
+      "target": "public_profile_jobtitle"
     },
     {
       "relation": "contains",
@@ -5697,9 +5727,9 @@
       "source_file": "public/profile.json",
       "source_location": "L9",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_location",
-      "confidence_score": 1.0
+      "target": "public_profile_location"
     },
     {
       "relation": "contains",
@@ -5707,9 +5737,9 @@
       "source_file": "public/profile.json",
       "source_location": "L5",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_name",
-      "confidence_score": 1.0
+      "target": "public_profile_name"
     },
     {
       "relation": "contains",
@@ -5717,9 +5747,9 @@
       "source_file": "public/profile.json",
       "source_location": "L123",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_projects",
-      "confidence_score": 1.0
+      "target": "public_profile_projects"
     },
     {
       "relation": "contains",
@@ -5727,9 +5757,9 @@
       "source_file": "public/profile.json",
       "source_location": "L12",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_sameas",
-      "confidence_score": 1.0
+      "target": "public_profile_sameas"
     },
     {
       "relation": "contains",
@@ -5737,9 +5767,9 @@
       "source_file": "public/profile.json",
       "source_location": "L4",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_schemaversion",
-      "confidence_score": 1.0
+      "target": "public_profile_schemaversion"
     },
     {
       "relation": "contains",
@@ -5747,9 +5777,9 @@
       "source_file": "public/profile.json",
       "source_location": "L199",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_sections",
-      "confidence_score": 1.0
+      "target": "public_profile_sections"
     },
     {
       "relation": "contains",
@@ -5757,9 +5787,9 @@
       "source_file": "public/profile.json",
       "source_location": "L105",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_skills",
-      "confidence_score": 1.0
+      "target": "public_profile_skills"
     },
     {
       "relation": "contains",
@@ -5767,9 +5797,9 @@
       "source_file": "public/profile.json",
       "source_location": "L16",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_tagline",
-      "confidence_score": 1.0
+      "target": "public_profile_tagline"
     },
     {
       "relation": "contains",
@@ -5777,9 +5807,9 @@
       "source_file": "public/profile.json",
       "source_location": "L3",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_type",
-      "confidence_score": 1.0
+      "target": "public_profile_type"
     },
     {
       "relation": "contains",
@@ -5787,9 +5817,9 @@
       "source_file": "public/profile.json",
       "source_location": "L10",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_json",
-      "target": "public_profile_url",
-      "confidence_score": 1.0
+      "target": "public_profile_url"
     },
     {
       "relation": "contains",
@@ -5797,9 +5827,9 @@
       "source_file": "public/profile.json",
       "source_location": "L21",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_availability",
-      "target": "public_profile_availability_applicationcycle",
-      "confidence_score": 1.0
+      "target": "public_profile_availability_applicationcycle"
     },
     {
       "relation": "contains",
@@ -5807,9 +5837,9 @@
       "source_file": "public/profile.json",
       "source_location": "L20",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_availability",
-      "target": "public_profile_availability_graduation",
-      "confidence_score": 1.0
+      "target": "public_profile_availability_graduation"
     },
     {
       "relation": "contains",
@@ -5817,9 +5847,9 @@
       "source_file": "public/profile.json",
       "source_location": "L19",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_availability",
-      "target": "public_profile_availability_heading",
-      "confidence_score": 1.0
+      "target": "public_profile_availability_heading"
     },
     {
       "relation": "contains",
@@ -5827,9 +5857,9 @@
       "source_file": "public/profile.json",
       "source_location": "L22",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_availability",
-      "target": "public_profile_availability_note",
-      "confidence_score": 1.0
+      "target": "public_profile_availability_note"
     },
     {
       "relation": "contains",
@@ -5837,9 +5867,9 @@
       "source_file": "public/profile.json",
       "source_location": "L18",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "public_profile_availability",
-      "target": "public_profile_availability_status",
-      "confidence_score": 1.0
+      "target": "public_profile_availability_status"
     },
     {
       "relation": "contains",
@@ -5943,5 +5973,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "4788f7d0f7eca33ab1e8360b40a32e36e4a4ffee"
+  "built_at_commit": "9ae9dcde82ed4ecb4df1830465c1538d6b879977"
 }

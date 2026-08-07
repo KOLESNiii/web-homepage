@@ -1,16 +1,16 @@
 # Graph Report - web-homepage  (2026-08-07)
 
 ## Corpus Check
-- 32 files · ~18,815 words
+- 32 files · ~18,868 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 265 nodes · 344 edges · 22 communities (20 shown, 2 thin omitted)
+- 266 nodes · 346 edges · 22 communities (20 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4788f7d0`
+- Built from commit: `9ae9dcde`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -78,8 +78,8 @@ Cohesion: 0.12
 Nodes (17): devDependencies, eslint, eslint-plugin-vue, jiti, npm-run-all2, prettier, tailwindcss, @tsconfig/node24 (+9 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.22
-Nodes (15): draw(), drawInterchanges(), drawRoute(), drawSmoothRoute(), drawStops(), drawTrain(), gauge(), onScreen() (+7 more)
+Cohesion: 0.21
+Nodes (16): draw(), drawInterchanges(), drawRoundedRoute(), drawRoute(), drawSmoothRoute(), drawStops(), drawTrain(), gauge() (+8 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.12

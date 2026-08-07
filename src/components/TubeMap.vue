@@ -75,28 +75,33 @@ interface View {
 /** A stroke width in world units that never draws thinner than `floor` on screen. */
 const gauge = (world: number, zoom: number, floor: number) => Math.max(world * zoom, floor) / zoom
 
-/** Draw a polyline with a short quadratic transition through every bend. */
-function drawSmoothRoute(points: Route['points']) {
+/** Draw straight Tube-map runs with a small circular fillet at each turn. */
+function drawRoundedRoute(points: Route['points']) {
   if (!ctx || points.length === 0) return
 
-  const first = points[0]
+  const distinct = points.filter((point, index) => {
+    const previous = points[index - 1]
+    return !previous || point.x !== previous.x || point.y !== previous.y
+  })
+  const first = distinct[0]
   if (!first) return
   ctx.moveTo(first.x, first.y)
 
-  for (let i = 1; i < points.length - 1; i++) {
-    const corner = points[i]
-    const next = points[i + 1]
+  for (let i = 1; i < distinct.length - 1; i++) {
+    const corner = distinct[i]
+    const next = distinct[i + 1]
     if (!corner || !next) continue
 
-    ctx.quadraticCurveTo(
-      corner.x,
-      corner.y,
-      (corner.x + next.x) / 2,
-      (corner.y + next.y) / 2,
-    )
+    // arcTo keeps both adjoining runs straight and rounds only the corner.
+    // The cap prevents a tiny generated segment from swallowing the turn.
+    const previous = distinct[i - 1]
+    const incoming = previous ? Math.hypot(corner.x - previous.x, corner.y - previous.y) : 0
+    const outgoing = Math.hypot(next.x - corner.x, next.y - corner.y)
+    const radius = Math.min(96, incoming / 2, outgoing / 2)
+    ctx.arcTo(corner.x, corner.y, next.x, next.y, radius)
   }
 
-  const last = points[points.length - 1]
+  const last = distinct[distinct.length - 1]
   if (last) ctx.lineTo(last.x, last.y)
 }
 
@@ -109,9 +114,7 @@ function drawRoute(route: Route, view: View) {
   ctx.lineCap = 'round'
   ctx.beginPath()
 
-  // A curve is cheap to draw at this scale, and avoids exposing the corner
-  // vertices as sharp points when a line changes heading.
-  drawSmoothRoute(route.points)
+  drawRoundedRoute(route.points)
   ctx.stroke()
 }
 

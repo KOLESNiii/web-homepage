@@ -97,7 +97,7 @@ function drawRoundedRoute(points: Route['points']) {
     const previous = distinct[i - 1]
     const incoming = previous ? Math.hypot(corner.x - previous.x, corner.y - previous.y) : 0
     const outgoing = Math.hypot(next.x - corner.x, next.y - corner.y)
-    const radius = Math.min(96, incoming / 2, outgoing / 2)
+    const radius = Math.min(28, incoming / 2, outgoing / 2)
     ctx.arcTo(corner.x, corner.y, next.x, next.y, radius)
   }
 

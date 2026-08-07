@@ -1,7 +1,12 @@
 <template>
-  <header class="legend" :class="{ 'legend--open': open }">
+  <header
+    class="legend"
+    :class="{ 'legend--open': open }"
+    aria-label="Portfolio navigation"
+    @keydown.esc="closeSheet"
+  >
     <div class="legend__inner">
-      <button class="legend__mark" type="button" @click="jump(0)">
+      <button class="legend__mark" type="button" aria-label="Go to the start" @click="jump(0)">
         <span class="stop stop--change" aria-hidden="true"></span>
         <span class="legend__initials">{{ profile.initials }}</span>
       </button>
@@ -15,7 +20,7 @@
           type="button"
           :class="{ 'is-active': active === index }"
           :style="{ '--line': lineColour(section.line) }"
-          :aria-current="active === index ? 'true' : undefined"
+          :aria-current="active === index ? 'location' : undefined"
           @click="jump(index)"
         >
           <span class="key__bar" aria-hidden="true"></span>
@@ -41,7 +46,12 @@
           </svg>
         </button>
 
-        <a class="chip chip--cv" :href="profile.cv" download>
+        <a
+          class="chip chip--cv"
+          :href="profile.cv"
+          download
+          aria-label="Download curriculum vitae (PDF)"
+        >
           <span>CV</span>
           <svg viewBox="0 0 16 16" aria-hidden="true">
             <path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 13.5h12" />
@@ -50,19 +60,26 @@
       </div>
 
       <button
+        ref="toggleButton"
         class="legend__toggle"
         type="button"
         :aria-expanded="open"
         aria-controls="legend-sheet"
         :aria-label="open ? 'Close the key' : 'Open the key'"
-        @click="open = !open"
+        @click="toggleSheet"
       >
         <span></span>
         <span></span>
       </button>
     </div>
 
-    <div id="legend-sheet" class="sheet" :hidden="!open">
+    <div
+      id="legend-sheet"
+      ref="sheet"
+      class="sheet"
+      :hidden="!open"
+      @keydown="trapSheetFocus"
+    >
       <p class="sheet__title">Key</p>
 
       <button
@@ -79,7 +96,13 @@
         <span class="sheet__line">{{ lines[section.line].name }}</span>
       </button>
 
-      <a class="sheet__cv" :href="profile.cv" download @click="open = false">
+      <a
+        class="sheet__cv"
+        :href="profile.cv"
+        download
+        aria-label="Download curriculum vitae (PDF)"
+        @click="open = false"
+      >
         Download CV
         <svg viewBox="0 0 16 16" aria-hidden="true">
           <path d="M8 1.5v9m0 0 3.2-3.2M8 10.5 4.8 7.3M2 13.5h12" />
@@ -89,7 +112,13 @@
   </header>
 
   <!-- Where you are, the way the platform tells you. -->
-  <p class="where" :class="{ 'where--away': travelling }" aria-live="polite">
+  <p
+    class="where"
+    :class="{ 'where--away': travelling }"
+    role="status"
+    aria-live="polite"
+    aria-atomic="true"
+  >
     <span class="where__bar" :style="{ background: lineColour(current.line) }" aria-hidden="true" />
     <span class="where__line">{{ lines[current.line].name }} line</span>
     <span class="where__stop">{{ platform + 1 }} / {{ current.stops }}</span>
@@ -97,7 +126,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { lineColour, lines, profile, sections } from '../data/portfolio'
 import { useMap } from '../map/useMap'
 import { useTheme } from '../composables/useTheme'
@@ -112,6 +141,8 @@ const map = useMap()
 const { theme, toggle } = useTheme()
 
 const open = ref(false)
+const toggleButton = ref<HTMLButtonElement | null>(null)
+const sheet = ref<HTMLElement | null>(null)
 const active = map.activeIndex
 const platform = map.platformIndex
 const travelling = map.travelling
@@ -122,9 +153,45 @@ function jump(index: number) {
   map.goTo(index)
 }
 
+function toggleSheet() {
+  open.value = !open.value
+}
+
+function closeSheet() {
+  open.value = false
+}
+
+function trapSheetFocus(event: KeyboardEvent) {
+  if (event.key !== 'Tab') return
+
+  const focusable = Array.from(
+    sheet.value?.querySelectorAll<HTMLElement>(
+      'button:not([disabled]), a[href], [tabindex]:not([tabindex="-1"])',
+    ) ?? [],
+  )
+  const first = focusable[0]
+  const last = focusable[focusable.length - 1]
+  if (!first || !last) return
+
+  const current = document.activeElement
+  if (event.shiftKey && current === first) {
+    event.preventDefault()
+    last.focus()
+  } else if (!event.shiftKey && current === last) {
+    event.preventDefault()
+    first.focus()
+  }
+}
+
 // Lock the page while the sheet is up, otherwise the map moves underneath it.
-watch(open, (isOpen) => {
+watch(open, async (isOpen) => {
   document.body.style.overflow = isOpen ? 'hidden' : ''
+  if (isOpen) {
+    await nextTick()
+    sheet.value?.querySelector<HTMLElement>('button, a[href]')?.focus()
+  } else {
+    toggleButton.value?.focus()
+  }
 })
 </script>
 
@@ -161,6 +228,7 @@ watch(open, (isOpen) => {
   font-size: 0.88rem;
   letter-spacing: 0.14em;
   color: var(--text);
+  min-height: 44px;
 }
 
 /* -------------------------------------------------------------------------
@@ -184,6 +252,7 @@ watch(open, (isOpen) => {
   cursor: pointer;
   font-size: 0.84rem;
   color: var(--muted);
+  min-height: 44px;
   transition: color 0.3s var(--ease);
 }
 
@@ -227,7 +296,7 @@ watch(open, (isOpen) => {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  height: 34px;
+  height: 44px;
   border: 1px solid var(--rule-strong);
   border-radius: 999px;
   background: transparent;
@@ -243,7 +312,7 @@ watch(open, (isOpen) => {
 }
 
 .chip--icon {
-  width: 34px;
+  width: 44px;
   flex: none;
 }
 
@@ -268,8 +337,8 @@ watch(open, (isOpen) => {
 
 .legend__toggle {
   display: none;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--rule-strong);
   border-radius: 12px;
   background: transparent;

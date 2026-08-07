@@ -1,9 +1,20 @@
 <template>
-  <button class="skip-link" type="button" @click="skip">Skip to the content</button>
+  <a class="skip-link" href="#main-content" @click.prevent="skip">Skip to the content</a>
 
   <TubeMap />
 
-  <div class="world" :class="{ 'world--travelling': travelling }">
+  <main
+    id="main-content"
+    class="world"
+    :class="{ 'world--travelling': travelling }"
+    tabindex="-1"
+    aria-describedby="journey-instructions"
+  >
+    <p id="journey-instructions" class="sr-only">
+      Scroll to travel through the portfolio. You can also use the section key above to jump
+      directly to a line. Every section is available in document order for keyboard and screen
+      reader users.
+    </p>
     <div ref="planeRef" class="world__plane">
       <HeroSection />
       <AboutSection />
@@ -12,7 +23,7 @@
       <ProjectsSection />
       <ContactSection />
     </div>
-  </div>
+  </main>
 
   <SiteNav />
 
@@ -36,7 +47,10 @@ const map = useMap()
 const { travelling, railHeight } = map
 const planeRef = ref<HTMLElement | null>(null)
 
-const skip = () => map.goTo(map.indexOf('about'))
+const skip = () => {
+  map.goTo(map.indexOf('about'))
+  document.getElementById('main-content')?.focus({ preventScroll: true })
+}
 
 /**
  * Land on a deep link. The document is only as tall as the rail, and the rail

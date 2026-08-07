@@ -50,8 +50,8 @@
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/src/App.vue": {
-    "mtime": 1786137084.737707,
-    "ast_hash": "90ee2fe51ea5cebfe0412625bcd39667",
+    "mtime": 1786141088.4953022,
+    "ast_hash": "5e01621a5f3e03b1b8eccddf1ea826f3",
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/src/main.ts": {
@@ -95,13 +95,13 @@
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/src/components/MapLine.vue": {
-    "mtime": 1786137084.7379873,
-    "ast_hash": "343b8142b7f8a79a99a8ea6bb5fd7f6f",
+    "mtime": 1786141162.6472478,
+    "ast_hash": "ba8d7971bc480ec652bf1cf7276274eb",
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/src/components/ProjectsSection.vue": {
-    "mtime": 1786137084.7381043,
-    "ast_hash": "cd6f5be45db2333e6cdf4b6f236f7241",
+    "mtime": 1786141210.3145711,
+    "ast_hash": "bad890c14057b4950e86ce19758eb103",
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/src/components/SkillsSection.vue": {
@@ -120,8 +120,8 @@
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/src/components/SiteNav.vue": {
-    "mtime": 1786137084.7382443,
-    "ast_hash": "97c8399a63d8bf2978d19e914d981453",
+    "mtime": 1786141204.6366518,
+    "ast_hash": "1f1493e15752e4e05fa4efbced56b925",
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/src/components/TimelineSection.vue": {

@@ -1,16 +1,16 @@
 # Graph Report - web-homepage  (2026-08-07)
 
 ## Corpus Check
-- 31 files · ~16,951 words
+- 31 files · ~17,179 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 236 nodes · 316 edges · 21 communities (19 shown, 2 thin omitted)
+- 239 nodes · 319 edges · 21 communities (19 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `74ed3ff5`
+- Built from commit: `93c8252a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -66,7 +66,7 @@ Nodes (38): Layout, pointAt(), activeIndex, Camera, cameraForScroll(), cancelFli
 
 ### Community 2 - "Community 2"
 Cohesion: 0.06
-Nodes (28): current, map, open, { theme, toggle }, GROUND, stored, systemLight, Theme (+20 more)
+Nodes (27): current, map, open, { theme, toggle }, GROUND, stored, systemLight, Theme (+19 more)
 
 ### Community 3 - "Community 3"
 Cohesion: 0.10
@@ -82,7 +82,7 @@ Nodes (15): draw(), drawInterchanges(), drawRoute(), drawSmoothRoute(), drawStop
 
 ### Community 6 - "Community 6"
 Cohesion: 0.12
-Nodes (4): router, landing, map, app
+Nodes (5): useMap(), router, landing, map, app
 
 ### Community 7 - "Community 7"
 Cohesion: 0.18
@@ -123,6 +123,6 @@ _Questions this graph is uniquely positioned to answer:_
 - **Should `Community 1` be split into smaller, more focused modules?**
   _Cohesion score 0.10128205128205128 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
-  _Cohesion score 0.06031746031746032 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.05689900426742532 - nodes in this community are weakly interconnected._
 - **Should `Community 3` be split into smaller, more focused modules?**
   _Cohesion score 0.1 - nodes in this community are weakly interconnected._

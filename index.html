@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="">
+<!doctype html>
+<html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tim Kolesnichenko</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="theme-color" content="#12161d" />
+
+    <!-- Pick the ground before first paint, so the page never flashes the
+         wrong map at you. Mirrors composables/useTheme.ts. -->
+    <script>
+      try {
+        var stored = localStorage.getItem('tube-theme')
+        document.documentElement.dataset.theme =
+          stored === 'light' || stored === 'dark'
+            ? stored
+            : matchMedia('(prefers-color-scheme: light)').matches
+              ? 'light'
+              : 'dark'
+      } catch (error) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+
+    <title>Timofey Kolesnichenko — Software Engineer</title>
+    <meta
+      name="description"
+      content="Computing student at Imperial College London building compilers, kernels and interfaces. Open to graduate software engineering roles for 2028."
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Timofey Kolesnichenko — Software Engineer" />
+    <meta
+      property="og:description"
+      content="Computing at Imperial College London. Compilers, kernels and interfaces — the whole line, end to end."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="app"></div>

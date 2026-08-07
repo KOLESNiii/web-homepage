@@ -9,7 +9,7 @@
       "source_file": "package.json",
       "source_location": "L1",
       "id": "package_json",
-      "community": 4,
+      "community": 3,
       "norm_label": "package.json"
     },
     {
@@ -18,7 +18,7 @@
       "source_file": "package.json",
       "source_location": "L2",
       "id": "web_homepage_package_name",
-      "community": 4,
+      "community": 3,
       "norm_label": "name"
     },
     {
@@ -27,7 +27,7 @@
       "source_file": "package.json",
       "source_location": "L3",
       "id": "web_homepage_package_version",
-      "community": 4,
+      "community": 3,
       "norm_label": "version"
     },
     {
@@ -36,7 +36,7 @@
       "source_file": "package.json",
       "source_location": "L4",
       "id": "web_homepage_package_private",
-      "community": 4,
+      "community": 3,
       "norm_label": "private"
     },
     {
@@ -45,7 +45,7 @@
       "source_file": "package.json",
       "source_location": "L5",
       "id": "web_homepage_package_type",
-      "community": 4,
+      "community": 3,
       "norm_label": "type"
     },
     {
@@ -54,7 +54,7 @@
       "source_file": "package.json",
       "source_location": "L6",
       "id": "web_homepage_package_engines",
-      "community": 4,
+      "community": 3,
       "norm_label": "engines"
     },
     {
@@ -63,7 +63,7 @@
       "source_file": "package.json",
       "source_location": "L7",
       "id": "web_homepage_package_engines_node",
-      "community": 4,
+      "community": 3,
       "norm_label": "node"
     },
     {
@@ -144,7 +144,7 @@
       "source_file": "package.json",
       "source_location": "L18",
       "id": "web_homepage_package_dependencies",
-      "community": 4,
+      "community": 3,
       "norm_label": "dependencies"
     },
     {
@@ -153,7 +153,7 @@
       "source_file": "package.json",
       "source_location": "L19",
       "id": "web_homepage_package_dependencies_autoprefixer",
-      "community": 4,
+      "community": 3,
       "norm_label": "autoprefixer"
     },
     {
@@ -162,7 +162,7 @@
       "source_file": "package.json",
       "source_location": "L20",
       "id": "web_homepage_package_dependencies_postcss",
-      "community": 4,
+      "community": 3,
       "norm_label": "postcss"
     },
     {
@@ -171,7 +171,7 @@
       "source_file": "package.json",
       "source_location": "L21",
       "id": "web_homepage_package_dependencies_vue",
-      "community": 4,
+      "community": 3,
       "norm_label": "vue"
     },
     {
@@ -180,7 +180,7 @@
       "source_file": "package.json",
       "source_location": "L22",
       "id": "web_homepage_package_dependencies_vue_router",
-      "community": 4,
+      "community": 3,
       "norm_label": "vue-router"
     },
     {
@@ -1033,7 +1033,7 @@
       "label": "gainFor()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L76",
+      "source_location": "L78",
       "id": "map_usemap_gainfor",
       "community": 1,
       "norm_label": "gainfor()"
@@ -1042,7 +1042,7 @@
       "label": "network",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L79",
+      "source_location": "L81",
       "id": "map_usemap_network",
       "community": 1,
       "norm_label": "network"
@@ -1051,7 +1051,7 @@
       "label": "activeIndex",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L81",
+      "source_location": "L83",
       "id": "map_usemap_activeindex",
       "community": 1,
       "norm_label": "activeindex"
@@ -1060,7 +1060,7 @@
       "label": "platformIndex",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L83",
+      "source_location": "L85",
       "id": "map_usemap_platformindex",
       "community": 1,
       "norm_label": "platformindex"
@@ -1069,7 +1069,7 @@
       "label": "travelling",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L85",
+      "source_location": "L87",
       "id": "map_usemap_travelling",
       "community": 1,
       "norm_label": "travelling"
@@ -1078,7 +1078,7 @@
       "label": "railHeight",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L86",
+      "source_location": "L88",
       "id": "map_usemap_railheight",
       "community": 1,
       "norm_label": "railheight"
@@ -1087,7 +1087,7 @@
       "label": "segments",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L90",
+      "source_location": "L92",
       "id": "map_usemap_segments",
       "community": 1,
       "norm_label": "segments"
@@ -1096,7 +1096,7 @@
       "label": "clamp01()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L96",
+      "source_location": "L101",
       "id": "map_usemap_clamp01",
       "community": 1,
       "norm_label": "clamp01()"
@@ -1105,7 +1105,7 @@
       "label": "mix()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L97",
+      "source_location": "L102",
       "id": "map_usemap_mix",
       "community": 1,
       "norm_label": "mix()"
@@ -1114,7 +1114,7 @@
       "label": "smoothstep()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L99",
+      "source_location": "L104",
       "id": "map_usemap_smoothstep",
       "community": 1,
       "norm_label": "smoothstep()"
@@ -1123,7 +1123,7 @@
       "label": "easeInOut()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L104",
+      "source_location": "L109",
       "id": "map_usemap_easeinout",
       "community": 1,
       "norm_label": "easeinout()"
@@ -1132,7 +1132,7 @@
       "label": "measure()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L110",
+      "source_location": "L115",
       "id": "map_usemap_measure",
       "community": 1,
       "norm_label": "measure()"
@@ -1141,7 +1141,7 @@
       "label": "mapCentre()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L182",
+      "source_location": "L187",
       "id": "map_usemap_mapcentre",
       "community": 1,
       "norm_label": "mapcentre()"
@@ -1150,7 +1150,7 @@
       "label": "travelOf()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L189",
+      "source_location": "L194",
       "id": "map_usemap_travelof",
       "community": 1,
       "norm_label": "travelof()"
@@ -1159,7 +1159,7 @@
       "label": "layOutJourney()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L197",
+      "source_location": "L202",
       "id": "map_usemap_layoutjourney",
       "community": 1,
       "norm_label": "layoutjourney()"
@@ -1168,7 +1168,7 @@
       "label": "platformPoint()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L224",
+      "source_location": "L229",
       "id": "map_usemap_platformpoint",
       "community": 1,
       "norm_label": "platformpoint()"
@@ -1177,7 +1177,7 @@
       "label": "flatness()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L235",
+      "source_location": "L240",
       "id": "map_usemap_flatness",
       "community": 1,
       "norm_label": "flatness()"
@@ -1186,7 +1186,7 @@
       "label": "flightAt()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L250",
+      "source_location": "L255",
       "id": "map_usemap_flightat",
       "community": 1,
       "norm_label": "flightat()"
@@ -1195,7 +1195,7 @@
       "label": "segmentAt()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L268",
+      "source_location": "L273",
       "id": "map_usemap_segmentat",
       "community": 1,
       "norm_label": "segmentat()"
@@ -1204,7 +1204,7 @@
       "label": "cameraForScroll()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L276",
+      "source_location": "L281",
       "id": "map_usemap_cameraforscroll",
       "community": 1,
       "norm_label": "cameraforscroll()"
@@ -1213,7 +1213,7 @@
       "label": "sectionForScroll()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L317",
+      "source_location": "L322",
       "id": "map_usemap_sectionforscroll",
       "community": 1,
       "norm_label": "sectionforscroll()"
@@ -1222,7 +1222,7 @@
       "label": "nearestPlatform()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L332",
+      "source_location": "L337",
       "id": "map_usemap_nearestplatform",
       "community": 1,
       "norm_label": "nearestplatform()"
@@ -1231,16 +1231,34 @@
       "label": "writePlane()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L346",
+      "source_location": "L351",
       "id": "map_usemap_writeplane",
       "community": 1,
       "norm_label": "writeplane()"
     },
     {
+      "label": "inertialScroll()",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L363",
+      "id": "map_usemap_inertialscroll",
+      "community": 1,
+      "norm_label": "inertialscroll()"
+    },
+    {
+      "label": "syncScrollPosition()",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L389",
+      "id": "map_usemap_syncscrollposition",
+      "community": 1,
+      "norm_label": "syncscrollposition()"
+    },
+    {
       "label": "tick()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L358",
+      "source_location": "L396",
       "id": "map_usemap_tick",
       "community": 1,
       "norm_label": "tick()"
@@ -1249,7 +1267,7 @@
       "label": "scrollFor()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L381",
+      "source_location": "L420",
       "id": "map_usemap_scrollfor",
       "community": 1,
       "norm_label": "scrollfor()"
@@ -1258,7 +1276,7 @@
       "label": "scrollForPlatform()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L386",
+      "source_location": "L425",
       "id": "map_usemap_scrollforplatform",
       "community": 1,
       "norm_label": "scrollforplatform()"
@@ -1267,7 +1285,7 @@
       "label": "jumpTo()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L395",
+      "source_location": "L434",
       "id": "map_usemap_jumpto",
       "community": 1,
       "norm_label": "jumpto()"
@@ -1276,7 +1294,7 @@
       "label": "goTo()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L400",
+      "source_location": "L439",
       "id": "map_usemap_goto",
       "community": 1,
       "norm_label": "goto()"
@@ -1285,7 +1303,7 @@
       "label": "cancelFlight()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L422",
+      "source_location": "L462",
       "id": "map_usemap_cancelflight",
       "community": 1,
       "norm_label": "cancelflight()"
@@ -1294,7 +1312,7 @@
       "label": "rebuild()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L428",
+      "source_location": "L469",
       "id": "map_usemap_rebuild",
       "community": 1,
       "norm_label": "rebuild()"
@@ -1303,7 +1321,7 @@
       "label": "useMap()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L443",
+      "source_location": "L485",
       "id": "map_usemap_usemap",
       "community": 2,
       "norm_label": "usemap()"
@@ -3474,6 +3492,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/map/useMap.ts",
+      "source_location": "L363",
+      "weight": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_inertialscroll",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
       "source_location": "L395",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -3659,6 +3687,16 @@
       "confidence_score": 1.0,
       "source": "src_map_usemap_ts",
       "target": "map_usemap_smoothstep"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L389",
+      "weight": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_syncscrollposition",
+      "confidence_score": 1.0
     },
     {
       "relation": "contains",
@@ -4060,6 +4098,61 @@
       "confidence_score": 1.0,
       "source": "map_usemap_tick",
       "target": "map_usemap_writeplane"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L407",
+      "weight": 1.0,
+      "source": "map_usemap_tick",
+      "target": "map_usemap_inertialscroll",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L466",
+      "weight": 1.0,
+      "source": "map_usemap_cancelflight",
+      "target": "map_usemap_syncscrollposition",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L449",
+      "weight": 1.0,
+      "source": "map_usemap_goto",
+      "target": "map_usemap_syncscrollposition",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L480",
+      "weight": 1.0,
+      "source": "map_usemap_rebuild",
+      "target": "map_usemap_syncscrollposition",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L404",
+      "weight": 1.0,
+      "source": "map_usemap_tick",
+      "target": "map_usemap_syncscrollposition",
+      "confidence_score": 1.0
     },
     {
       "relation": "calls",
@@ -4919,9 +5012,9 @@
       "source_file": "src/components/TubeMap.vue",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_tubemap_vue",
-      "target": "components_tubemap_drawsmoothroute",
-      "confidence_score": 1.0
+      "target": "components_tubemap_drawsmoothroute"
     },
     {
       "relation": "contains",
@@ -5105,9 +5198,9 @@
       "source_file": "src/components/TubeMap.vue",
       "source_location": "L114",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_tubemap_drawroute",
-      "target": "components_tubemap_drawsmoothroute",
-      "confidence_score": 1.0
+      "target": "components_tubemap_drawsmoothroute"
     },
     {
       "relation": "calls",
@@ -5309,5 +5402,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f8a4bac9112b03555f837d8fd7a4bde1c7002f9e"
+  "built_at_commit": "74ed3ff52db9a4b8feade8ef3b27f2fe49947550"
 }

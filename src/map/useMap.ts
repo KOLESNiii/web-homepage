@@ -67,6 +67,8 @@ interface Flight {
 }
 
 const FLIGHT_MS = 1700
+const SCROLL_SPRING = 0.16
+const SCROLL_DAMPING = 0.78
 /**
  * World px travelled per px scrolled. Above 1 because a station's worth of
  * track is more than a screen of map, and one flick should be about one
@@ -92,6 +94,9 @@ let journey = 0
 let flight: Flight | null = null
 let plane: HTMLElement | null = null
 let reduced = false
+let scrollPosition = 0
+let scrollVelocity = 0
+let scrollInitialised = false
 
 const clamp01 = (value: number) => (value < 0 ? 0 : value > 1 ? 1 : value)
 const mix = (a: number, b: number, t: number) => a + (b - a) * t
@@ -354,6 +359,39 @@ function writePlane() {
   plane.style.transform = `translate3d(${rx}px, ${ry}px, 0) scale(${zoom})`
 }
 
+/** Ease the camera towards the browser's scroll position for a little carry. */
+function inertialScroll(target: number): number {
+  if (reduced) {
+    scrollPosition = target
+    scrollVelocity = 0
+    scrollInitialised = true
+    return target
+  }
+
+  if (!scrollInitialised) {
+    scrollPosition = target
+    scrollInitialised = true
+    return target
+  }
+
+  scrollVelocity += (target - scrollPosition) * SCROLL_SPRING
+  scrollVelocity *= SCROLL_DAMPING
+  scrollPosition += scrollVelocity
+
+  if (Math.abs(target - scrollPosition) < 0.5 && Math.abs(scrollVelocity) < 0.5) {
+    scrollPosition = target
+    scrollVelocity = 0
+  }
+
+  return Math.max(0, Math.min(scrollPosition, journey))
+}
+
+function syncScrollPosition() {
+  scrollPosition = window.scrollY
+  scrollVelocity = 0
+  scrollInitialised = true
+}
+
 /** Called once per frame by the renderer, which owns the animation loop. */
 function tick(now: number): Camera {
   if (flight) {
@@ -363,9 +401,10 @@ function tick(now: number): Camera {
     if (t >= 1) {
       flight = null
       travelling.value = false
+      syncScrollPosition()
     }
   } else {
-    const scroll = window.scrollY
+    const scroll = inertialScroll(window.scrollY)
     cameraForScroll(scroll, camera)
     activeIndex.value = sectionForScroll(scroll)
     travelling.value = camera.zoom < 0.985
@@ -407,6 +446,7 @@ function goTo(index: number, stop = 0) {
 
   if (reduced) {
     flight = null
+    syncScrollPosition()
     cameraForScroll(target, camera)
     writePlane()
     return
@@ -423,6 +463,7 @@ function cancelFlight() {
   if (!flight) return
   flight = null
   travelling.value = false
+  syncScrollPosition()
 }
 
 function rebuild() {
@@ -436,6 +477,7 @@ function rebuild() {
 
   layOutJourney()
   jumpTo(scrollFor(previous))
+  syncScrollPosition()
   cameraForScroll(window.scrollY, camera)
   writePlane()
 }

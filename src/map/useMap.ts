@@ -11,7 +11,7 @@
  * line in the legend makes the same flight on a clock instead of on scroll.
  */
 
-import { computed, ref, shallowRef } from 'vue'
+import { computed, reactive, ref, shallowRef } from 'vue'
 import { sections } from '../data/portfolio'
 import { buildNetwork, pointAt, type Layout, type Network, type Point, type Route } from './network'
 
@@ -67,6 +67,8 @@ interface Flight {
 }
 
 const FLIGHT_MS = 1700
+const SCROLL_SPRING = 0.16
+const SCROLL_DAMPING = 0.78
 /**
  * World px travelled per px scrolled. Above 1 because a station's worth of
  * track is more than a screen of map, and one flick should be about one
@@ -83,15 +85,20 @@ const activeIndex = ref(0)
 const platformIndex = ref(0)
 /** True while the camera is off the ground: panels are hidden, the map is not. */
 const travelling = ref(false)
+/** True while the visitor is handling the map directly instead of riding the scroll journey. */
+const exploring = ref(true)
 const railHeight = ref(0)
 
-const camera: Camera = { x: 0, y: 0, zoom: 1, ax: 0, ay: 0 }
+const camera = reactive<Camera>({ x: 0, y: 0, zoom: 1, ax: 0, ay: 0 })
 
 let segments: Segment[] = []
 let journey = 0
 let flight: Flight | null = null
 let plane: HTMLElement | null = null
 let reduced = false
+let scrollPosition = 0
+let scrollVelocity = 0
+let scrollInitialised = false
 
 const clamp01 = (value: number) => (value < 0 ? 0 : value > 1 ? 1 : value)
 const mix = (a: number, b: number, t: number) => a + (b - a) * t
@@ -146,9 +153,9 @@ function measure(bounds?: { minX: number; minY: number; maxX: number; maxY: numb
         across,
         close,
         closeAcross: Math.round(close * 1.9),
-        pitch: 380,
-        band: 260,
-        jog: 360,
+        pitch: 720,
+        band: 120,
+        jog: 150,
         sideways: false,
       }
     : {
@@ -156,10 +163,10 @@ function measure(bounds?: { minX: number; minY: number; maxX: number; maxY: numb
         across,
         close,
         closeAcross: Math.round(close * 1.9),
-        pitch: 1000,
-        band: 360,
-        jog: 420,
-        sideways: true,
+        pitch: 1300,
+        band: 200,
+        jog: 260,
+        sideways: false,
       }
 
   return {
@@ -183,6 +190,99 @@ function mapCentre(): Point {
   const bounds = network.value?.bounds
   if (!bounds) return { x: 0, y: 0 }
   return { x: (bounds.minX + bounds.maxX) / 2, y: (bounds.minY + bounds.maxY) / 2 }
+}
+
+/** Keep enough diagram under the viewport that a drag can never lose the map altogether. */
+function constrainCamera() {
+  const bounds = network.value?.bounds
+  if (!bounds) return
+
+  const { vw, vh } = metrics.value
+  const halfWidth = vw / camera.zoom / 2
+  const halfHeight = vh / camera.zoom / 2
+  const edge = 72 / camera.zoom
+
+  const minX = bounds.minX - edge + halfWidth
+  const maxX = bounds.maxX + edge - halfWidth
+  const minY = bounds.minY - edge + halfHeight
+  const maxY = bounds.maxY + edge - halfHeight
+
+  camera.x = minX > maxX ? (bounds.minX + bounds.maxX) / 2 : Math.max(minX, Math.min(maxX, camera.x))
+  camera.y = minY > maxY ? (bounds.minY + bounds.maxY) / 2 : Math.max(minY, Math.min(maxY, camera.y))
+}
+
+/** Put the whole network on the glass, as a real map menu should. */
+function fitOverview() {
+  const centre = mapCentre()
+  camera.x = centre.x
+  camera.y = centre.y
+  camera.zoom = metrics.value.fitZoom
+  camera.ax = metrics.value.vw * 0.5
+  camera.ay = metrics.value.vh * 0.5
+  constrainCamera()
+  writePlane()
+}
+
+/** Hand the camera to the visitor without making the picture jump. */
+function enterExplore(fit = false) {
+  cancelFlight()
+  exploring.value = true
+  travelling.value = false
+
+  if (fit) {
+    fitOverview()
+    return
+  }
+
+  const { vw, vh } = metrics.value
+  camera.x += (vw * 0.5 - camera.ax) / camera.zoom
+  camera.y += (vh * 0.5 - camera.ay) / camera.zoom
+  camera.ax = vw * 0.5
+  camera.ay = vh * 0.5
+  constrainCamera()
+  writePlane()
+}
+
+function panBy(dx: number, dy: number) {
+  if (!exploring.value) return
+  camera.x -= dx / camera.zoom
+  camera.y -= dy / camera.zoom
+  constrainCamera()
+  writePlane()
+}
+
+/** Zoom around the cursor (or the viewport centre for buttons and keyboard). */
+function zoomBy(factor: number, screenX = metrics.value.vw * 0.5, screenY = metrics.value.vh * 0.5) {
+  if (!exploring.value) return
+
+  const beforeX = camera.x + (screenX - camera.ax) / camera.zoom
+  const beforeY = camera.y + (screenY - camera.ay) / camera.zoom
+  const minimum = Math.max(0.055, metrics.value.fitZoom * 0.92)
+  const next = Math.max(minimum, Math.min(2.4, camera.zoom * factor))
+
+  camera.x = beforeX - (screenX - camera.ax) / next
+  camera.y = beforeY - (screenY - camera.ay) / next
+  camera.zoom = next
+  constrainCamera()
+  writePlane()
+}
+
+/** Open map mode at a station closely enough that its attached content is readable. */
+function focusPlatform(index: number, stop: number, zoom = 0.9) {
+  const platforms = network.value?.sections[index]?.platforms ?? []
+  const station = platforms[stop]
+  if (!station) return
+
+  exploring.value = true
+  activeIndex.value = index
+  platformIndex.value = stop
+  travelling.value = false
+  camera.x = station.x
+  camera.y = station.y
+  camera.zoom = Math.max(metrics.value.fitZoom, zoom)
+  camera.ax = metrics.value.anchorX
+  camera.ay = station.sideways ? metrics.value.flatY : metrics.value.anchorY
+  writePlane()
 }
 
 /** Arc length between a section's first and last platform. */
@@ -217,14 +317,15 @@ function layOutJourney() {
    Where the camera is
    ------------------------------------------------------------------------- */
 
-/**
- * A line's first and last platform are always on a run down the map, by
- * construction, so a flight starts and finishes at the ordinary anchor.
- */
+/** One end of a flight, using the anchor appropriate to that platform's direction. */
 function platformPoint(index: number, stop: 'first' | 'last'): Waypoint {
   const platforms = network.value?.sections[index]?.platforms ?? []
   const station = stop === 'first' ? platforms[0] : platforms[platforms.length - 1]
-  return { x: station?.x ?? 0, y: station?.y ?? 0, ay: metrics.value.anchorY }
+  return {
+    x: station?.x ?? 0,
+    y: station?.y ?? 0,
+    ay: station?.sideways ? metrics.value.flatY : metrics.value.anchorY,
+  }
 }
 
 /**
@@ -354,24 +455,62 @@ function writePlane() {
   plane.style.transform = `translate3d(${rx}px, ${ry}px, 0) scale(${zoom})`
 }
 
+/** Ease the camera towards the browser's scroll position for a little carry. */
+function inertialScroll(target: number): number {
+  if (reduced) {
+    scrollPosition = target
+    scrollVelocity = 0
+    scrollInitialised = true
+    return target
+  }
+
+  if (!scrollInitialised) {
+    scrollPosition = target
+    scrollInitialised = true
+    return target
+  }
+
+  scrollVelocity += (target - scrollPosition) * SCROLL_SPRING
+  scrollVelocity *= SCROLL_DAMPING
+  scrollPosition += scrollVelocity
+
+  if (Math.abs(target - scrollPosition) < 0.5 && Math.abs(scrollVelocity) < 0.5) {
+    scrollPosition = target
+    scrollVelocity = 0
+  }
+
+  return Math.max(0, Math.min(scrollPosition, journey))
+}
+
+function syncScrollPosition() {
+  scrollPosition = window.scrollY
+  scrollVelocity = 0
+  scrollInitialised = true
+}
+
 /** Called once per frame by the renderer, which owns the animation loop. */
 function tick(now: number): Camera {
-  if (flight) {
+  if (exploring.value) {
+    travelling.value = false
+  } else if (flight) {
     const t = clamp01((now - flight.started) / flight.duration)
     flightAt(flight.from, flight.to, t, camera)
     travelling.value = t < 0.86
     if (t >= 1) {
       flight = null
       travelling.value = false
+      syncScrollPosition()
     }
   } else {
-    const scroll = window.scrollY
+    const scroll = inertialScroll(window.scrollY)
     cameraForScroll(scroll, camera)
     activeIndex.value = sectionForScroll(scroll)
     travelling.value = camera.zoom < 0.985
   }
 
-  platformIndex.value = nearestPlatform(activeIndex.value, camera)
+  // Free panning should not silently move the visitor's return ticket. When
+  // they resume, take them back to the platform where they left the journey.
+  if (!exploring.value) platformIndex.value = nearestPlatform(activeIndex.value, camera)
 
   writePlane()
   return camera
@@ -397,7 +536,8 @@ function jumpTo(scroll: number) {
 }
 
 /** Fly to a line: pull back, cross the map, drop in at its first platform. */
-function goTo(index: number, stop = 0) {
+function goTo(index: number, stop = 0, animate = true) {
+  exploring.value = false
   const target = scrollForPlatform(index, stop)
   // Where the camera stands now, however sideways the line under it was.
   const from: Waypoint = { x: camera.x, y: camera.y, ay: camera.ay }
@@ -405,8 +545,9 @@ function goTo(index: number, stop = 0) {
   jumpTo(target)
   activeIndex.value = index
 
-  if (reduced) {
+  if (reduced || !animate) {
     flight = null
+    syncScrollPosition()
     cameraForScroll(target, camera)
     writePlane()
     return
@@ -423,6 +564,7 @@ function cancelFlight() {
   if (!flight) return
   flight = null
   travelling.value = false
+  syncScrollPosition()
 }
 
 function rebuild() {
@@ -435,8 +577,13 @@ function rebuild() {
   metrics.value = measure(map.bounds)
 
   layOutJourney()
-  jumpTo(scrollFor(previous))
-  cameraForScroll(window.scrollY, camera)
+  if (exploring.value) {
+    fitOverview()
+  } else {
+    jumpTo(scrollFor(previous))
+    syncScrollPosition()
+    cameraForScroll(window.scrollY, camera)
+  }
   writePlane()
 }
 
@@ -447,14 +594,23 @@ export function useMap() {
     activeIndex,
     platformIndex,
     travelling,
+    exploring,
     railHeight,
     camera,
     activeSection: computed(() => sections[activeIndex.value] ?? sections[0]),
     platform: (index: number, stop: number) =>
       network.value?.sections[index]?.platforms[stop] ?? null,
-    indexOf: (id: string) => sections.findIndex((section) => section.id === id),
+    indexOf: (id: string) => {
+      const current = id === 'home' ? 'about' : id === 'stack' ? 'skills' : id
+      return sections.findIndex((section) => section.id === current)
+    },
     tick,
     goTo,
+    enterExplore,
+    fitOverview,
+    focusPlatform,
+    panBy,
+    zoomBy,
     cancelFlight,
     rebuild,
     scrollForPlatform,

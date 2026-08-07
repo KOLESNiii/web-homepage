@@ -1,5 +1,5 @@
 <template>
-  <MapLine section="stack">
+  <MapLine section="skills">
     <!-- One stop per skill, close together, the way an inner-city stretch of
          line calls at a station every few hundred yards. The group name labels
          the stretch it opens rather than boxing the ones that follow it. The
@@ -8,7 +8,7 @@
     <MapPanel
       v-for="(station, index) in skillStops"
       :key="station.item"
-      section="stack"
+      section="skills"
       :stop="index"
       variant="name"
     >
@@ -28,13 +28,13 @@ import { skillStops } from '../data/portfolio'
 /* The first stop of a group carries the group's name above its own, the way a
    map labels the stretch of line a run of stations belongs to. */
 .group {
-  margin-bottom: 0.15rem;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  line-height: 1.4;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--line-ink);
+  margin-bottom: 0.25rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--text);
   white-space: nowrap;
 }
 

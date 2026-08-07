@@ -26,6 +26,9 @@ coverage
 
 *.tsbuildinfo
 
+# Graphify stores the local Python interpreter path here.
+graphify-out/.graphify_python
+
 .eslintcache
 
 # Cypress

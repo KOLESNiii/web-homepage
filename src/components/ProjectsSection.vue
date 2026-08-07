@@ -23,10 +23,24 @@
       </ul>
 
       <p v-if="project.repo || project.demo" class="project__links">
-        <a v-if="project.repo" class="link" :href="project.repo" target="_blank" rel="noopener">
+        <a
+          v-if="project.repo"
+          class="link"
+          :href="project.repo"
+          target="_blank"
+          rel="noopener noreferrer"
+          :aria-label="`Source code for ${project.title}`"
+        >
           Source
         </a>
-        <a v-if="project.demo" class="link" :href="project.demo" target="_blank" rel="noopener">
+        <a
+          v-if="project.demo"
+          class="link"
+          :href="project.demo"
+          target="_blank"
+          rel="noopener noreferrer"
+          :aria-label="`Live demo for ${project.title}`"
+        >
           Live
         </a>
       </p>

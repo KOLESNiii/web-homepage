@@ -66,7 +66,7 @@
   --text: #f2f5f8;
   --muted-strong: #b8c1cc;
   --muted: #8a93a0;
-  --faint: #5d6673;
+  --faint: #8d98a5;
 
   --rule: rgba(255, 255, 255, 0.09);
   --rule-strong: rgba(255, 255, 255, 0.18);
@@ -99,7 +99,7 @@
   --text: #14181f;
   --muted-strong: #3d4652;
   --muted: #5f6874;
-  --faint: #8b939e;
+  --faint: #687481;
 
   --rule: rgba(20, 24, 31, 0.11);
   --rule-strong: rgba(20, 24, 31, 0.24);
@@ -149,6 +149,12 @@ html {
   background: var(--bg);
 }
 
+html.is-map-exploring,
+html.is-map-exploring body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -185,6 +191,18 @@ button {
   border-radius: 4px;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .skip-link {
   position: fixed;
   top: 0.75rem;
@@ -215,15 +233,20 @@ button {
 /* =========================================================================
    Panels
    -------------------------------------------------------------------------
-   Only the line you are riding shows its panels. The rest are faded out,
-   which keeps the diagram readable, and made inert, which keeps the tab
-   order down to the same one line.
+   Guided travel shows one line at a time. Map mode reveals the full content
+   network; the generated layout reserves a separate corridor for each line
+   so those cards remain readable without collisions.
    ========================================================================= */
 
-.world .route[data-active='false'] .panel,
+.world:not(.world--exploring) .route[data-active='false'] .panel,
 .world.world--travelling .panel {
   opacity: 0;
   pointer-events: none;
+}
+
+.world.world--exploring .panel {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .panel-title {
@@ -233,6 +256,12 @@ button {
   letter-spacing: -0.025em;
   line-height: 1.1;
   margin-bottom: 0.7rem;
+}
+
+/* Keep keyboard focus visible even when a panel is moving with the camera. */
+.panel :focus-visible {
+  position: relative;
+  z-index: 1;
 }
 
 .panel-lede {

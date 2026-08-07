@@ -1,7 +1,7 @@
 <template>
   <article
     class="panel"
-    :class="[`panel--${variant}`, { 'panel--sideways': sideways }]"
+    :class="[`panel--${variant}`, { 'panel--sideways': sideways, 'panel--dense': dense }]"
     :style="style"
     @focusin="onFocus"
   >
@@ -19,11 +19,10 @@ import { useMap } from '../map/useMap'
  * One panel, pinned to one platform.
  *
  * Panels live in map coordinates inside the transformed plane, so they travel
- * with the diagram rather than with the document. Only the line you are on
- * shows its panels — the rest are faded out and take no clicks, which keeps
- * the diagram readable. They stay in the document and in the tab order,
- * though: tabbing onto one brings the camera to it, so keyboard and screen
- * reader users travel the whole journey rather than one line of it.
+ * with the diagram rather than with the document. Guided travel shows the
+ * current line; map mode shows the complete, collision-free content network.
+ * Every panel stays in document order, and focusing one during the guided
+ * journey brings its platform to the camera.
  *
  * Three shapes:
  *
@@ -37,8 +36,12 @@ const props = withDefaults(
     section: string
     stop: number
     variant?: 'card' | 'bare' | 'name'
+    /** Fine placement adjustment for cards whose content needs extra room. */
+    offsetY?: number
+    /** Tighter card padding for content-heavy panels that must fit a viewport. */
+    dense?: boolean
   }>(),
-  { variant: 'card' },
+  { variant: 'card', offsetY: 0, dense: false },
 )
 
 const map = useMap()
@@ -62,12 +65,12 @@ const style = computed(() => {
 
   return {
     left: `${sideways.value ? x : x + gap}px`,
-    top: `${sideways.value ? y + gap : y}px`,
+    top: `${y + (sideways.value ? gap : 0) + props.offsetY}px`,
     // A name is as wide as its word; everything else takes the column width.
     ...(props.variant === 'name' ? { maxWidth: `${panelWidth}px` } : { width: `${panelWidth}px` }),
     '--line': lineColour(line.value),
     '--line-ink': lineInk(line.value),
-    '--leader': `${gap}px`,
+    '--leader': `${gap + (sideways.value ? props.offsetY : 0)}px`,
   }
 })
 
@@ -76,6 +79,7 @@ const style = computed(() => {
  * page does not scroll, so nothing else would put it on screen.
  */
 function onFocus() {
+  if (map.exploring.value) return
   const target = map.scrollForPlatform(index.value, props.stop)
   if (Math.abs(window.scrollY - target) < map.metrics.value.vh * 0.4) return
   map.cancelFlight()
@@ -101,6 +105,10 @@ function onFocus() {
    thing level with the platform and nothing sits over the line. */
 .panel--sideways {
   transform: none;
+}
+
+.panel--dense {
+  padding: 0.75rem 1.25rem;
 }
 
 /*

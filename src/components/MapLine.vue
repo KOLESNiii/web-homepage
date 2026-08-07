@@ -1,11 +1,17 @@
 <template>
-  <section :id="section" class="route" :data-active="active">
+  <section
+    :id="section"
+    class="route"
+    :data-active="active"
+    :aria-label="`${label} section`"
+  >
     <slot />
   </section>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
+import { sections } from '../data/portfolio'
 import { useMap } from '../map/useMap'
 
 /**
@@ -19,10 +25,15 @@ const props = defineProps<{ section: string }>()
 
 const map = useMap()
 const active = computed(() => map.activeIndex.value === map.indexOf(props.section))
+const label = computed(() => sections[map.indexOf(props.section)]?.label ?? props.section)
 </script>
 
 <style scoped>
 .route {
-  display: contents;
+  /* Keep a real section in the accessibility tree without becoming the
+     containing block for the absolute-positioned panels. */
+  display: block;
+  width: 0;
+  height: 0;
 }
 </style>

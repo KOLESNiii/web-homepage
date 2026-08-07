@@ -317,14 +317,15 @@ function layOutJourney() {
    Where the camera is
    ------------------------------------------------------------------------- */
 
-/**
- * A line's first and last platform are always on a run down the map, by
- * construction, so a flight starts and finishes at the ordinary anchor.
- */
+/** One end of a flight, using the anchor appropriate to that platform's direction. */
 function platformPoint(index: number, stop: 'first' | 'last'): Waypoint {
   const platforms = network.value?.sections[index]?.platforms ?? []
   const station = stop === 'first' ? platforms[0] : platforms[platforms.length - 1]
-  return { x: station?.x ?? 0, y: station?.y ?? 0, ay: metrics.value.anchorY }
+  return {
+    x: station?.x ?? 0,
+    y: station?.y ?? 0,
+    ay: station?.sideways ? metrics.value.flatY : metrics.value.anchorY,
+  }
 }
 
 /**

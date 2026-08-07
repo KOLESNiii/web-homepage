@@ -2,10 +2,10 @@
  * The map itself.
  *
  * Every top-level section of the site is a line on one shared diagram, laid
- * out in world coordinates that nothing else on the page shares. The section
- * lines run down their own bands; the rest of the network runs across and
- * between them, so wherever you are there are other lines nearby and the
- * crossings are real crossings rather than decoration.
+ * out in world coordinates that nothing else on the page shares. Content
+ * routes occupy protected vertical or horizontal corridors; the rest of the
+ * network runs across and between them, so crossings remain real crossings
+ * without allowing the attached information panels to collide.
  *
  * The layout is generated, but from a fixed seed: the map is the same map on
  * every visit and on every rebuild, which is the only way it can be a place
@@ -552,33 +552,99 @@ export function buildNetwork(layout: Layout): Network {
   const routes: Route[] = []
   const sectionRoutes: SectionRoute[] = []
 
-  // Each section's line, built at y = 0 first and shifted into place after,
-  // once we know how tall the tallest of them is.
+  /** A small geometry kit for packing content routes into non-overlapping zones. */
+  const extent = (points: Point[]) => ({
+    minX: Math.min(...points.map((point) => point.x)),
+    minY: Math.min(...points.map((point) => point.y)),
+    maxX: Math.max(...points.map((point) => point.x)),
+    maxY: Math.max(...points.map((point) => point.y)),
+  })
+  const move = (points: Point[], dx: number, dy: number) => {
+    for (const point of points) {
+      point.x += dx
+      point.y += dy
+    }
+  }
+
+  /*
+   * Build every content route at the origin first. A horizontal route is the
+   * same octilinear grammar turned through 90°; its stations stay on level
+   * runs, so panels naturally hang underneath them.
+   */
   const drafts = sections.map((section, index) => {
     const rand = mulberry32(0x5eed + index * 977)
-    // `close` is only declared on the lines whose stops are names.
-    const reach: Reach =
-      'close' in section
-        ? { down: layout.close, across: layout.closeAcross, sideways: layout.sideways }
-        : { down: spacing, across: layout.across, sideways: layout.sideways }
-    return { section, ...runLine(rand, index * layout.pitch, section.stops, reach, layout) }
+    const horizontal = 'orientation' in section && section.orientation === 'horizontal'
+    const close = 'close' in section
+    const reach: Reach = horizontal
+      ? {
+          down: close ? layout.closeAcross : layout.across,
+          across: close ? layout.close : spacing,
+          sideways: false,
+        }
+      : {
+          down: close ? layout.close : spacing,
+          across: close ? layout.closeAcross : layout.across,
+          sideways: false,
+        }
+    const draft = runLine(rand, 0, section.stops, reach, layout)
+
+    if (horizontal) {
+      draft.points = draft.points.map((point) => ({ x: point.y, y: -point.x }))
+      draft.sideways = draft.sideways.map(() => true)
+    }
+
+    return { section, horizontal, ...draft }
   })
 
-  const spans = drafts.map((draft) => {
+  const horizontalDrafts = drafts.filter((draft) => draft.horizontal)
+  const verticalDrafts = drafts.filter((draft) => !draft.horizontal)
+  const top = horizontalDrafts[0]
+  const bottom = horizontalDrafts[1]
+
+  // Path forms the northern cross-map route.
+  if (top) {
+    const box = extent(top.points)
+    move(top.points, -box.minX, -box.minY)
+  }
+
+  const topBox = top ? extent(top.points) : { minX: 0, minY: 0, maxX: 0, maxY: 0 }
+  const verticalWidth = Math.max(0, verticalDrafts.length - 1) * layout.pitch
+  const northernWidth = topBox.maxX - topBox.minX
+  const verticalStartX = Math.max(0, (northernWidth - verticalWidth) / 2)
+  const verticalStartY = topBox.maxY + spacing * 1.25
+
+  // About, Skills and Work sit in parallel reserved corridors below Path.
+  verticalDrafts.forEach((draft, index) => {
     const first = draft.points[draft.platforms[0] ?? 0]
-    const last = draft.points[draft.platforms[draft.platforms.length - 1] ?? 0]
-    return (last?.y ?? 0) - (first?.y ?? 0)
+    move(
+      draft.points,
+      verticalStartX + index * layout.pitch - (first?.x ?? 0),
+      verticalStartY - (first?.y ?? 0),
+    )
   })
-  const tallest = Math.max(...spans, spacing)
-  const mapHeight = tallest + LEAD * 2
 
-  drafts.forEach((draft, index) => {
-    // Centre every line on the same horizon, so the map is a rectangle and not
-    // a staircase, and the flight between two lines is a level one.
-    const first = draft.points[draft.platforms[0] ?? 0]
-    const shift = (mapHeight - (spans[index] ?? 0)) / 2 - (first?.y ?? 0)
-    for (const point of draft.points) point.y += shift
+  const verticalPlatformBottom = Math.max(
+    verticalStartY,
+    ...verticalDrafts.flatMap((draft) =>
+      draft.platforms.map((platform) => draft.points[platform]?.y ?? verticalStartY),
+    ),
+  )
 
+  // Contact crosses the lower ends of the vertical content routes instead of
+  // floating beneath them. The remaining fraction of one panel-height keeps
+  // its below-track cards clear while the track itself creates interchanges.
+  if (bottom) {
+    const box = extent(bottom.points)
+    const bottomWidth = box.maxX - box.minX
+    const contentWidth = Math.max(northernWidth, verticalWidth + layout.across)
+    move(
+      bottom.points,
+      (contentWidth - bottomWidth) / 2 - box.minX,
+      verticalPlatformBottom + spacing * 0.56 - box.minY,
+    )
+  }
+
+  drafts.forEach((draft) => {
     const route = toRoute(draft.section.line, draft.points, 1)
     routes.push(route)
     sectionRoutes.push({
@@ -590,8 +656,13 @@ export function buildNetwork(layout: Layout): Network {
     })
   })
 
-  const left = -layout.pitch * 1.1
-  const right = (sections.length - 1) * layout.pitch + layout.pitch * 1.4
+  const contentPoints = drafts.flatMap((draft) => draft.points)
+  const content = extent(contentPoints)
+  const left = content.minX - layout.pitch * 0.75
+  const right = content.maxX + layout.pitch * 0.75
+  const topEdge = content.minY - spacing * 0.35
+  const bottomEdge = content.maxY + spacing * 0.35
+  const mapHeight = bottomEdge - topEdge
 
   INTERLEAVED.forEach(({ key, at }, index) => {
     const rand = mulberry32(0xbeef + index * 613)
@@ -599,21 +670,28 @@ export function buildNetwork(layout: Layout): Network {
     // sideways rather than down, so it takes more of them to cross the map.
     const reach: Reach = { down: spacing, across: layout.across, sideways: true }
     const stops = Math.round((mapHeight / spacing) * 1.9)
-    const draft = runLine(rand, at * layout.pitch, stops, reach, layout)
+    const fraction = (at + 0.35) / 6.1
+    const draft = runLine(rand, left + (right - left) * fraction, stops, reach, layout)
 
     // Nobody reads along one of these, so all that matters is that it covers
     // the map: build it over-long, centre it, and cut it to the map's height.
     const ys = draft.points.map((point) => point.y)
     const top = Math.min(...ys)
-    const shift = (mapHeight - (Math.max(...ys) - top)) / 2 - top
+    const shift = topEdge + (mapHeight - (Math.max(...ys) - top)) / 2 - top
     for (const point of draft.points) point.y += shift
 
-    routes.push(toRoute(key, clipToBand(draft.points, 0, mapHeight), index % 2 === 0 ? 1 : -1))
+    routes.push(
+      toRoute(
+        key,
+        clipToBand(draft.points, topEdge, bottomEdge),
+        index % 2 === 0 ? 1 : -1,
+      ),
+    )
   })
 
   CROSSTOWN.forEach((key, index) => {
     const rand = mulberry32(0xc0ffee + index * 421)
-    const y = mapHeight * (0.16 + index * 0.3)
+    const y = topEdge + mapHeight * (0.16 + index * 0.3)
     routes.push(toRoute(key, runAcross(rand, y, left, right, layout), index % 2 === 0 ? 1 : -1))
   })
 

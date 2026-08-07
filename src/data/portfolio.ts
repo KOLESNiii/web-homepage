@@ -52,6 +52,8 @@ export interface SectionLine {
   line: LineKey
   /** How many platforms it calls at — one panel each. */
   stops: number
+  /** The main direction of this content corridor on the overview map. */
+  orientation?: 'vertical' | 'horizontal'
   /**
    * Set where a stop is a name rather than a panel. Names need only a line of
    * room, so the line calls at several a screen, the way an inner-city stretch
@@ -410,15 +412,21 @@ export const projects: Project[] = [
    platforms the line calls at, which is how many panels the section renders —
    it is derived from the content above so the two can never disagree.
 
-   The order here is the order of the journey: the map is laid out left to
-   right in it, and scrolling off the end of one line flies you to the next.
+   The order here is the order of the journey. The network builder composes
+   those routes into protected horizontal and vertical content corridors.
    ========================================================================= */
 
 export const sections = [
   { id: 'about', label: 'About', line: 'victoria', stops: 4 },
-  { id: 'path', label: 'Path', line: 'central', stops: timeline.length + 2 },
+  {
+    id: 'path',
+    label: 'Path',
+    line: 'central',
+    stops: timeline.length + 2,
+    orientation: 'horizontal',
+  },
   // Every item is its own stop, close together, rather than four panels of lists.
   { id: 'skills', label: 'Skills', line: 'district', stops: skillStops.length, close: true },
   { id: 'work', label: 'Work', line: 'elizabeth', stops: projects.length },
-  { id: 'contact', label: 'Contact', line: 'bakerloo', stops: 3 },
+  { id: 'contact', label: 'Contact', line: 'bakerloo', stops: 3, orientation: 'horizontal' },
 ] as const satisfies readonly SectionLine[]

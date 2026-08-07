@@ -763,7 +763,7 @@
       "label": "profile",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L67",
+      "source_location": "L69",
       "id": "data_portfolio_profile",
       "community": 4,
       "norm_label": "profile"
@@ -772,7 +772,7 @@
       "label": "contact",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L83",
+      "source_location": "L85",
       "id": "data_portfolio_contact",
       "community": 2,
       "norm_label": "contact"
@@ -781,7 +781,7 @@
       "label": "about",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L92",
+      "source_location": "L94",
       "id": "data_portfolio_about",
       "community": 2,
       "norm_label": "about"
@@ -790,7 +790,7 @@
       "label": "Module",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L106",
+      "source_location": "L108",
       "id": "data_portfolio_module",
       "community": 2,
       "norm_label": "module"
@@ -799,7 +799,7 @@
       "label": "AcademicResults",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L114",
+      "source_location": "L116",
       "id": "data_portfolio_academicresults",
       "community": 2,
       "norm_label": "academicresults"
@@ -808,7 +808,7 @@
       "label": "academics",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L122",
+      "source_location": "L124",
       "id": "data_portfolio_academics",
       "community": 2,
       "norm_label": "academics"
@@ -817,7 +817,7 @@
       "label": "firstYearAcademics",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L141",
+      "source_location": "L143",
       "id": "data_portfolio_firstyearacademics",
       "community": 2,
       "norm_label": "firstyearacademics"
@@ -826,7 +826,7 @@
       "label": "TimelineEntry",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L191",
+      "source_location": "L193",
       "id": "data_portfolio_timelineentry",
       "community": 2,
       "norm_label": "timelineentry"
@@ -835,7 +835,7 @@
       "label": "timeline",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L201",
+      "source_location": "L203",
       "id": "data_portfolio_timeline",
       "community": 2,
       "norm_label": "timeline"
@@ -844,7 +844,7 @@
       "label": "SkillGroup",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L250",
+      "source_location": "L252",
       "id": "data_portfolio_skillgroup",
       "community": 2,
       "norm_label": "skillgroup"
@@ -853,7 +853,7 @@
       "label": "skills",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L256",
+      "source_location": "L258",
       "id": "data_portfolio_skills",
       "community": 2,
       "norm_label": "skills"
@@ -862,7 +862,7 @@
       "label": "SkillStop",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L301",
+      "source_location": "L303",
       "id": "data_portfolio_skillstop",
       "community": 2,
       "norm_label": "skillstop"
@@ -871,7 +871,7 @@
       "label": "skillStops",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L307",
+      "source_location": "L309",
       "id": "data_portfolio_skillstops",
       "community": 2,
       "norm_label": "skillstops"
@@ -880,7 +880,7 @@
       "label": "Project",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L315",
+      "source_location": "L317",
       "id": "data_portfolio_project",
       "community": 2,
       "norm_label": "project"
@@ -889,7 +889,7 @@
       "label": "projects",
       "file_type": "code",
       "source_file": "src/data/portfolio.ts",
-      "source_location": "L328",
+      "source_location": "L330",
       "id": "data_portfolio_projects",
       "community": 2,
       "norm_label": "projects"
@@ -1258,7 +1258,7 @@
       "label": "platformPoint()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L324",
+      "source_location": "L321",
       "id": "map_usemap_platformpoint",
       "community": 1,
       "norm_label": "platformpoint()"
@@ -1267,7 +1267,7 @@
       "label": "flatness()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L335",
+      "source_location": "L336",
       "id": "map_usemap_flatness",
       "community": 1,
       "norm_label": "flatness()"
@@ -1276,7 +1276,7 @@
       "label": "flightAt()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L350",
+      "source_location": "L351",
       "id": "map_usemap_flightat",
       "community": 1,
       "norm_label": "flightat()"
@@ -1285,7 +1285,7 @@
       "label": "segmentAt()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L368",
+      "source_location": "L369",
       "id": "map_usemap_segmentat",
       "community": 1,
       "norm_label": "segmentat()"
@@ -1294,7 +1294,7 @@
       "label": "cameraForScroll()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L376",
+      "source_location": "L377",
       "id": "map_usemap_cameraforscroll",
       "community": 1,
       "norm_label": "cameraforscroll()"
@@ -1303,7 +1303,7 @@
       "label": "sectionForScroll()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L417",
+      "source_location": "L418",
       "id": "map_usemap_sectionforscroll",
       "community": 1,
       "norm_label": "sectionforscroll()"
@@ -1312,7 +1312,7 @@
       "label": "nearestPlatform()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L432",
+      "source_location": "L433",
       "id": "map_usemap_nearestplatform",
       "community": 1,
       "norm_label": "nearestplatform()"
@@ -1321,7 +1321,7 @@
       "label": "writePlane()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L446",
+      "source_location": "L447",
       "id": "map_usemap_writeplane",
       "community": 1,
       "norm_label": "writeplane()"
@@ -1330,7 +1330,7 @@
       "label": "inertialScroll()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L458",
+      "source_location": "L459",
       "id": "map_usemap_inertialscroll",
       "community": 1,
       "norm_label": "inertialscroll()"
@@ -1339,7 +1339,7 @@
       "label": "syncScrollPosition()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L484",
+      "source_location": "L485",
       "id": "map_usemap_syncscrollposition",
       "community": 1,
       "norm_label": "syncscrollposition()"
@@ -1348,7 +1348,7 @@
       "label": "tick()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L491",
+      "source_location": "L492",
       "id": "map_usemap_tick",
       "community": 1,
       "norm_label": "tick()"
@@ -1357,7 +1357,7 @@
       "label": "scrollFor()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L519",
+      "source_location": "L520",
       "id": "map_usemap_scrollfor",
       "community": 1,
       "norm_label": "scrollfor()"
@@ -1366,7 +1366,7 @@
       "label": "scrollForPlatform()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L524",
+      "source_location": "L525",
       "id": "map_usemap_scrollforplatform",
       "community": 1,
       "norm_label": "scrollforplatform()"
@@ -1375,7 +1375,7 @@
       "label": "jumpTo()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L533",
+      "source_location": "L534",
       "id": "map_usemap_jumpto",
       "community": 1,
       "norm_label": "jumpto()"
@@ -1384,7 +1384,7 @@
       "label": "goTo()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L538",
+      "source_location": "L539",
       "id": "map_usemap_goto",
       "community": 1,
       "norm_label": "goto()"
@@ -1393,7 +1393,7 @@
       "label": "cancelFlight()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L562",
+      "source_location": "L563",
       "id": "map_usemap_cancelflight",
       "community": 1,
       "norm_label": "cancelflight()"
@@ -1402,7 +1402,7 @@
       "label": "rebuild()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L569",
+      "source_location": "L570",
       "id": "map_usemap_rebuild",
       "community": 1,
       "norm_label": "rebuild()"
@@ -1411,7 +1411,7 @@
       "label": "useMap()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L589",
+      "source_location": "L590",
       "id": "map_usemap_usemap",
       "community": 4,
       "norm_label": "usemap()"
@@ -6921,5 +6921,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a92e01c6d6c563b8033dc3678873daba445ecd60"
+  "built_at_commit": "a83aa11807549f8cfd86e756f7288d857eee6cab"
 }

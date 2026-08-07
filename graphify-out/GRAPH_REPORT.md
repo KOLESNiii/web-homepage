@@ -1,16 +1,16 @@
 # Graph Report - web-homepage  (2026-08-07)
 
 ## Corpus Check
-- 31 files · ~16,789 words
+- 31 files · ~16,832 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 233 nodes · 307 edges · 21 communities (19 shown, 2 thin omitted)
+- 234 nodes · 309 edges · 21 communities (19 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `a6b99fc9`
+- Built from commit: `f8a4bac9`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -69,16 +69,16 @@ Cohesion: 0.06
 Nodes (28): current, map, open, { theme, toggle }, GROUND, stored, systemLight, Theme (+20 more)
 
 ### Community 3 - "Community 3"
-Cohesion: 0.10
-Nodes (19): dependencies, autoprefixer, postcss, vue, vue-router, engines, node, name (+11 more)
+Cohesion: 0.25
+Nodes (8): scripts, build, build-only, dev, format, lint, preview, type-check
 
 ### Community 4 - "Community 4"
-Cohesion: 0.12
-Nodes (17): devDependencies, eslint, eslint-plugin-vue, jiti, npm-run-all2, prettier, tailwindcss, @tsconfig/node24 (+9 more)
+Cohesion: 0.07
+Nodes (28): dependencies, autoprefixer, postcss, vue, vue-router, devDependencies, eslint, eslint-plugin-vue (+20 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.23
-Nodes (14): draw(), drawInterchanges(), drawRoute(), drawStops(), drawTrain(), gauge(), onScreen(), onVisibility() (+6 more)
+Cohesion: 0.22
+Nodes (15): draw(), drawInterchanges(), drawRoute(), drawSmoothRoute(), drawStops(), drawTrain(), gauge(), onScreen() (+7 more)
 
 ### Community 6 - "Community 6"
 Cohesion: 0.12
@@ -112,8 +112,8 @@ Nodes (3): platform, sideways, style
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `devDependencies` connect `Community 4` to `Community 3`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+- **Why does `scripts` connect `Community 3` to `Community 4`?**
+  _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **Why does `Route` connect `Community 0` to `Community 1`?**
   _High betweenness centrality (0.008) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `private` to the rest of the system?**
@@ -124,5 +124,5 @@ _Questions this graph is uniquely positioned to answer:_
   _Cohesion score 0.10241820768136557 - nodes in this community are weakly interconnected._
 - **Should `Community 2` be split into smaller, more focused modules?**
   _Cohesion score 0.06031746031746032 - nodes in this community are weakly interconnected._
-- **Should `Community 3` be split into smaller, more focused modules?**
-  _Cohesion score 0.1 - nodes in this community are weakly interconnected._
+- **Should `Community 4` be split into smaller, more focused modules?**
+  _Cohesion score 0.06896551724137931 - nodes in this community are weakly interconnected._

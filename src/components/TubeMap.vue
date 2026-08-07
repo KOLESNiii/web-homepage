@@ -75,6 +75,31 @@ interface View {
 /** A stroke width in world units that never draws thinner than `floor` on screen. */
 const gauge = (world: number, zoom: number, floor: number) => Math.max(world * zoom, floor) / zoom
 
+/** Draw a polyline with a short quadratic transition through every bend. */
+function drawSmoothRoute(points: Route['points']) {
+  if (!ctx || points.length === 0) return
+
+  const first = points[0]
+  if (!first) return
+  ctx.moveTo(first.x, first.y)
+
+  for (let i = 1; i < points.length - 1; i++) {
+    const corner = points[i]
+    const next = points[i + 1]
+    if (!corner || !next) continue
+
+    ctx.quadraticCurveTo(
+      corner.x,
+      corner.y,
+      (corner.x + next.x) / 2,
+      (corner.y + next.y) / 2,
+    )
+  }
+
+  const last = points[points.length - 1]
+  if (last) ctx.lineTo(last.x, last.y)
+}
+
 function drawRoute(route: Route, view: View) {
   if (!ctx) return
 
@@ -84,26 +109,9 @@ function drawRoute(route: Route, view: View) {
   ctx.lineCap = 'round'
   ctx.beginPath()
 
-  let drawing = false
-  for (let i = 1; i < route.points.length; i++) {
-    const a = route.points[i - 1]
-    const b = route.points[i]
-    if (!a || !b) continue
-    if (
-      Math.max(a.y, b.y) < view.top ||
-      Math.min(a.y, b.y) > view.bottom ||
-      Math.max(a.x, b.x) < view.left ||
-      Math.min(a.x, b.x) > view.right
-    ) {
-      drawing = false
-      continue
-    }
-    if (!drawing) {
-      ctx.moveTo(a.x, a.y)
-      drawing = true
-    }
-    ctx.lineTo(b.x, b.y)
-  }
+  // A curve is cheap to draw at this scale, and avoids exposing the corner
+  // vertices as sharp points when a line changes heading.
+  drawSmoothRoute(route.points)
   ctx.stroke()
 }
 

@@ -155,13 +155,23 @@
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/index.html": {
-    "mtime": 1786137084.7371392,
-    "ast_hash": "88dbb6d71f625b3f20f873e0e580a824",
+    "mtime": 1786141376.0652244,
+    "ast_hash": "1ca6bb5edad4f74479bcc3dc78f586e5",
     "semantic_hash": ""
   },
   "/home/kolesniii/web-homepage/public/cv.pdf": {
     "mtime": 1786137084.7376053,
     "ast_hash": "f17d1720cdb5091e2d4e7cf9a8a89793",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/public/profile.json": {
+    "mtime": 1786141376.0662243,
+    "ast_hash": "78862ec456c9977df7a3ce5b327fd832",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/public/robots.txt": {
+    "mtime": 1786141376.0652244,
+    "ast_hash": "7ca1584108cdaff256b986b8ec6a6171",
     "semantic_hash": ""
   }
 }

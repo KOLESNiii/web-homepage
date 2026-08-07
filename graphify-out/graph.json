@@ -2056,6 +2056,240 @@
       "norm_label": "recommendations"
     },
     {
+      "label": "profile.json",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L1",
+      "id": "public_profile_json",
+      "community": 21,
+      "norm_label": "profile.json"
+    },
+    {
+      "label": "@context",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L2",
+      "id": "public_profile_context",
+      "community": 21,
+      "norm_label": "@context"
+    },
+    {
+      "label": "@type",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L3",
+      "id": "public_profile_type",
+      "community": 21,
+      "norm_label": "@type"
+    },
+    {
+      "label": "schemaVersion",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L4",
+      "id": "public_profile_schemaversion",
+      "community": 21,
+      "norm_label": "schemaversion"
+    },
+    {
+      "label": "name",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L5",
+      "id": "public_profile_name",
+      "community": 21,
+      "norm_label": "name"
+    },
+    {
+      "label": "alternateName",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L6",
+      "id": "public_profile_alternatename",
+      "community": 21,
+      "norm_label": "alternatename"
+    },
+    {
+      "label": "initials",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L7",
+      "id": "public_profile_initials",
+      "community": 21,
+      "norm_label": "initials"
+    },
+    {
+      "label": "jobTitle",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L8",
+      "id": "public_profile_jobtitle",
+      "community": 21,
+      "norm_label": "jobtitle"
+    },
+    {
+      "label": "location",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L9",
+      "id": "public_profile_location",
+      "community": 21,
+      "norm_label": "location"
+    },
+    {
+      "label": "url",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L10",
+      "id": "public_profile_url",
+      "community": 21,
+      "norm_label": "url"
+    },
+    {
+      "label": "email",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L11",
+      "id": "public_profile_email",
+      "community": 21,
+      "norm_label": "email"
+    },
+    {
+      "label": "sameAs",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L12",
+      "id": "public_profile_sameas",
+      "community": 21,
+      "norm_label": "sameas"
+    },
+    {
+      "label": "tagline",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L16",
+      "id": "public_profile_tagline",
+      "community": 21,
+      "norm_label": "tagline"
+    },
+    {
+      "label": "availability",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L17",
+      "id": "public_profile_availability",
+      "community": 21,
+      "norm_label": "availability"
+    },
+    {
+      "label": "status",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L18",
+      "id": "public_profile_availability_status",
+      "community": 21,
+      "norm_label": "status"
+    },
+    {
+      "label": "heading",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L19",
+      "id": "public_profile_availability_heading",
+      "community": 21,
+      "norm_label": "heading"
+    },
+    {
+      "label": "graduation",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L20",
+      "id": "public_profile_availability_graduation",
+      "community": 21,
+      "norm_label": "graduation"
+    },
+    {
+      "label": "applicationCycle",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L21",
+      "id": "public_profile_availability_applicationcycle",
+      "community": 21,
+      "norm_label": "applicationcycle"
+    },
+    {
+      "label": "note",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L22",
+      "id": "public_profile_availability_note",
+      "community": 21,
+      "norm_label": "note"
+    },
+    {
+      "label": "about",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L24",
+      "id": "public_profile_about",
+      "community": 21,
+      "norm_label": "about"
+    },
+    {
+      "label": "education",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L28",
+      "id": "public_profile_education",
+      "community": 21,
+      "norm_label": "education"
+    },
+    {
+      "label": "experience",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L75",
+      "id": "public_profile_experience",
+      "community": 21,
+      "norm_label": "experience"
+    },
+    {
+      "label": "skills",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L105",
+      "id": "public_profile_skills",
+      "community": 21,
+      "norm_label": "skills"
+    },
+    {
+      "label": "projects",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L123",
+      "id": "public_profile_projects",
+      "community": 21,
+      "norm_label": "projects"
+    },
+    {
+      "label": "documents",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L191",
+      "id": "public_profile_documents",
+      "community": 21,
+      "norm_label": "documents"
+    },
+    {
+      "label": "sections",
+      "file_type": "code",
+      "source_file": "public/profile.json",
+      "source_location": "L199",
+      "id": "public_profile_sections",
+      "community": 21,
+      "norm_label": "sections"
+    },
+    {
       "label": "README.md",
       "file_type": "document",
       "source_file": "README.md",
@@ -4959,9 +5193,9 @@
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L160",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_sitenav_vue",
-      "target": "components_sitenav_closesheet",
-      "confidence_score": 1.0
+      "target": "components_sitenav_closesheet"
     },
     {
       "relation": "contains",
@@ -5019,9 +5253,9 @@
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L156",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_sitenav_vue",
-      "target": "components_sitenav_togglesheet",
-      "confidence_score": 1.0
+      "target": "components_sitenav_togglesheet"
     },
     {
       "relation": "contains",
@@ -5029,9 +5263,9 @@
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L164",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_sitenav_vue",
-      "target": "components_sitenav_trapsheetfocus",
-      "confidence_score": 1.0
+      "target": "components_sitenav_trapsheetfocus"
     },
     {
       "relation": "contains",
@@ -5360,6 +5594,256 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_about",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_alternatename",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L17",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_availability",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L191",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_documents",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L28",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_education",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L11",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_email",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_experience",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L7",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_initials",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L8",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_jobtitle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L9",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_location",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_name",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_projects",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_sameas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_schemaversion",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L199",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_sections",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L105",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_skills",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_tagline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_type",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L10",
+      "weight": 1.0,
+      "source": "public_profile_json",
+      "target": "public_profile_url",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "public_profile_availability",
+      "target": "public_profile_availability_applicationcycle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "public_profile_availability",
+      "target": "public_profile_availability_graduation",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "public_profile_availability",
+      "target": "public_profile_availability_heading",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "public_profile_availability",
+      "target": "public_profile_availability_note",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "public/profile.json",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "public_profile_availability",
+      "target": "public_profile_availability_status",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "README.md",
       "source_location": "L1",
       "weight": 1.0,
@@ -5459,5 +5943,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "93c8252af86923d819ea44d72df170c5c650fd5e"
+  "built_at_commit": "4788f7d0f7eca33ab1e8360b40a32e36e4a4ffee"
 }

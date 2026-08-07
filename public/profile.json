@@ -1,0 +1,207 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "schemaVersion": "1.0",
+  "name": "Timofey Kolesnichenko",
+  "alternateName": "Tim Kolesnichenko",
+  "initials": "TK",
+  "jobTitle": "Software Engineer",
+  "location": "Imperial College London",
+  "url": "https://kolesniii.github.io/web-homepage/",
+  "email": "timkolesnichenko05@gmail.com",
+  "sameAs": [
+    "https://github.com/KOLESNiii",
+    "https://www.linkedin.com/in/tim-kolesnichenko"
+  ],
+  "tagline": "Compilers, kernels and interfaces — the whole line, end to end.",
+  "availability": {
+    "status": "Good service",
+    "heading": "Open to graduate roles.",
+    "graduation": "June 2028",
+    "applicationCycle": "2027",
+    "note": "Graduating in 2028 and applying through the 2027 cycle. I'm after teams working close to the metal — compilers, systems, infrastructure — or on interfaces people actually enjoy using. If that sounds like yours, I'd like to hear about it."
+  },
+  "about": [
+    "I'm a second-year Computing student at Imperial College London with a bias toward the parts of a system most people never see: the register allocator underneath the compiler, the eviction policy underneath the kernel, the recommendation loop underneath the recipe.",
+    "Most of what I've built has been built with other people — a compiler team, an OS group, a product team doing real user research. I care about work that is correct at the bottom and legible at the top, and I'd rather ship something small that holds up than something large that doesn't."
+  ],
+  "education": [
+    {
+      "period": "Sept 2024 — June 2028",
+      "qualification": "MEng Computing",
+      "institution": "Imperial College London",
+      "year": "Year 2",
+      "average": 80.81,
+      "classification": "First Class",
+      "recognition": "Dean’s List · Top 10% of cohort",
+      "modules": [
+        { "code": "COMP50008", "title": "Probability and Statistics", "mark": 87.34 },
+        { "code": "COMP50002", "title": "Software Engineering Design", "mark": 86.84 },
+        { "code": "COMP50013", "title": "Machine Learning", "mark": 86.59 },
+        { "code": "COMP50007", "title": "Computing Practical 2", "mark": 82.09 },
+        { "code": "COMP50001", "title": "Algorithm Design and Analysis", "mark": 82.0 },
+        { "code": "COMP50011", "title": "Computational Techniques", "mark": 81.5 },
+        { "code": "COMP50003", "title": "Models of Computation", "mark": 79.49 },
+        { "code": "COMP50004", "title": "Operating Systems", "mark": 76.98 },
+        { "code": "COMP50005", "title": "Networks and Communications", "mark": 73.6 },
+        { "code": "COMP50010", "title": "Designing for Real People", "mark": 69.15 }
+      ]
+    },
+    {
+      "period": "Sept 2024 — June 2028",
+      "qualification": "MEng Computing",
+      "institution": "Imperial College London",
+      "year": "Year 1",
+      "average": 86.38,
+      "classification": "First Class",
+      "recognition": "Dean’s List · Top 10% of cohort",
+      "modules": [
+        { "title": "Introduction to Computer Systems", "mark": 98.13 },
+        { "title": "Graphs and Algorithms", "mark": 93.33 },
+        { "title": "Computing Practical 1", "mark": 92.59 },
+        { "title": "Linear Algebra", "mark": 85.75 },
+        { "title": "Discrete Mathematics, Logic and Reasoning", "mark": 85.67 },
+        { "title": "Introduction to Databases", "mark": 83.34 },
+        { "title": "Calculus", "mark": 69.75 },
+        { "title": "Introduction to Computer Architecture", "mark": 64.5 },
+        {
+          "title": "Introduction to Philosophy",
+          "mark": "Pass with Distinction",
+          "registrationStatus": "Registered for extra credit"
+        }
+      ]
+    }
+  ],
+  "experience": [
+    {
+      "period": "Summer 2026 — Present",
+      "title": "Software Engineering Intern",
+      "organisation": "LCP Delta · Tech & Data (AI Innovation)",
+      "type": "work",
+      "detail": "Building an agentic web scraper that can be pointed at arbitrary datasets and work out how to extract them, rather than being hand-written per source."
+    },
+    {
+      "period": "Feb 2025 — Present",
+      "title": "Data Cleanser",
+      "organisation": "The River Restoration Centre",
+      "type": "work",
+      "detail": "Rebuilt a legacy Microsoft Access database end to end — data structures, UI overhaul and workflow streamlining — working with the manager on requirements while owning design, implementation and testing."
+    },
+    {
+      "period": "Aug 2023",
+      "title": "Data Science Intern",
+      "organisation": "Hartree Centre, STFC",
+      "type": "work",
+      "detail": "Worked with a team identifying re-identifying PII combinations in the National Survey dataset, then wrote up and presented the findings to the Data Science group."
+    },
+    {
+      "period": "2017 — 2024",
+      "title": "A Levels & GCSEs",
+      "organisation": "Altrincham Grammar School for Boys",
+      "type": "education",
+      "detail": "A* in Mathematics, Further Mathematics, Computer Science, Physics and Chemistry. Eleven GCSEs at grades 9–8."
+    }
+  ],
+  "skills": [
+    {
+      "group": "Languages",
+      "skills": ["C", "Scala", "Python", "TypeScript", "C#", "Haskell", "Kotlin", "Java", "AArch64 asm"]
+    },
+    {
+      "group": "Frameworks",
+      "skills": ["React", "Next.js", "Vue", "FastAPI", "Jetpack Compose", "Flask", "Keras", "Unity"]
+    },
+    {
+      "group": "Platforms & tooling",
+      "skills": ["Linux", "Git / GitLab CI", "Postgres", "Docker", "Firebase", "Convex", "QEMU", "Playwright"]
+    },
+    {
+      "group": "Foundations",
+      "skills": ["Compilers", "Operating systems", "Concurrency", "Computer architecture", "Algorithms", "Machine learning", "Human-centred design"]
+    }
+  ],
+  "projects": [
+    {
+      "title": "Fed Up",
+      "year": "2026",
+      "summary": "Food planning built around plans failing",
+      "description": "A food planner for students under deadline pressure: give it your budget, your effort ceiling and the week you are dreading, and it proposes a plan you will actually follow — then recalculates the cost and the rest of the week the moment you swap a meal because the day went wrong. A FastAPI service over Postgres and pgvector ranks recipes on taste similarity from sentence-transformer embeddings, ability match, novelty and budget fit, reweighting the lot when you flag a high-stress week. I built the accounts and cross-device session layer, the shopping list, and cost estimation from ingredients.",
+      "technologies": ["React", "TypeScript", "FastAPI", "Postgres / pgvector", "Firebase"]
+    },
+    {
+      "title": "WACC Compiler",
+      "year": "2026",
+      "summary": "A compiler, and a garbage collector under it",
+      "description": "A compiler for the WACC language in Scala: Parsley lexer and parser, renamer and type checker, a three-address IR, and two backends — AArch64 and x86-64, the latter with a greedy register allocator — plus a peephole pass over the emitted assembly. My extension was garbage collection: ~900 lines of C behind stack maps emitted by the compiler, doing a stop-the-world mark and sweep over the walked stack, with generational young and old heaps, promotion and forwarding pointers. I also wrote the constant-folding and control-flow optimisation passes.",
+      "technologies": ["Scala", "Parsley", "C", "AArch64", "x86-64", "Garbage collection"]
+    },
+    {
+      "title": "PintOS",
+      "year": "2025",
+      "summary": "Where the concurrency bugs live",
+      "description": "A term inside a teaching kernel, most of it spent in virtual memory. I worked on the frame table and a global frame table that shares file-backed frames between processes, second-chance clock eviction with swap, reentrant pinning so user buffers survive a syscall, and mmap. Most of the difficulty was concurrency: locking the global frame table against stale reads, a use-after-free where a shared frame outlived the file pointer keying it, and a race between the evictor and the page-fault handler. I also set the CI pipeline up.",
+      "technologies": ["C", "x86", "QEMU", "Concurrency", "Operating Systems"]
+    },
+    {
+      "title": "Roomie",
+      "year": "2025",
+      "summary": "Flatmate matching, end to end",
+      "description": "An Android app that matches prospective flatmates and lets the formed group submit a joint rental offer. Built on the Amazon Undergraduate Engagement Programme: I designed the Firestore structures behind profiles, messaging and compatibility scoring, and worked in agile sprints with code review from Amazon engineers.",
+      "technologies": ["Kotlin", "Jetpack Compose", "Firebase", "TypeScript"],
+      "source": "https://github.com/dorianturner/Roomie"
+    },
+    {
+      "title": "ARMv8 Emulator & Assembler",
+      "year": "2025",
+      "summary": "Silicon, simulated",
+      "description": "An ARMv8 emulator and a two-pass assembler written in C. The emulator decodes and executes the instruction set against a modelled register file and memory; the assembler produces the binaries it runs. Between them they close the loop from source to execution with nothing in the middle you did not write.",
+      "technologies": ["C", "ARMv8 Assembly", "Systems Programming"]
+    },
+    {
+      "title": "Classy Unit Mixer",
+      "year": "2025",
+      "summary": "A cocktail machine that had to work live",
+      "description": "The final stage of the same ARMv8 project, on real hardware: a Raspberry Pi cocktail machine driven by C at the GPIO level, with an I2C LCD, button input, pumps and a custom CAD chassis. I owned the software for that stage, and it was demoed to university staff and Arm engineers in a room where it had to work first time.",
+      "technologies": ["C", "GPIO / I2C", "CAD", "Raspberry Pi"]
+    },
+    {
+      "title": "DemocraTune",
+      "year": "2025",
+      "summary": "The queue, decided by the room",
+      "description": "A fork of the open-source SongUp queue where the room picks what plays. I wrote the scheduling layer that replaced first-come-first-served: round-robin across contributors, and a variant weighted by each user’s voting record. Also added per-client personal queues, play history and export of that history into a YouTube Music playlist, then moved the FastAPI service out of its nested layout and got it deploying properly behind the Next.js app.",
+      "technologies": ["TypeScript", "Next.js", "React", "Convex", "FastAPI"],
+      "source": "https://github.com/KOLESNiii/DemocraTune"
+    },
+    {
+      "title": "Interview Practice",
+      "year": "2025",
+      "summary": "Feedback on how you answer, not just what",
+      "description": "Built at ICHack 2025: a web app that simulates technical interviews with facial-cue detection, live transcription and analytics, so you get feedback on delivery as well as content. Flask backend doing video processing and inference, with results fed back into the front end in real time. Demoed to Helsing engineers and university staff.",
+      "technologies": ["Python", "Flask", "Keras", "JavaScript"],
+      "source": "https://github.com/KOLESNiii/ichack25"
+    },
+    {
+      "title": "Guitar Scar",
+      "year": "2024",
+      "summary": "Learn guitar by clearing dungeons",
+      "description": "A Unity dungeon crawler with procedurally generated levels, built so that progressing through the game teaches you to actually play the guitar rather than press the right button at the right time.",
+      "technologies": ["C#", "Unity", "Procedural Generation"]
+    }
+  ],
+  "documents": [
+    {
+      "type": "Curriculum Vitae",
+      "format": "application/pdf",
+      "url": "/cv.pdf",
+      "download": true
+    }
+  ],
+  "sections": [
+    { "id": "home", "label": "Start" },
+    { "id": "about", "label": "About" },
+    { "id": "path", "label": "Path" },
+    { "id": "stack", "label": "Stack" },
+    { "id": "work", "label": "Work" },
+    { "id": "contact", "label": "Contact" }
+  ]
+}

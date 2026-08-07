@@ -1,16 +1,16 @@
 # Graph Report - web-homepage  (2026-08-07)
 
 ## Corpus Check
-- 31 files · ~17,179 words
+- 32 files · ~18,815 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 239 nodes · 319 edges · 21 communities (19 shown, 2 thin omitted)
+- 265 nodes · 344 edges · 22 communities (20 shown, 2 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `93c8252a`
+- Built from commit: `4788f7d0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -29,6 +29,7 @@
 - [[_COMMUNITY_Community 11|Community 11]]
 - [[_COMMUNITY_Community 13|Community 13]]
 - [[_COMMUNITY_Community 14|Community 14]]
+- [[_COMMUNITY_Community 21|Community 21]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `cameraForScroll()` - 11 edges
@@ -40,7 +41,7 @@
 7. `clamp01()` - 6 edges
 8. `goTo()` - 6 edges
 9. `buildNetwork()` - 6 edges
-10. `syncScrollPosition()` - 5 edges
+10. `availability` - 6 edges
 
 ## Surprising Connections (you probably didn't know these)
 - `rebuild()` --calls--> `buildNetwork()`  [EXTRACTED]
@@ -54,7 +55,7 @@
 - `flatness()` --calls--> `pointAt()`  [EXTRACTED]
   src/map/useMap.ts → src/map/network.ts
 
-## Communities (21 total, 2 thin omitted)
+## Communities (22 total, 2 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.09
@@ -104,8 +105,12 @@ Nodes (4): printWidth, $schema, semi, singleQuote
 Cohesion: 0.40
 Nodes (3): platform, sideways, style
 
+### Community 21 - "Community 21"
+Cohesion: 0.08
+Nodes (25): about, alternateName, availability, applicationCycle, graduation, heading, note, status (+17 more)
+
 ## Knowledge Gaps
-- **105 isolated node(s):** `name`, `version`, `private`, `type`, `node` (+100 more)
+- **129 isolated node(s):** `name`, `version`, `private`, `type`, `node` (+124 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -113,11 +118,11 @@ Nodes (3): platform, sideways, style
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `devDependencies` connect `Community 4` to `Community 3`?**
-  _High betweenness centrality (0.016) - this node is a cross-community bridge._
+  _High betweenness centrality (0.013) - this node is a cross-community bridge._
 - **Why does `Route` connect `Community 0` to `Community 1`?**
-  _High betweenness centrality (0.008) - this node is a cross-community bridge._
+  _High betweenness centrality (0.006) - this node is a cross-community bridge._
 - **What connects `name`, `version`, `private` to the rest of the system?**
-  _105 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _129 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
   _Cohesion score 0.08819345661450925 - nodes in this community are weakly interconnected._
 - **Should `Community 1` be split into smaller, more focused modules?**

@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <link rel="icon" href="/favicon.ico" />
     <meta name="theme-color" content="#12161d" />
+    <meta name="author" content="Timofey Kolesnichenko" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://kolesniii.github.io/web-homepage/" />
+    <link
+      rel="alternate"
+      type="application/json"
+      href="/profile.json"
+      title="Machine-readable profile"
+    />
 
     <!-- Pick the ground before first paint, so the page never flashes the
          wrong map at you. Mirrors composables/useTheme.ts. -->
@@ -35,6 +44,41 @@
       content="Computing at Imperial College London. Compilers, kernels and interfaces — the whole line, end to end."
     />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "https://kolesniii.github.io/web-homepage/#person",
+        "name": "Timofey Kolesnichenko",
+        "alternateName": "Tim Kolesnichenko",
+        "jobTitle": "Software Engineer",
+        "description": "Computing student at Imperial College London building compilers, kernels and interfaces. Open to graduate software engineering roles for 2028.",
+        "url": "https://kolesniii.github.io/web-homepage/",
+        "email": "timkolesnichenko05@gmail.com",
+        "affiliation": {
+          "@type": "CollegeOrUniversity",
+          "name": "Imperial College London"
+        },
+        "sameAs": [
+          "https://github.com/KOLESNiii",
+          "https://www.linkedin.com/in/tim-kolesnichenko"
+        ],
+        "knowsAbout": [
+          "Compilers",
+          "Operating systems",
+          "Concurrency",
+          "Computer architecture",
+          "Algorithms",
+          "Machine learning",
+          "Human-centred design"
+        ],
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "https://kolesniii.github.io/web-homepage/"
+        }
+      }
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

@@ -19,11 +19,10 @@ import { useMap } from '../map/useMap'
  * One panel, pinned to one platform.
  *
  * Panels live in map coordinates inside the transformed plane, so they travel
- * with the diagram rather than with the document. Only the line you are on
- * shows its panels — the rest are faded out and take no clicks, which keeps
- * the diagram readable. They stay in the document and in the tab order,
- * though: tabbing onto one brings the camera to it, so keyboard and screen
- * reader users travel the whole journey rather than one line of it.
+ * with the diagram rather than with the document. Guided travel shows the
+ * current line; map mode shows the complete, collision-free content network.
+ * Every panel stays in document order, and focusing one during the guided
+ * journey brings its platform to the camera.
  *
  * Three shapes:
  *
@@ -80,6 +79,7 @@ const style = computed(() => {
  * page does not scroll, so nothing else would put it on screen.
  */
 function onFocus() {
+  if (map.exploring.value) return
   const target = map.scrollForPlatform(index.value, props.stop)
   if (Math.abs(window.scrollY - target) < map.metrics.value.vh * 0.4) return
   map.cancelFlight()

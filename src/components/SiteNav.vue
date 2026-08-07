@@ -114,7 +114,7 @@
   <!-- Where you are, the way the platform tells you. -->
   <p
     class="where"
-    :class="{ 'where--away': travelling }"
+    :class="{ 'where--away': travelling || exploring }"
     role="status"
     aria-live="polite"
     aria-atomic="true"
@@ -146,10 +146,15 @@ const sheet = ref<HTMLElement | null>(null)
 const active = map.activeIndex
 const platform = map.platformIndex
 const travelling = map.travelling
+const exploring = map.exploring
 const current = computed(() => sections[active.value] ?? sections[0])
 
 function jump(index: number) {
   open.value = false
+  if (exploring.value) {
+    map.focusPlatform(index, 0)
+    return
+  }
   map.goTo(index)
 }
 

@@ -294,7 +294,7 @@ export const skills: SkillGroup[] = [
 ]
 
 /**
- * The Stack line, flattened: one stop per skill, in order, with the group name
+ * The Skills line, flattened: one stop per skill, in order, with the group name
  * carried by the first stop of each group the way a map labels a stretch of
  * line. The section renders one of these per platform.
  */
@@ -415,11 +415,10 @@ export const projects: Project[] = [
    ========================================================================= */
 
 export const sections = [
-  { id: 'home', label: 'Start', line: 'victoria', stops: 2 },
-  { id: 'about', label: 'About', line: 'piccadilly', stops: 2 },
+  { id: 'about', label: 'About', line: 'victoria', stops: 4 },
   { id: 'path', label: 'Path', line: 'central', stops: timeline.length + 2 },
   // Every item is its own stop, close together, rather than four panels of lists.
-  { id: 'stack', label: 'Stack', line: 'district', stops: skillStops.length, close: true },
+  { id: 'skills', label: 'Skills', line: 'district', stops: skillStops.length, close: true },
   { id: 'work', label: 'Work', line: 'elizabeth', stops: projects.length },
   { id: 'contact', label: 'Contact', line: 'bakerloo', stops: 3 },
 ] as const satisfies readonly SectionLine[]

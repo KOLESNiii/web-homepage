@@ -135,6 +135,7 @@ const CROSSTOWN: LineKey[] = ['circle', 'dlr', 'overground']
 const INTERLEAVED: { key: LineKey; at: number }[] = [
   { key: 'jubilee', at: 0.55 },
   { key: 'hammersmith', at: 1.7 },
+  { key: 'piccadilly', at: 2.6 },
   { key: 'metropolitan', at: 3.45 },
   { key: 'waterloo', at: 5.4 },
 ]

@@ -38,18 +38,17 @@ behind it instead of passing.
 
 | Section | Line       |
 | ------- | ---------- |
-| Start   | Victoria   |
-| About   | Piccadilly |
+| About   | Victoria   |
 | Path    | Central    |
-| Stack   | District   |
+| Skills  | District   |
 | Work    | Elizabeth  |
 | Contact | Bakerloo   |
 
-The other seven official lines make up the rest of the network: Jubilee,
-Hammersmith & City, Metropolitan and Waterloo & City thread between and beyond
-the section bands, and Circle, DLR and Overground run across them. Those carry
-no content, so they wander freely — level runs, climbs, dips and the occasional
-plunge straight down. Every place two lines cross becomes an interchange,
+The other eight official lines make up the rest of the network: Jubilee,
+Hammersmith & City, Piccadilly, Metropolitan and Waterloo & City thread between
+and beyond the section bands, and Circle, DLR and Overground run across them.
+Those carry no content, so they wander freely — level runs, climbs, dips and
+the occasional plunge straight down. Every place two lines cross becomes an interchange,
 geometrically — interchanges are not placed by hand.
 
 A stop's content sits where a station name sits on the real map: beside the
@@ -112,8 +111,9 @@ src/
     MapLine.vue              one section's line: its id, and whether you're on it
     MapPanel.vue             one panel, pinned to one platform
     SiteNav.vue              the legend, and the "where you are" readout
-    HeroSection.vue          Victoria line
-    AboutSection.vue         Piccadilly line
+    JourneyMenu.vue          optional route chooser
+    MapControls.vue          pan, zoom, fit, and journey controls
+    AboutSection.vue         Victoria line: landing, introduction, bio, and stats
     TimelineSection.vue      Central line, ending at the results board
     SkillsSection.vue        District line, one stop per skill, a name each
     ProjectsSection.vue      Elizabeth line, one station per project

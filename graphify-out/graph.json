@@ -189,7 +189,7 @@
       "source_file": "package.json",
       "source_location": "L24",
       "id": "web_homepage_package_devdependencies",
-      "community": 4,
+      "community": 12,
       "norm_label": "devdependencies"
     },
     {
@@ -198,7 +198,7 @@
       "source_file": "package.json",
       "source_location": "L25",
       "id": "web_homepage_package_devdependencies_tsconfig_node24",
-      "community": 4,
+      "community": 12,
       "norm_label": "@tsconfig/node24"
     },
     {
@@ -207,7 +207,7 @@
       "source_file": "package.json",
       "source_location": "L26",
       "id": "web_homepage_package_devdependencies_types_node",
-      "community": 4,
+      "community": 12,
       "norm_label": "@types/node"
     },
     {
@@ -216,7 +216,7 @@
       "source_file": "package.json",
       "source_location": "L27",
       "id": "web_homepage_package_devdependencies_vitejs_plugin_vue",
-      "community": 4,
+      "community": 12,
       "norm_label": "@vitejs/plugin-vue"
     },
     {
@@ -225,7 +225,7 @@
       "source_file": "package.json",
       "source_location": "L28",
       "id": "web_homepage_package_devdependencies_vue_eslint_config_prettier",
-      "community": 4,
+      "community": 12,
       "norm_label": "@vue/eslint-config-prettier"
     },
     {
@@ -234,7 +234,7 @@
       "source_file": "package.json",
       "source_location": "L29",
       "id": "web_homepage_package_devdependencies_vue_eslint_config_typescript",
-      "community": 4,
+      "community": 12,
       "norm_label": "@vue/eslint-config-typescript"
     },
     {
@@ -243,7 +243,7 @@
       "source_file": "package.json",
       "source_location": "L30",
       "id": "web_homepage_package_devdependencies_vue_tsconfig",
-      "community": 4,
+      "community": 12,
       "norm_label": "@vue/tsconfig"
     },
     {
@@ -252,7 +252,7 @@
       "source_file": "package.json",
       "source_location": "L31",
       "id": "web_homepage_package_devdependencies_eslint",
-      "community": 4,
+      "community": 12,
       "norm_label": "eslint"
     },
     {
@@ -261,7 +261,7 @@
       "source_file": "package.json",
       "source_location": "L32",
       "id": "web_homepage_package_devdependencies_eslint_plugin_vue",
-      "community": 4,
+      "community": 12,
       "norm_label": "eslint-plugin-vue"
     },
     {
@@ -270,7 +270,7 @@
       "source_file": "package.json",
       "source_location": "L33",
       "id": "web_homepage_package_devdependencies_jiti",
-      "community": 4,
+      "community": 12,
       "norm_label": "jiti"
     },
     {
@@ -279,7 +279,7 @@
       "source_file": "package.json",
       "source_location": "L34",
       "id": "web_homepage_package_devdependencies_npm_run_all2",
-      "community": 4,
+      "community": 12,
       "norm_label": "npm-run-all2"
     },
     {
@@ -288,7 +288,7 @@
       "source_file": "package.json",
       "source_location": "L35",
       "id": "web_homepage_package_devdependencies_prettier",
-      "community": 4,
+      "community": 12,
       "norm_label": "prettier"
     },
     {
@@ -297,7 +297,7 @@
       "source_file": "package.json",
       "source_location": "L36",
       "id": "web_homepage_package_devdependencies_tailwindcss",
-      "community": 4,
+      "community": 12,
       "norm_label": "tailwindcss"
     },
     {
@@ -306,7 +306,7 @@
       "source_file": "package.json",
       "source_location": "L37",
       "id": "web_homepage_package_devdependencies_typescript",
-      "community": 4,
+      "community": 12,
       "norm_label": "typescript"
     },
     {
@@ -315,7 +315,7 @@
       "source_file": "package.json",
       "source_location": "L38",
       "id": "web_homepage_package_devdependencies_vite",
-      "community": 4,
+      "community": 12,
       "norm_label": "vite"
     },
     {
@@ -324,7 +324,7 @@
       "source_file": "package.json",
       "source_location": "L39",
       "id": "web_homepage_package_devdependencies_vite_plugin_vue_devtools",
-      "community": 4,
+      "community": 12,
       "norm_label": "vite-plugin-vue-devtools"
     },
     {
@@ -333,7 +333,7 @@
       "source_file": "package.json",
       "source_location": "L40",
       "id": "web_homepage_package_devdependencies_vue_tsc",
-      "community": 4,
+      "community": 12,
       "norm_label": "vue-tsc"
     },
     {
@@ -619,34 +619,61 @@
       "label": "map",
       "file_type": "code",
       "source_file": "src/App.vue",
-      "source_location": "L46",
+      "source_location": "L56",
       "id": "src_app_map",
       "community": 6,
       "norm_label": "map"
     },
     {
+      "label": "welcome",
+      "file_type": "code",
+      "source_file": "src/App.vue",
+      "source_location": "L59",
+      "id": "src_app_welcome",
+      "community": 6,
+      "norm_label": "welcome"
+    },
+    {
       "label": "skip()",
       "file_type": "code",
       "source_file": "src/App.vue",
-      "source_location": "L50",
+      "source_location": "L61",
       "id": "src_app_skip",
       "community": 6,
       "norm_label": "skip()"
     },
     {
-      "label": "land()",
+      "label": "choose()",
       "file_type": "code",
       "source_file": "src/App.vue",
-      "source_location": "L61",
-      "id": "src_app_land",
+      "source_location": "L66",
+      "id": "src_app_choose",
       "community": 6,
-      "norm_label": "land()"
+      "norm_label": "choose()"
+    },
+    {
+      "label": "explore()",
+      "file_type": "code",
+      "source_file": "src/App.vue",
+      "source_location": "L73",
+      "id": "src_app_explore",
+      "community": 6,
+      "norm_label": "explore()"
+    },
+    {
+      "label": "openMenu()",
+      "file_type": "code",
+      "source_file": "src/App.vue",
+      "source_location": "L81",
+      "id": "src_app_openmenu",
+      "community": 6,
+      "norm_label": "openmenu()"
     },
     {
       "label": "release()",
       "file_type": "code",
       "source_file": "src/App.vue",
-      "source_location": "L72",
+      "source_location": "L87",
       "id": "src_app_release",
       "community": 6,
       "norm_label": "release()"
@@ -655,7 +682,7 @@
       "label": "landing",
       "file_type": "code",
       "source_file": "src/App.vue",
-      "source_location": "L83",
+      "source_location": "L98",
       "id": "src_app_landing",
       "community": 6,
       "norm_label": "landing"
@@ -738,7 +765,7 @@
       "source_file": "src/data/portfolio.ts",
       "source_location": "L67",
       "id": "data_portfolio_profile",
-      "community": 2,
+      "community": 4,
       "norm_label": "profile"
     },
     {
@@ -873,7 +900,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L1",
       "id": "src_composables_usetheme_ts",
-      "community": 2,
+      "community": 4,
       "norm_label": "usetheme.ts"
     },
     {
@@ -882,7 +909,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L9",
       "id": "composables_usetheme_theme",
-      "community": 2,
+      "community": 4,
       "norm_label": "theme"
     },
     {
@@ -891,7 +918,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L14",
       "id": "composables_usetheme_ground",
-      "community": 2,
+      "community": 4,
       "norm_label": "ground"
     },
     {
@@ -900,7 +927,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L16",
       "id": "composables_usetheme_read",
-      "community": 2,
+      "community": 4,
       "norm_label": "read()"
     },
     {
@@ -909,7 +936,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L24",
       "id": "composables_usetheme_write",
-      "community": 2,
+      "community": 4,
       "norm_label": "write()"
     },
     {
@@ -918,7 +945,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L32",
       "id": "composables_usetheme_systemlight",
-      "community": 2,
+      "community": 4,
       "norm_label": "systemlight"
     },
     {
@@ -927,7 +954,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L34",
       "id": "composables_usetheme_stored",
-      "community": 2,
+      "community": 4,
       "norm_label": "stored"
     },
     {
@@ -936,7 +963,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L40",
       "id": "composables_usetheme_apply",
-      "community": 2,
+      "community": 4,
       "norm_label": "apply()"
     },
     {
@@ -945,7 +972,7 @@
       "source_file": "src/composables/useTheme.ts",
       "source_location": "L58",
       "id": "composables_usetheme_usetheme",
-      "community": 2,
+      "community": 4,
       "norm_label": "usetheme()"
     },
     {
@@ -954,7 +981,7 @@
       "source_file": "src/composables/useMotion.ts",
       "source_location": "L1",
       "id": "src_composables_usemotion_ts",
-      "community": 12,
+      "community": 5,
       "norm_label": "usemotion.ts"
     },
     {
@@ -963,7 +990,7 @@
       "source_file": "src/composables/useMotion.ts",
       "source_location": "L4",
       "id": "composables_usemotion_usereducedmotion",
-      "community": 12,
+      "community": 5,
       "norm_label": "usereducedmotion()"
     },
     {
@@ -972,7 +999,7 @@
       "source_file": "src/composables/useMotion.ts",
       "source_location": "L21",
       "id": "composables_usemotion_rafthrottle",
-      "community": 12,
+      "community": 5,
       "norm_label": "rafthrottle()"
     },
     {
@@ -1075,10 +1102,19 @@
       "norm_label": "travelling"
     },
     {
+      "label": "exploring",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L89",
+      "id": "map_usemap_exploring",
+      "community": 1,
+      "norm_label": "exploring"
+    },
+    {
       "label": "railHeight",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L88",
+      "source_location": "L90",
       "id": "map_usemap_railheight",
       "community": 1,
       "norm_label": "railheight"
@@ -1087,7 +1123,7 @@
       "label": "segments",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L92",
+      "source_location": "L94",
       "id": "map_usemap_segments",
       "community": 1,
       "norm_label": "segments"
@@ -1096,7 +1132,7 @@
       "label": "clamp01()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L101",
+      "source_location": "L103",
       "id": "map_usemap_clamp01",
       "community": 1,
       "norm_label": "clamp01()"
@@ -1105,7 +1141,7 @@
       "label": "mix()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L102",
+      "source_location": "L104",
       "id": "map_usemap_mix",
       "community": 1,
       "norm_label": "mix()"
@@ -1114,7 +1150,7 @@
       "label": "smoothstep()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L104",
+      "source_location": "L106",
       "id": "map_usemap_smoothstep",
       "community": 1,
       "norm_label": "smoothstep()"
@@ -1123,7 +1159,7 @@
       "label": "easeInOut()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L109",
+      "source_location": "L111",
       "id": "map_usemap_easeinout",
       "community": 1,
       "norm_label": "easeinout()"
@@ -1132,7 +1168,7 @@
       "label": "measure()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L115",
+      "source_location": "L117",
       "id": "map_usemap_measure",
       "community": 1,
       "norm_label": "measure()"
@@ -1141,16 +1177,70 @@
       "label": "mapCentre()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L187",
+      "source_location": "L189",
       "id": "map_usemap_mapcentre",
       "community": 1,
       "norm_label": "mapcentre()"
     },
     {
+      "label": "constrainCamera()",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L196",
+      "id": "map_usemap_constraincamera",
+      "community": 1,
+      "norm_label": "constraincamera()"
+    },
+    {
+      "label": "fitOverview()",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L215",
+      "id": "map_usemap_fitoverview",
+      "community": 1,
+      "norm_label": "fitoverview()"
+    },
+    {
+      "label": "enterExplore()",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L227",
+      "id": "map_usemap_enterexplore",
+      "community": 1,
+      "norm_label": "enterexplore()"
+    },
+    {
+      "label": "panBy()",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L246",
+      "id": "map_usemap_panby",
+      "community": 1,
+      "norm_label": "panby()"
+    },
+    {
+      "label": "zoomBy()",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L255",
+      "id": "map_usemap_zoomby",
+      "community": 1,
+      "norm_label": "zoomby()"
+    },
+    {
+      "label": "focusPlatform()",
+      "file_type": "code",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L271",
+      "id": "map_usemap_focusplatform",
+      "community": 1,
+      "norm_label": "focusplatform()"
+    },
+    {
       "label": "travelOf()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L194",
+      "source_location": "L289",
       "id": "map_usemap_travelof",
       "community": 1,
       "norm_label": "travelof()"
@@ -1159,7 +1249,7 @@
       "label": "layOutJourney()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L202",
+      "source_location": "L297",
       "id": "map_usemap_layoutjourney",
       "community": 1,
       "norm_label": "layoutjourney()"
@@ -1168,7 +1258,7 @@
       "label": "platformPoint()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L229",
+      "source_location": "L324",
       "id": "map_usemap_platformpoint",
       "community": 1,
       "norm_label": "platformpoint()"
@@ -1177,7 +1267,7 @@
       "label": "flatness()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L240",
+      "source_location": "L335",
       "id": "map_usemap_flatness",
       "community": 1,
       "norm_label": "flatness()"
@@ -1186,7 +1276,7 @@
       "label": "flightAt()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L255",
+      "source_location": "L350",
       "id": "map_usemap_flightat",
       "community": 1,
       "norm_label": "flightat()"
@@ -1195,7 +1285,7 @@
       "label": "segmentAt()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L273",
+      "source_location": "L368",
       "id": "map_usemap_segmentat",
       "community": 1,
       "norm_label": "segmentat()"
@@ -1204,7 +1294,7 @@
       "label": "cameraForScroll()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L281",
+      "source_location": "L376",
       "id": "map_usemap_cameraforscroll",
       "community": 1,
       "norm_label": "cameraforscroll()"
@@ -1213,7 +1303,7 @@
       "label": "sectionForScroll()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L322",
+      "source_location": "L417",
       "id": "map_usemap_sectionforscroll",
       "community": 1,
       "norm_label": "sectionforscroll()"
@@ -1222,7 +1312,7 @@
       "label": "nearestPlatform()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L337",
+      "source_location": "L432",
       "id": "map_usemap_nearestplatform",
       "community": 1,
       "norm_label": "nearestplatform()"
@@ -1231,7 +1321,7 @@
       "label": "writePlane()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L351",
+      "source_location": "L446",
       "id": "map_usemap_writeplane",
       "community": 1,
       "norm_label": "writeplane()"
@@ -1240,7 +1330,7 @@
       "label": "inertialScroll()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L363",
+      "source_location": "L458",
       "id": "map_usemap_inertialscroll",
       "community": 1,
       "norm_label": "inertialscroll()"
@@ -1249,7 +1339,7 @@
       "label": "syncScrollPosition()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L389",
+      "source_location": "L484",
       "id": "map_usemap_syncscrollposition",
       "community": 1,
       "norm_label": "syncscrollposition()"
@@ -1258,7 +1348,7 @@
       "label": "tick()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L396",
+      "source_location": "L491",
       "id": "map_usemap_tick",
       "community": 1,
       "norm_label": "tick()"
@@ -1267,7 +1357,7 @@
       "label": "scrollFor()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L420",
+      "source_location": "L519",
       "id": "map_usemap_scrollfor",
       "community": 1,
       "norm_label": "scrollfor()"
@@ -1276,7 +1366,7 @@
       "label": "scrollForPlatform()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L425",
+      "source_location": "L524",
       "id": "map_usemap_scrollforplatform",
       "community": 1,
       "norm_label": "scrollforplatform()"
@@ -1285,7 +1375,7 @@
       "label": "jumpTo()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L434",
+      "source_location": "L533",
       "id": "map_usemap_jumpto",
       "community": 1,
       "norm_label": "jumpto()"
@@ -1294,7 +1384,7 @@
       "label": "goTo()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L439",
+      "source_location": "L538",
       "id": "map_usemap_goto",
       "community": 1,
       "norm_label": "goto()"
@@ -1303,7 +1393,7 @@
       "label": "cancelFlight()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L462",
+      "source_location": "L562",
       "id": "map_usemap_cancelflight",
       "community": 1,
       "norm_label": "cancelflight()"
@@ -1312,7 +1402,7 @@
       "label": "rebuild()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L469",
+      "source_location": "L569",
       "id": "map_usemap_rebuild",
       "community": 1,
       "norm_label": "rebuild()"
@@ -1321,9 +1411,9 @@
       "label": "useMap()",
       "file_type": "code",
       "source_file": "src/map/useMap.ts",
-      "source_location": "L485",
+      "source_location": "L589",
       "id": "map_usemap_usemap",
-      "community": 6,
+      "community": 4,
       "norm_label": "usemap()"
     },
     {
@@ -1429,7 +1519,7 @@
       "label": "mulberry32()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L146",
+      "source_location": "L147",
       "id": "map_network_mulberry32",
       "community": 0,
       "norm_label": "mulberry32()"
@@ -1438,7 +1528,7 @@
       "label": "Random",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L156",
+      "source_location": "L157",
       "id": "map_network_random",
       "community": 0,
       "norm_label": "random"
@@ -1447,7 +1537,7 @@
       "label": "pick()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L158",
+      "source_location": "L159",
       "id": "map_network_pick",
       "community": 0,
       "norm_label": "pick()"
@@ -1456,7 +1546,7 @@
       "label": "Heading",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L166",
+      "source_location": "L167",
       "id": "map_network_heading",
       "community": 0,
       "norm_label": "heading"
@@ -1465,7 +1555,7 @@
       "label": "Reach",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L169",
+      "source_location": "L170",
       "id": "map_network_reach",
       "community": 0,
       "norm_label": "reach"
@@ -1474,7 +1564,7 @@
       "label": "chanceIn()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L176",
+      "source_location": "L177",
       "id": "map_network_chancein",
       "community": 0,
       "norm_label": "chancein()"
@@ -1483,7 +1573,7 @@
       "label": "swing()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L184",
+      "source_location": "L185",
       "id": "map_network_swing",
       "community": 0,
       "norm_label": "swing()"
@@ -1492,7 +1582,7 @@
       "label": "nextHeading()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L198",
+      "source_location": "L199",
       "id": "map_network_nextheading",
       "community": 0,
       "norm_label": "nextheading()"
@@ -1501,7 +1591,7 @@
       "label": "runLine()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L233",
+      "source_location": "L234",
       "id": "map_network_runline",
       "community": 0,
       "norm_label": "runline()"
@@ -1510,7 +1600,7 @@
       "label": "runAcross()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L306",
+      "source_location": "L307",
       "id": "map_network_runacross",
       "community": 0,
       "norm_label": "runacross()"
@@ -1519,7 +1609,7 @@
       "label": "clipToBand()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L343",
+      "source_location": "L344",
       "id": "map_network_cliptoband",
       "community": 0,
       "norm_label": "cliptoband()"
@@ -1528,7 +1618,7 @@
       "label": "measure()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L366",
+      "source_location": "L367",
       "id": "map_network_measure",
       "community": 0,
       "norm_label": "measure()"
@@ -1537,7 +1627,7 @@
       "label": "crossAngle()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L380",
+      "source_location": "L381",
       "id": "map_network_crossangle",
       "community": 0,
       "norm_label": "crossangle()"
@@ -1546,7 +1636,7 @@
       "label": "toRoute()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L387",
+      "source_location": "L388",
       "id": "map_network_toroute",
       "community": 0,
       "norm_label": "toroute()"
@@ -1555,7 +1645,7 @@
       "label": "pointAt()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L407",
+      "source_location": "L408",
       "id": "map_network_pointat",
       "community": 1,
       "norm_label": "pointat()"
@@ -1564,7 +1654,7 @@
       "label": "crossing()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L424",
+      "source_location": "L425",
       "id": "map_network_crossing",
       "community": 0,
       "norm_label": "crossing()"
@@ -1573,7 +1663,7 @@
       "label": "addStation()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L440",
+      "source_location": "L441",
       "id": "map_network_addstation",
       "community": 0,
       "norm_label": "addstation()"
@@ -1582,7 +1672,7 @@
       "label": "arcOnSegment()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L446",
+      "source_location": "L447",
       "id": "map_network_arconsegment",
       "community": 0,
       "norm_label": "arconsegment()"
@@ -1591,7 +1681,7 @@
       "label": "placeInterchanges()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L453",
+      "source_location": "L454",
       "id": "map_network_placeinterchanges",
       "community": 0,
       "norm_label": "placeinterchanges()"
@@ -1600,7 +1690,7 @@
       "label": "placeStations()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L488",
+      "source_location": "L489",
       "id": "map_network_placestations",
       "community": 0,
       "norm_label": "placestations()"
@@ -1609,7 +1699,7 @@
       "label": "seedTrains()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L510",
+      "source_location": "L511",
       "id": "map_network_seedtrains",
       "community": 0,
       "norm_label": "seedtrains()"
@@ -1618,7 +1708,7 @@
       "label": "syncNextStop()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L539",
+      "source_location": "L540",
       "id": "map_network_syncnextstop",
       "community": 0,
       "norm_label": "syncnextstop()"
@@ -1627,7 +1717,7 @@
       "label": "buildNetwork()",
       "file_type": "code",
       "source_file": "src/map/network.ts",
-      "source_location": "L549",
+      "source_location": "L550",
       "id": "map_network_buildnetwork",
       "community": 0,
       "norm_label": "buildnetwork()"
@@ -1735,7 +1825,7 @@
       "label": "platform",
       "file_type": "code",
       "source_file": "src/components/MapPanel.vue",
-      "source_location": "L52",
+      "source_location": "L51",
       "id": "components_mappanel_platform",
       "community": 11,
       "norm_label": "platform"
@@ -1744,7 +1834,7 @@
       "label": "sideways",
       "file_type": "code",
       "source_file": "src/components/MapPanel.vue",
-      "source_location": "L58",
+      "source_location": "L57",
       "id": "components_mappanel_sideways",
       "community": 11,
       "norm_label": "sideways"
@@ -1753,7 +1843,7 @@
       "label": "style",
       "file_type": "code",
       "source_file": "src/components/MapPanel.vue",
-      "source_location": "L60",
+      "source_location": "L59",
       "id": "components_mappanel_style",
       "community": 11,
       "norm_label": "style"
@@ -1762,19 +1852,55 @@
       "label": "onFocus()",
       "file_type": "code",
       "source_file": "src/components/MapPanel.vue",
-      "source_location": "L82",
+      "source_location": "L81",
       "id": "components_mappanel_onfocus",
       "community": 11,
       "norm_label": "onfocus()"
     },
     {
-      "label": "HeroSection.vue",
+      "label": "JourneyMenu.vue",
       "file_type": "code",
-      "source_file": "src/components/HeroSection.vue",
+      "source_file": "src/components/JourneyMenu.vue",
       "source_location": "L1",
-      "id": "src_components_herosection_vue",
+      "id": "src_components_journeymenu_vue",
+      "community": 2,
+      "norm_label": "journeymenu.vue"
+    },
+    {
+      "label": "trapFocus()",
+      "file_type": "code",
+      "source_file": "src/components/JourneyMenu.vue",
+      "source_location": "L82",
+      "id": "components_journeymenu_trapfocus",
+      "community": 2,
+      "norm_label": "trapfocus()"
+    },
+    {
+      "label": "MapControls.vue",
+      "file_type": "code",
+      "source_file": "src/components/MapControls.vue",
+      "source_location": "L1",
+      "id": "src_components_mapcontrols_vue",
       "community": 6,
-      "norm_label": "herosection.vue"
+      "norm_label": "mapcontrols.vue"
+    },
+    {
+      "label": "resume()",
+      "file_type": "code",
+      "source_file": "src/components/MapControls.vue",
+      "source_location": "L37",
+      "id": "components_mapcontrols_resume",
+      "community": 6,
+      "norm_label": "resume()"
+    },
+    {
+      "label": "startExplore()",
+      "file_type": "code",
+      "source_file": "src/components/MapControls.vue",
+      "source_location": "L41",
+      "id": "components_mapcontrols_startexplore",
+      "community": 6,
+      "norm_label": "startexplore()"
     },
     {
       "label": "SiteNav.vue",
@@ -1782,7 +1908,7 @@
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L1",
       "id": "src_components_sitenav_vue",
-      "community": 2,
+      "community": 4,
       "norm_label": "sitenav.vue"
     },
     {
@@ -1791,7 +1917,7 @@
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L140",
       "id": "components_sitenav_map",
-      "community": 2,
+      "community": 4,
       "norm_label": "map"
     },
     {
@@ -1800,7 +1926,7 @@
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L141",
       "id": "components_sitenav_theme_toggle",
-      "community": 2,
+      "community": 4,
       "norm_label": "{ theme, toggle }"
     },
     {
@@ -1809,52 +1935,52 @@
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L143",
       "id": "components_sitenav_open",
-      "community": 2,
+      "community": 4,
       "norm_label": "open"
     },
     {
       "label": "current",
       "file_type": "code",
       "source_file": "src/components/SiteNav.vue",
-      "source_location": "L149",
+      "source_location": "L150",
       "id": "components_sitenav_current",
-      "community": 2,
+      "community": 4,
       "norm_label": "current"
     },
     {
       "label": "jump()",
       "file_type": "code",
       "source_file": "src/components/SiteNav.vue",
-      "source_location": "L151",
+      "source_location": "L152",
       "id": "components_sitenav_jump",
-      "community": 2,
+      "community": 4,
       "norm_label": "jump()"
     },
     {
       "label": "toggleSheet()",
       "file_type": "code",
       "source_file": "src/components/SiteNav.vue",
-      "source_location": "L156",
+      "source_location": "L161",
       "id": "components_sitenav_togglesheet",
-      "community": 2,
+      "community": 4,
       "norm_label": "togglesheet()"
     },
     {
       "label": "closeSheet()",
       "file_type": "code",
       "source_file": "src/components/SiteNav.vue",
-      "source_location": "L160",
+      "source_location": "L165",
       "id": "components_sitenav_closesheet",
-      "community": 2,
+      "community": 4,
       "norm_label": "closesheet()"
     },
     {
       "label": "trapSheetFocus()",
       "file_type": "code",
       "source_file": "src/components/SiteNav.vue",
-      "source_location": "L164",
+      "source_location": "L169",
       "id": "components_sitenav_trapsheetfocus",
-      "community": 2,
+      "community": 4,
       "norm_label": "trapsheetfocus()"
     },
     {
@@ -1885,10 +2011,136 @@
       "norm_label": "tubemap.vue"
     },
     {
+      "label": "props",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L51",
+      "id": "components_tubemap_props",
+      "community": 5,
+      "norm_label": "props"
+    },
+    {
+      "label": "reduced",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L54",
+      "id": "components_tubemap_reduced",
+      "community": 5,
+      "norm_label": "reduced"
+    },
+    {
+      "label": "{ theme }",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L55",
+      "id": "components_tubemap_theme",
+      "community": 5,
+      "norm_label": "{ theme }"
+    },
+    {
+      "label": "map",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L56",
+      "id": "components_tubemap_map",
+      "community": 5,
+      "norm_label": "map"
+    },
+    {
+      "label": "dragging",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L58",
+      "id": "components_tubemap_dragging",
+      "community": 5,
+      "norm_label": "dragging"
+    },
+    {
+      "label": "gestureFromPointers()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L68",
+      "id": "components_tubemap_gesturefrompointers",
+      "community": 5,
+      "norm_label": "gesturefrompointers()"
+    },
+    {
+      "label": "onPointerDown()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L81",
+      "id": "components_tubemap_onpointerdown",
+      "community": 5,
+      "norm_label": "onpointerdown()"
+    },
+    {
+      "label": "onPointerMove()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L89",
+      "id": "components_tubemap_onpointermove",
+      "community": 5,
+      "norm_label": "onpointermove()"
+    },
+    {
+      "label": "onPointerUp()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L106",
+      "id": "components_tubemap_onpointerup",
+      "community": 5,
+      "norm_label": "onpointerup()"
+    },
+    {
+      "label": "onWheel()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L112",
+      "id": "components_tubemap_onwheel",
+      "community": 5,
+      "norm_label": "onwheel()"
+    },
+    {
+      "label": "onDoubleClick()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L118",
+      "id": "components_tubemap_ondoubleclick",
+      "community": 5,
+      "norm_label": "ondoubleclick()"
+    },
+    {
+      "label": "onKeyDown()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L123",
+      "id": "components_tubemap_onkeydown",
+      "community": 5,
+      "norm_label": "onkeydown()"
+    },
+    {
+      "label": "clamp01()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L161",
+      "id": "components_tubemap_clamp01",
+      "community": 5,
+      "norm_label": "clamp01()"
+    },
+    {
+      "label": "cssColour()",
+      "file_type": "code",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L163",
+      "id": "components_tubemap_csscolour",
+      "community": 5,
+      "norm_label": "csscolour()"
+    },
+    {
       "label": "readPalette()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L53",
+      "source_location": "L166",
       "id": "components_tubemap_readpalette",
       "community": 5,
       "norm_label": "readpalette()"
@@ -1897,7 +2149,7 @@
       "label": "gauge()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L76",
+      "source_location": "L189",
       "id": "components_tubemap_gauge",
       "community": 5,
       "norm_label": "gauge()"
@@ -1906,7 +2158,7 @@
       "label": "drawRoundedRoute()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L79",
+      "source_location": "L192",
       "id": "components_tubemap_drawroundedroute",
       "community": 5,
       "norm_label": "drawroundedroute()"
@@ -1915,7 +2167,7 @@
       "label": "drawRoute()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L108",
+      "source_location": "L221",
       "id": "components_tubemap_drawroute",
       "community": 5,
       "norm_label": "drawroute()"
@@ -1924,7 +2176,7 @@
       "label": "onScreen()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L121",
+      "source_location": "L234",
       "id": "components_tubemap_onscreen",
       "community": 5,
       "norm_label": "onscreen()"
@@ -1933,7 +2185,7 @@
       "label": "drawStops()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L128",
+      "source_location": "L241",
       "id": "components_tubemap_drawstops",
       "community": 5,
       "norm_label": "drawstops()"
@@ -1942,7 +2194,7 @@
       "label": "drawInterchanges()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L156",
+      "source_location": "L269",
       "id": "components_tubemap_drawinterchanges",
       "community": 5,
       "norm_label": "drawinterchanges()"
@@ -1951,7 +2203,7 @@
       "label": "drawTrain()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L177",
+      "source_location": "L290",
       "id": "components_tubemap_drawtrain",
       "community": 5,
       "norm_label": "drawtrain()"
@@ -1960,7 +2212,7 @@
       "label": "draw()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L213",
+      "source_location": "L326",
       "id": "components_tubemap_draw",
       "community": 5,
       "norm_label": "draw()"
@@ -1969,7 +2221,7 @@
       "label": "signature()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L280",
+      "source_location": "L393",
       "id": "components_tubemap_signature",
       "community": 5,
       "norm_label": "signature()"
@@ -1978,7 +2230,7 @@
       "label": "render()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L286",
+      "source_location": "L399",
       "id": "components_tubemap_render",
       "community": 5,
       "norm_label": "render()"
@@ -1987,7 +2239,7 @@
       "label": "stop()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L307",
+      "source_location": "L420",
       "id": "components_tubemap_stop",
       "community": 5,
       "norm_label": "stop()"
@@ -1996,7 +2248,7 @@
       "label": "start()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L312",
+      "source_location": "L425",
       "id": "components_tubemap_start",
       "community": 5,
       "norm_label": "start()"
@@ -2005,7 +2257,7 @@
       "label": "resize()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L318",
+      "source_location": "L431",
       "id": "components_tubemap_resize",
       "community": 5,
       "norm_label": "resize()"
@@ -2014,7 +2266,7 @@
       "label": "onResize()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L340",
+      "source_location": "L453",
       "id": "components_tubemap_onresize",
       "community": 5,
       "norm_label": "onresize()"
@@ -2023,7 +2275,7 @@
       "label": "onVisibility()",
       "file_type": "code",
       "source_file": "src/components/TubeMap.vue",
-      "source_location": "L348",
+      "source_location": "L461",
       "id": "components_tubemap_onvisibility",
       "community": 5,
       "norm_label": "onvisibility()"
@@ -2329,7 +2581,7 @@
       "label": "Two grounds",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L61",
+      "source_location": "L60",
       "id": "web_homepage_readme_two_grounds",
       "community": 7,
       "norm_label": "two grounds"
@@ -2338,7 +2590,7 @@
       "label": "Before publishing",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L74",
+      "source_location": "L73",
       "id": "web_homepage_readme_before_publishing",
       "community": 7,
       "norm_label": "before publishing"
@@ -2347,7 +2599,7 @@
       "label": "Structure",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L97",
+      "source_location": "L96",
       "id": "web_homepage_readme_structure",
       "community": 7,
       "norm_label": "structure"
@@ -2356,7 +2608,7 @@
       "label": "code:block1 (src/)",
       "file_type": "document",
       "source_file": "README.md",
-      "source_location": "L99",
+      "source_location": "L98",
       "id": "web_homepage_readme_codeblock_1",
       "community": 7,
       "norm_label": "code:block1 (src/)"
@@ -2387,6 +2639,15 @@
       "id": "web_homepage_readme_codeblock_2",
       "community": 7,
       "norm_label": "code:sh (bun install)"
+    },
+    {
+      "label": "land()",
+      "file_type": "code",
+      "source_file": "src/App.vue",
+      "source_location": "L61",
+      "community": 6,
+      "norm_label": "land()",
+      "id": "src_app_land"
     },
     {
       "label": "drawSmoothRoute()",
@@ -2984,6 +3245,26 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/App.vue",
+      "source_location": "L67",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_vue",
+      "target": "src_app_choose"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.vue",
+      "source_location": "L74",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_vue",
+      "target": "src_app_explore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.vue",
       "source_location": "L47",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -3014,6 +3295,16 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/App.vue",
+      "source_location": "L81",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_vue",
+      "target": "src_app_openmenu"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.vue",
       "source_location": "L58",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -3029,6 +3320,16 @@
       "confidence_score": 1.0,
       "source": "src_app_vue",
       "target": "src_app_skip"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.vue",
+      "source_location": "L60",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_vue",
+      "target": "src_app_welcome"
     },
     {
       "relation": "imports_from",
@@ -3057,11 +3358,22 @@
       "context": "import",
       "confidence": "EXTRACTED",
       "source_file": "src/App.vue",
-      "source_location": "L27",
+      "source_location": "L48",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_app_vue",
-      "target": "src_components_herosection_vue"
+      "target": "src_components_journeymenu_vue"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/App.vue",
+      "source_location": "L49",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_app_vue",
+      "target": "src_components_mapcontrols_vue"
     },
     {
       "relation": "imports_from",
@@ -3165,11 +3477,33 @@
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/JourneyMenu.vue",
+      "source_location": "L61",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_journeymenu_vue",
+      "target": "src_data_portfolio_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L101",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_components_sitenav_vue",
+      "target": "src_data_portfolio_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L31",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
       "target": "src_data_portfolio_ts"
     },
     {
@@ -3431,6 +3765,17 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/JourneyMenu.vue",
+      "source_location": "L61",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_journeymenu_vue",
+      "target": "data_portfolio_linecolour"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/components/SiteNav.vue",
       "source_location": "L101",
       "weight": 1.0,
@@ -3458,6 +3803,17 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_components_sitenav_vue",
+      "target": "src_composables_usetheme_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
       "target": "src_composables_usetheme_ts"
     },
     {
@@ -3552,6 +3908,28 @@
       "target": "composables_usetheme_usetheme"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "composables_usetheme_usetheme"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "src_composables_usemotion_ts"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/composables/useMotion.ts",
@@ -3572,6 +3950,17 @@
       "target": "composables_usemotion_usereducedmotion"
     },
     {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L36",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "composables_usemotion_usereducedmotion"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -3580,6 +3969,17 @@
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_components_sitenav_vue",
+      "target": "src_map_usemap_ts"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
       "target": "src_map_usemap_ts"
     },
     {
@@ -3702,11 +4102,51 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/map/useMap.ts",
+      "source_location": "L196",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_constraincamera"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
       "source_location": "L104",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_map_usemap_ts",
       "target": "map_usemap_easeinout"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L227",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_enterexplore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L89",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_exploring"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L215",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_fitoverview"
     },
     {
       "relation": "contains",
@@ -3737,6 +4177,16 @@
       "confidence_score": 1.0,
       "source": "src_map_usemap_ts",
       "target": "map_usemap_flightat"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L271",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_focusplatform"
     },
     {
       "relation": "contains",
@@ -3847,6 +4297,16 @@
       "confidence_score": 1.0,
       "source": "src_map_usemap_ts",
       "target": "map_usemap_network"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L246",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_panby"
     },
     {
       "relation": "contains",
@@ -4029,6 +4489,16 @@
       "target": "map_usemap_writeplane"
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L255",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_map_usemap_ts",
+      "target": "map_usemap_zoomby"
+    },
+    {
       "relation": "imports_from",
       "context": "import",
       "confidence": "EXTRACTED",
@@ -4176,11 +4646,154 @@
       "context": "call",
       "confidence": "EXTRACTED",
       "source_file": "src/map/useMap.ts",
+      "source_location": "L216",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_fitoverview",
+      "target": "map_usemap_mapcentre"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
       "source_location": "L256",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "map_usemap_flightat",
       "target": "map_usemap_mapcentre"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L242",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_enterexplore",
+      "target": "map_usemap_constraincamera"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L222",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_fitoverview",
+      "target": "map_usemap_constraincamera"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L250",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_panby",
+      "target": "map_usemap_constraincamera"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L266",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_zoomby",
+      "target": "map_usemap_constraincamera"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L233",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_enterexplore",
+      "target": "map_usemap_fitoverview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L223",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_fitoverview",
+      "target": "map_usemap_writeplane"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L562",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_rebuild",
+      "target": "map_usemap_fitoverview"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L228",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_enterexplore",
+      "target": "map_usemap_cancelflight"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L243",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_enterexplore",
+      "target": "map_usemap_writeplane"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L251",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_panby",
+      "target": "map_usemap_writeplane"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L267",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_zoomby",
+      "target": "map_usemap_writeplane"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/map/useMap.ts",
+      "source_location": "L285",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "map_usemap_focusplatform",
+      "target": "map_usemap_writeplane"
     },
     {
       "relation": "calls",
@@ -4500,6 +5113,28 @@
       "confidence_score": 1.0,
       "source": "src_components_sitenav_vue",
       "target": "map_usemap_usemap"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L35",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "map_usemap_usemap"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "src_map_network_ts"
     },
     {
       "relation": "contains",
@@ -4846,12 +5481,45 @@
       "relation": "imports",
       "context": "import",
       "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "map_network_station"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "map_network_train"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
       "source_file": "src/map/trains.ts",
       "source_location": "L16",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_map_trains_ts",
       "target": "map_network_train"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L32",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "map_network_route"
     },
     {
       "relation": "imports",
@@ -4967,11 +5635,33 @@
       "relation": "calls",
       "context": "call",
       "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L302",
+      "weight": 1.0,
+      "source": "components_tubemap_drawtrain",
+      "target": "map_network_pointat"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
       "source_file": "src/map/network.ts",
       "source_location": "L492",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "map_network_placestations",
+      "target": "map_network_pointat"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L34",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
       "target": "map_network_pointat"
     },
     {
@@ -5074,6 +5764,17 @@
       "target": "map_network_syncnextstop"
     },
     {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "src_map_trains_ts"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/map/trains.ts",
@@ -5147,6 +5848,28 @@
       "target": "map_trains_recycle"
     },
     {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L414",
+      "weight": 1.0,
+      "source": "components_tubemap_render",
+      "target": "map_trains_advancetrains"
+    },
+    {
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L33",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "map_trains_advancetrains"
+    },
+    {
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/router/index.ts",
@@ -5195,6 +5918,36 @@
       "confidence_score": 1.0,
       "source": "src_components_mappanel_vue",
       "target": "components_mappanel_style"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/JourneyMenu.vue",
+      "source_location": "L82",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_journeymenu_vue",
+      "target": "components_journeymenu_trapfocus"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MapControls.vue",
+      "source_location": "L37",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mapcontrols_vue",
+      "target": "components_mapcontrols_resume"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/MapControls.vue",
+      "source_location": "L41",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_mapcontrols_vue",
+      "target": "components_mapcontrols_startexplore"
     },
     {
       "relation": "contains",
@@ -5280,6 +6033,36 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/TubeMap.vue",
+      "source_location": "L161",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_clamp01"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L163",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_csscolour"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L58",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_dragging"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
       "source_location": "L202",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5302,9 +6085,9 @@
       "source_file": "src/components/TubeMap.vue",
       "source_location": "L79",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "src_components_tubemap_vue",
-      "target": "components_tubemap_drawroundedroute",
-      "confidence_score": 1.0
+      "target": "components_tubemap_drawroundedroute"
     },
     {
       "relation": "contains",
@@ -5360,6 +6143,76 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/TubeMap.vue",
+      "source_location": "L68",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_gesturefrompointers"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L56",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_map"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L118",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_ondoubleclick"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L123",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_onkeydown"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L81",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_onpointerdown"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L89",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_onpointermove"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L106",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_onpointerup"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
       "source_location": "L329",
       "weight": 1.0,
       "confidence_score": 1.0,
@@ -5390,11 +6243,41 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/components/TubeMap.vue",
+      "source_location": "L112",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_onwheel"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L51",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_props"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
       "source_location": "L53",
       "weight": 1.0,
       "confidence_score": 1.0,
       "source": "src_components_tubemap_vue",
       "target": "components_tubemap_readpalette"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L54",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_reduced"
     },
     {
       "relation": "contains",
@@ -5445,6 +6328,71 @@
       "confidence_score": 1.0,
       "source": "src_components_tubemap_vue",
       "target": "components_tubemap_stop"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L55",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "src_components_tubemap_vue",
+      "target": "components_tubemap_theme"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L85",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_tubemap_onpointerdown",
+      "target": "components_tubemap_gesturefrompointers"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L93",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_tubemap_onpointermove",
+      "target": "components_tubemap_gesturefrompointers"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L108",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_tubemap_onpointerup",
+      "target": "components_tubemap_gesturefrompointers"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L349",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_tubemap_draw",
+      "target": "components_tubemap_clamp01"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/TubeMap.vue",
+      "source_location": "L167",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "components_tubemap_readpalette",
+      "target": "components_tubemap_csscolour"
     },
     {
       "relation": "calls",
@@ -5508,9 +6456,9 @@
       "source_file": "src/components/TubeMap.vue",
       "source_location": "L117",
       "weight": 1.0,
+      "confidence_score": 1.0,
       "source": "components_tubemap_drawroute",
-      "target": "components_tubemap_drawroundedroute",
-      "confidence_score": 1.0
+      "target": "components_tubemap_drawroundedroute"
     },
     {
       "relation": "calls",
@@ -5973,5 +6921,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "9ae9dcde82ed4ecb4df1830465c1538d6b879977"
+  "built_at_commit": "a92e01c6d6c563b8033dc3678873daba445ecd60"
 }

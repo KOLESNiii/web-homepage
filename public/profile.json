@@ -197,10 +197,9 @@
     }
   ],
   "sections": [
-    { "id": "home", "label": "Start" },
     { "id": "about", "label": "About" },
     { "id": "path", "label": "Path" },
-    { "id": "stack", "label": "Stack" },
+    { "id": "skills", "label": "Skills" },
     { "id": "work", "label": "Work" },
     { "id": "contact", "label": "Contact" }
   ]

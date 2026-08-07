@@ -1,6 +1,28 @@
 <template>
-  <div class="tube-map" aria-hidden="true">
-    <canvas ref="canvasRef" class="tube-map__canvas"></canvas>
+  <div
+    ref="surfaceRef"
+    class="tube-map"
+    :class="{
+      'tube-map--exploring': exploring && !props.blocked,
+      'tube-map--dragging': dragging,
+    }"
+    :tabindex="exploring && !props.blocked ? 0 : -1"
+    :inert="props.blocked"
+    :aria-label="exploring && !props.blocked ? 'Interactive portfolio map' : undefined"
+    :aria-describedby="exploring && !props.blocked ? 'map-gesture-instructions' : undefined"
+    @wheel="onWheel"
+    @dblclick="onDoubleClick"
+    @pointerdown="onPointerDown"
+    @pointermove="onPointerMove"
+    @pointerup="onPointerUp"
+    @pointercancel="onPointerUp"
+    @keydown="onKeyDown"
+  >
+    <span id="map-gesture-instructions" class="sr-only">
+      Drag to pan. Use the mouse wheel, plus and minus keys, or pinch to zoom. Press zero to fit
+      the whole map.
+    </span>
+    <canvas ref="canvasRef" class="tube-map__canvas" aria-hidden="true"></canvas>
   </div>
 </template>
 
@@ -26,10 +48,101 @@ import { useTheme } from '../composables/useTheme'
 const TRACK = 7
 const TICK = 5.5
 
+const props = withDefaults(defineProps<{ blocked?: boolean }>(), { blocked: false })
 const canvasRef = ref<HTMLCanvasElement | null>(null)
+const surfaceRef = ref<HTMLElement | null>(null)
 const reduced = useReducedMotion()
 const { theme } = useTheme()
 const map = useMap()
+const exploring = map.exploring
+const dragging = ref(false)
+
+interface PointerPosition {
+  x: number
+  y: number
+}
+
+const pointers = new globalThis.Map<number, PointerPosition>()
+let gesture: { x: number; y: number; distance: number } | null = null
+
+function gestureFromPointers() {
+  const points = Array.from(pointers.values())
+  const first = points[0]
+  if (!first) return null
+  const second = points[1]
+  if (!second) return { x: first.x, y: first.y, distance: 0 }
+  return {
+    x: (first.x + second.x) / 2,
+    y: (first.y + second.y) / 2,
+    distance: Math.hypot(second.x - first.x, second.y - first.y),
+  }
+}
+
+function onPointerDown(event: PointerEvent) {
+  if (!exploring.value || props.blocked) return
+  surfaceRef.value?.setPointerCapture(event.pointerId)
+  pointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
+  gesture = gestureFromPointers()
+  dragging.value = true
+}
+
+function onPointerMove(event: PointerEvent) {
+  if (!exploring.value || props.blocked || !pointers.has(event.pointerId)) return
+  event.preventDefault()
+  pointers.set(event.pointerId, { x: event.clientX, y: event.clientY })
+  const next = gestureFromPointers()
+  if (!gesture || !next) {
+    gesture = next
+    return
+  }
+
+  map.panBy(next.x - gesture.x, next.y - gesture.y)
+  if (gesture.distance > 0 && next.distance > 0) {
+    map.zoomBy(next.distance / gesture.distance, next.x, next.y)
+  }
+  gesture = next
+}
+
+function onPointerUp(event: PointerEvent) {
+  pointers.delete(event.pointerId)
+  gesture = gestureFromPointers()
+  dragging.value = pointers.size > 0
+}
+
+function onWheel(event: WheelEvent) {
+  if (!exploring.value || props.blocked) return
+  event.preventDefault()
+  map.zoomBy(Math.exp(-event.deltaY * 0.0014), event.clientX, event.clientY)
+}
+
+function onDoubleClick(event: MouseEvent) {
+  if (!exploring.value || props.blocked) return
+  map.zoomBy(1.55, event.clientX, event.clientY)
+}
+
+function onKeyDown(event: KeyboardEvent) {
+  if (!exploring.value || props.blocked) return
+  const moves: Partial<Record<string, [number, number]>> = {
+    ArrowLeft: [110, 0],
+    ArrowRight: [-110, 0],
+    ArrowUp: [0, 110],
+    ArrowDown: [0, -110],
+  }
+  const move = moves[event.key]
+  if (move) {
+    event.preventDefault()
+    map.panBy(move[0], move[1])
+  } else if (event.key === '+' || event.key === '=') {
+    event.preventDefault()
+    map.zoomBy(1.25)
+  } else if (event.key === '-' || event.key === '_') {
+    event.preventDefault()
+    map.zoomBy(0.8)
+  } else if (event.key === '0') {
+    event.preventDefault()
+    map.fitOverview()
+  }
+}
 
 let ctx: CanvasRenderingContext2D | null = null
 let width = 0
@@ -370,6 +483,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+  pointers.clear()
   stop()
   window.clearTimeout(resizeTimer)
   window.removeEventListener('resize', onResize)
@@ -386,6 +500,24 @@ onUnmounted(() => {
   /* The diagram runs under the legend rather than into it. */
   -webkit-mask-image: linear-gradient(180deg, transparent, #000 5.5rem);
   mask-image: linear-gradient(180deg, transparent, #000 5.5rem);
+}
+
+.tube-map--exploring {
+  /* The map catches drags in the empty space; station cards remain above it
+     so their text, links and buttons stay available while exploring. */
+  z-index: 0;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+}
+
+.tube-map--dragging {
+  cursor: grabbing;
+}
+
+.tube-map:focus-visible {
+  outline: 2px solid var(--tube-victoria-ink);
+  outline-offset: -5px;
 }
 
 .tube-map__canvas {

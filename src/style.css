@@ -149,6 +149,12 @@ html {
   background: var(--bg);
 }
 
+html.is-map-exploring,
+html.is-map-exploring body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 body {
   background: var(--bg);
   color: var(--text);
@@ -227,15 +233,20 @@ button {
 /* =========================================================================
    Panels
    -------------------------------------------------------------------------
-   Only the line you are riding shows its panels. The rest are faded out,
-   which keeps the diagram readable, and made inert, which keeps the tab
-   order down to the same one line.
+   Guided travel shows one line at a time. Map mode reveals the full content
+   network; the generated layout reserves a separate corridor for each line
+   so those cards remain readable without collisions.
    ========================================================================= */
 
-.world .route[data-active='false'] .panel,
+.world:not(.world--exploring) .route[data-active='false'] .panel,
 .world.world--travelling .panel {
   opacity: 0;
   pointer-events: none;
+}
+
+.world.world--exploring .panel {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .panel-title {

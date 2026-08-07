@@ -1,7 +1,7 @@
 <template>
   <article
     class="panel"
-    :class="[`panel--${variant}`, { 'panel--sideways': sideways }]"
+    :class="[`panel--${variant}`, { 'panel--sideways': sideways, 'panel--dense': dense }]"
     :style="style"
     @focusin="onFocus"
   >
@@ -37,8 +37,12 @@ const props = withDefaults(
     section: string
     stop: number
     variant?: 'card' | 'bare' | 'name'
+    /** Fine placement adjustment for cards whose content needs extra room. */
+    offsetY?: number
+    /** Tighter card padding for content-heavy panels that must fit a viewport. */
+    dense?: boolean
   }>(),
-  { variant: 'card' },
+  { variant: 'card', offsetY: 0, dense: false },
 )
 
 const map = useMap()
@@ -62,12 +66,12 @@ const style = computed(() => {
 
   return {
     left: `${sideways.value ? x : x + gap}px`,
-    top: `${sideways.value ? y + gap : y}px`,
+    top: `${y + (sideways.value ? gap : 0) + props.offsetY}px`,
     // A name is as wide as its word; everything else takes the column width.
     ...(props.variant === 'name' ? { maxWidth: `${panelWidth}px` } : { width: `${panelWidth}px` }),
     '--line': lineColour(line.value),
     '--line-ink': lineInk(line.value),
-    '--leader': `${gap}px`,
+    '--leader': `${gap + (sideways.value ? props.offsetY : 0)}px`,
   }
 })
 
@@ -101,6 +105,10 @@ function onFocus() {
    thing level with the platform and nothing sits over the line. */
 .panel--sideways {
   transform: none;
+}
+
+.panel--dense {
+  padding: 0.75rem 1.25rem;
 }
 
 /*

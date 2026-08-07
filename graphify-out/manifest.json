@@ -1,0 +1,167 @@
+{
+  "/home/kolesniii/web-homepage/package.json": {
+    "mtime": 1786137084.7372112,
+    "ast_hash": "22023e706610b75e267edfedb9e08084",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/tsconfig.app.json": {
+    "mtime": 1768657425.0050335,
+    "ast_hash": "16d46f4ac727f241373787684e155ff4",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/tailwind.config.js": {
+    "mtime": 1768738157.1828723,
+    "ast_hash": "077a75f00c5230eb56101703bd2ed67c",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/env.d.ts": {
+    "mtime": 1768657425.0036883,
+    "ast_hash": "0352474ba2918efe13895edbc3780d94",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/tsconfig.node.json": {
+    "mtime": 1768657425.0050771,
+    "ast_hash": "e726a414173f89c2ef0a2c70321d8c3a",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/.prettierrc.json": {
+    "mtime": 1768657425.0062096,
+    "ast_hash": "81e1a85eb3522eed48d5095183125238",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/vite.config.ts": {
+    "mtime": 1768657425.01106,
+    "ast_hash": "079de76c6097902e62f33a94969bcb6f",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/postcss.config.js": {
+    "mtime": 1768738141.7794244,
+    "ast_hash": "ef3ba2a81ba19f8ea5ddf625521e96f0",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/eslint.config.ts": {
+    "mtime": 1768657425.01006,
+    "ast_hash": "1cd776aae6185f2a97094dfe8b04ffcd",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/tsconfig.json": {
+    "mtime": 1768657425.0050771,
+    "ast_hash": "95c50cdab2472124432dc71e994b481b",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/App.vue": {
+    "mtime": 1786137084.737707,
+    "ast_hash": "90ee2fe51ea5cebfe0412625bcd39667",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/main.ts": {
+    "mtime": 1785406429.179622,
+    "ast_hash": "266cc6e7f781bd19b46581f8df9a6b6d",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/data/portfolio.ts": {
+    "mtime": 1786140528.6533797,
+    "ast_hash": "2ea9a627e1ffd22499c3715b18b5cf9f",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/composables/useTheme.ts": {
+    "mtime": 1786137084.7385616,
+    "ast_hash": "25d53a96f2e645667b561af0c8dde2e9",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/composables/useMotion.ts": {
+    "mtime": 1786137084.7383683,
+    "ast_hash": "1924a082482d097a816e3a8512c4a7b1",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/map/useMap.ts": {
+    "mtime": 1786137084.739224,
+    "ast_hash": "850fef8319bb2ebb001b250cc8963151",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/map/network.ts": {
+    "mtime": 1786137084.7390165,
+    "ast_hash": "6b139a809c44ee5db092dd0444193c08",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/map/trains.ts": {
+    "mtime": 1786137084.7390828,
+    "ast_hash": "3f022a8cef371bf5a1680c8296b8911a",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/router/index.ts": {
+    "mtime": 1768657425.0140598,
+    "ast_hash": "30c02eb779ccbd19b340af5baa8abbdb",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/MapLine.vue": {
+    "mtime": 1786137084.7379873,
+    "ast_hash": "343b8142b7f8a79a99a8ea6bb5fd7f6f",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/ProjectsSection.vue": {
+    "mtime": 1786137084.7381043,
+    "ast_hash": "cd6f5be45db2333e6cdf4b6f236f7241",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/SkillsSection.vue": {
+    "mtime": 1786140528.653248,
+    "ast_hash": "825e2b2ddc298523da20af79e6ca822e",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/MapPanel.vue": {
+    "mtime": 1786140528.653248,
+    "ast_hash": "3834017a621597f4422832ffd193f781",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/HeroSection.vue": {
+    "mtime": 1786137084.7379272,
+    "ast_hash": "8959f8650ee92fd9456089de4feaab77",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/SiteNav.vue": {
+    "mtime": 1786137084.7382443,
+    "ast_hash": "97c8399a63d8bf2978d19e914d981453",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/TimelineSection.vue": {
+    "mtime": 1786140528.653248,
+    "ast_hash": "060c5028752dab3ebaed989a1b4723b7",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/ContactSection.vue": {
+    "mtime": 1786137084.7378547,
+    "ast_hash": "42a8d9f183ec0877226bd5a114a428bf",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/TubeMap.vue": {
+    "mtime": 1786137084.7383683,
+    "ast_hash": "03514a38ae41789be0726811e6df4580",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/src/components/AboutSection.vue": {
+    "mtime": 1786137084.737707,
+    "ast_hash": "c254fdc96889e66042bfab398f901910",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/.vscode/extensions.json": {
+    "mtime": 1768657425.0057802,
+    "ast_hash": "dce5532e59aee7c623dbfd774a22a0e0",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/README.md": {
+    "mtime": 1786137084.7363307,
+    "ast_hash": "91a0d86d2bfd041b3da8788d54b5f442",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/index.html": {
+    "mtime": 1786137084.7371392,
+    "ast_hash": "88dbb6d71f625b3f20f873e0e580a824",
+    "semantic_hash": ""
+  },
+  "/home/kolesniii/web-homepage/public/cv.pdf": {
+    "mtime": 1786137084.7376053,
+    "ast_hash": "f17d1720cdb5091e2d4e7cf9a8a89793",
+    "semantic_hash": ""
+  }
+}

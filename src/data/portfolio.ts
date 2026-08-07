@@ -104,17 +104,26 @@ export const about = [
    ========================================================================= */
 
 export interface Module {
-  code: string
+  code?: string
   title: string
-  mark: number
+  mark: number | string
+  grade?: string
+  registrationStatus?: string
 }
 
-export const academics = {
+export interface AcademicResults {
+  year: string
+  average: number
+  classification?: string
+  recognition?: string
+  modules: Module[]
+}
+
+export const academics: AcademicResults = {
   year: 'Year 2',
   average: 80.81,
   classification: 'First Class',
-  /** Year 1 outcome, kept for context alongside the Year 2 board. */
-  previous: 'Year 1 — 86%, Dean’s List (top 10%)',
+  recognition: 'Dean’s List · Top 10% of cohort',
   modules: [
     { code: 'COMP50008', title: 'Probability and Statistics', mark: 87.34 },
     { code: 'COMP50002', title: 'Software Engineering Design', mark: 86.84 },
@@ -127,6 +136,52 @@ export const academics = {
     { code: 'COMP50005', title: 'Networks and Communications', mark: 73.6 },
     { code: 'COMP50010', title: 'Designing for Real People', mark: 69.15 },
   ] satisfies Module[],
+}
+
+export const firstYearAcademics: AcademicResults = {
+  year: 'Year 1',
+  average: 86.38,
+  classification: 'First Class',
+  recognition: 'Dean’s List · Top 10% of cohort',
+  modules: [
+    {
+      title: 'Introduction to Computer Systems',
+      mark: 98.13,
+    },
+    {
+      title: 'Graphs and Algorithms',
+      mark: 93.33,
+    },
+    {
+      title: 'Computing Practical 1',
+      mark: 92.59,
+    },
+    {
+      title: 'Linear Algebra',
+      mark: 85.75,
+    },
+    {
+      title: 'Discrete Mathematics, Logic and Reasoning',
+      mark: 85.67,
+    },
+    {
+      title: 'Introduction to Databases',
+      mark: 83.34,
+    },
+    {
+      title: 'Calculus',
+      mark: 69.75,
+    },
+    {
+      title: 'Introduction to Computer Architecture',
+      mark: 64.5,
+    },
+    {
+      title: 'Introduction to Philosophy',
+      mark: 'Pass with Distinction',
+      registrationStatus: 'Registered for extra credit',
+    },
+  ],
 }
 
 /* =========================================================================
@@ -166,7 +221,7 @@ export const timeline: TimelineEntry[] = [
     title: 'MEng Computing',
     org: 'Imperial College London',
     detail:
-      'Year 2 average 80.81% (First Class). Year 1 at 86% with a place on the Dean’s List. Operating systems, compilers, machine learning, networks and human-centred design.',
+      'Year 2 average 80.81% (First Class) and Year 1 average 86.38% — both on the Dean’s List (top 10% of cohort). Operating systems, compilers, machine learning, networks and human-centred design.',
     kind: 'education',
     interchange: true,
   },
@@ -362,7 +417,7 @@ export const projects: Project[] = [
 export const sections = [
   { id: 'home', label: 'Start', line: 'victoria', stops: 2 },
   { id: 'about', label: 'About', line: 'piccadilly', stops: 2 },
-  { id: 'path', label: 'Path', line: 'central', stops: timeline.length + 1 },
+  { id: 'path', label: 'Path', line: 'central', stops: timeline.length + 2 },
   // Every item is its own stop, close together, rather than four panels of lists.
   { id: 'stack', label: 'Stack', line: 'district', stops: skillStops.length, close: true },
   { id: 'work', label: 'Work', line: 'elizabeth', stops: projects.length },

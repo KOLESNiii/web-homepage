@@ -21,8 +21,10 @@ const ACCEL = 46
 const DECEL = 62
 /** Anything slower than this at a platform counts as stopped. */
 const CREEP = 5
-const DWELL_MIN = 0.8
+const DWELL_MIN = 0.5
 const DWELL_SPAN = 1.9
+/** The gap at which a stop earns a full dwell; closer stops get shorter ones. */
+const DWELL_REACH = 520
 
 /** The fastest a train may be going and still be able to stop in `gap`. */
 const approachSpeed = (gap: number) => Math.sqrt(2 * DECEL * Math.max(gap, 0))
@@ -51,7 +53,11 @@ function step(route: Route, train: Train, ahead: Train | undefined, delta: numbe
   if (platform !== undefined && train.pos >= platform - 1.5 && train.speed <= CREEP) {
     train.pos = platform
     train.speed = 0
-    train.dwell = DWELL_MIN + Math.random() * DWELL_SPAN
+    // Stations a few hundred px apart get a short stop; a train on a stretch
+    // of line with one every so often stands for longer.
+    const onward = route.stops[train.next + 1]
+    const room = onward === undefined ? DWELL_REACH : Math.min(onward - platform, DWELL_REACH)
+    train.dwell = DWELL_MIN + Math.random() * DWELL_SPAN * (room / DWELL_REACH)
   }
 
   // The invariant, independent of the physics above.

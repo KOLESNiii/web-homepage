@@ -52,6 +52,12 @@ export interface SectionLine {
   line: LineKey
   /** How many platforms it calls at — one panel each. */
   stops: number
+  /**
+   * Set where a stop is a name rather than a panel. Names need only a line of
+   * room, so the line calls at several a screen, the way an inner-city stretch
+   * does — panels need a screen each.
+   */
+  close?: true
 }
 
 /* =========================================================================
@@ -232,6 +238,21 @@ export const skills: SkillGroup[] = [
   },
 ]
 
+/**
+ * The Stack line, flattened: one stop per skill, in order, with the group name
+ * carried by the first stop of each group the way a map labels a stretch of
+ * line. The section renders one of these per platform.
+ */
+export interface SkillStop {
+  item: string
+  /** Set on the first stop of a group, blank on the rest. */
+  group: string
+}
+
+export const skillStops: SkillStop[] = skills.flatMap((group) =>
+  group.items.map((item, index) => ({ item, group: index === 0 ? group.label : '' })),
+)
+
 /* =========================================================================
    Projects — stations along the Work line, in the order you meet them
    ========================================================================= */
@@ -342,7 +363,8 @@ export const sections = [
   { id: 'home', label: 'Start', line: 'victoria', stops: 2 },
   { id: 'about', label: 'About', line: 'piccadilly', stops: 2 },
   { id: 'path', label: 'Path', line: 'central', stops: timeline.length + 1 },
-  { id: 'stack', label: 'Stack', line: 'district', stops: skills.length },
+  // Every item is its own stop, close together, rather than four panels of lists.
+  { id: 'stack', label: 'Stack', line: 'district', stops: skillStops.length, close: true },
   { id: 'work', label: 'Work', line: 'elizabeth', stops: projects.length },
   { id: 'contact', label: 'Contact', line: 'bakerloo', stops: 3 },
 ] as const satisfies readonly SectionLine[]

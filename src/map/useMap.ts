@@ -13,7 +13,7 @@
 
 import { computed, ref, shallowRef } from 'vue'
 import { sections } from '../data/portfolio'
-import { buildNetwork, pointAt, type Network, type Point } from './network'
+import { buildNetwork, pointAt, type Layout, type Network, type Point, type Route } from './network'
 
 export interface Camera {
   /** The world point sitting under the anchor. */
@@ -28,11 +28,13 @@ export interface Camera {
 export interface Metrics {
   vw: number
   vh: number
-  /** Distance between two platforms, along the line. */
-  spacing: number
+  /** How wide and how spread out to draw the diagram at this size. */
+  layout: Layout
   /** Where the track sits on screen while you are reading. */
   anchorX: number
   anchorY: number
+  /** The same, where the line is running across the map instead of down it. */
+  flatY: number
   /** Clear space between the track and the panel beside it. */
   panelGap: number
   panelWidth: number
@@ -50,9 +52,16 @@ interface Segment {
   length: number
 }
 
+/** One end of a flight: a place on the map, and where on screen it sat. */
+interface Waypoint {
+  x: number
+  y: number
+  ay: number
+}
+
 interface Flight {
-  from: Camera
-  to: Camera
+  from: Waypoint
+  to: Waypoint
   started: number
   duration: number
 }
@@ -115,16 +124,53 @@ function measure(bounds?: { minX: number; minY: number; maxX: number; maxY: numb
   // Platforms have to sit further apart than a panel is tall, or the next
   // panel along leans into the one you are reading. Narrow panels are much
   // taller than wide ones for the same words, so they need much more room.
-  const reach = narrow
+  const spacing = narrow
     ? Math.max(920, Math.min(vh * 1.24, 1240))
     : Math.max(600, Math.min(vh * 0.88, 830))
+
+  // A name needs a line of room rather than a screen of it, so a line of names
+  // calls at about five a screen on any size of screen.
+  const close = Math.round(Math.max(140, Math.min(vh * 0.2, 210)))
+
+  // Sideways, the gap between two platforms has to clear a whole panel width
+  // rather than a panel height, or the next one along sits on this one.
+  const across = Math.round(panelWidth + panelGap + 140)
+
+  // A phone sees roughly a third of the world a desktop does, so the diagram
+  // is drawn to a third of the width — and it has no room either side of the
+  // track, so the lines you read along stay on runs down the map. Only the
+  // lines carrying nothing turn and run across it.
+  const layout: Layout = narrow
+    ? {
+        spacing: Math.round(spacing),
+        across,
+        close,
+        closeAcross: Math.round(close * 1.9),
+        pitch: 380,
+        band: 260,
+        jog: 360,
+        sideways: false,
+      }
+    : {
+        spacing: Math.round(spacing),
+        across,
+        close,
+        closeAcross: Math.round(close * 1.9),
+        pitch: 1000,
+        band: 360,
+        jog: 420,
+        sideways: true,
+      }
 
   return {
     vw,
     vh,
-    spacing: Math.round(reach),
+    layout,
     anchorX,
     anchorY: vh * 0.5,
+    // Riding a sideways run, the panel hangs below the track rather than
+    // beside it, so the track has to sit high enough to leave room under it.
+    flatY: vh * 0.3,
     panelGap,
     panelWidth,
     fitZoom: Math.min(vw / width, vh / height) * 0.84,
@@ -171,10 +217,29 @@ function layOutJourney() {
    Where the camera is
    ------------------------------------------------------------------------- */
 
-function platformPoint(index: number, stop: 'first' | 'last'): Point {
+/**
+ * A line's first and last platform are always on a run down the map, by
+ * construction, so a flight starts and finishes at the ordinary anchor.
+ */
+function platformPoint(index: number, stop: 'first' | 'last'): Waypoint {
   const platforms = network.value?.sections[index]?.platforms ?? []
   const station = stop === 'first' ? platforms[0] : platforms[platforms.length - 1]
-  return { x: station?.x ?? 0, y: station?.y ?? 0 }
+  return { x: station?.x ?? 0, y: station?.y ?? 0, ay: metrics.value.anchorY }
+}
+
+/**
+ * How sideways the track is here: 0 running down the map, 1 straight across
+ * it. Sampled over a stretch rather than at a point, so the anchor eases
+ * across the diagonal into a turn instead of snapping at the corner.
+ */
+function flatness(route: Route, at: number): number {
+  const back = pointAt(route, at - 70)
+  const on = pointAt(route, at + 70)
+  const dx = Math.abs(on.x - back.x)
+  const dy = Math.abs(on.y - back.y)
+  if (dx + dy < 1) return 0
+  // A 45° diagonal only counts for a little of the lift; a level run for all.
+  return clamp01((dx / (dx + dy) - 0.3) / 0.7)
 }
 
 /**
@@ -182,8 +247,8 @@ function platformPoint(index: number, stop: 'first' | 'last'): Point {
  * back in. Shared by the scroll bands and by the legend, so a flight looks the
  * same however it was started.
  */
-function flightAt(from: Point, to: Point, t: number, into: Camera): Camera {
-  const { anchorX, anchorY, fitZoom, vw, vh } = metrics.value
+function flightAt(from: Waypoint, to: Waypoint, t: number, into: Camera): Camera {
+  const { anchorX, fitZoom, vw, vh } = metrics.value
 
   // Up on the way out, down on the way back — one bell over the whole flight.
   const lift = t < 0.5 ? smoothstep(0, 0.44, t) : smoothstep(1, 0.56, t)
@@ -196,7 +261,7 @@ function flightAt(from: Point, to: Point, t: number, into: Camera): Camera {
   into.y = mix(mix(from.y, to.y, across), centre.y, lift * 0.86)
   into.zoom = mix(1, fitZoom, lift)
   into.ax = mix(anchorX, vw * 0.5, lift)
-  into.ay = mix(anchorY, vh * 0.5, lift)
+  into.ay = mix(mix(from.ay, to.ay, across), vh * 0.5, lift)
   return into
 }
 
@@ -224,7 +289,7 @@ function cameraForScroll(scroll: number, into: Camera): Camera {
       into.y = at.y
       into.zoom = 1
       into.ax = metrics.value.anchorX
-      into.ay = metrics.value.anchorY
+      into.ay = at.ay
       return into
     }
     return flightAt(from, to, t, into)
@@ -236,12 +301,16 @@ function cameraForScroll(scroll: number, into: Camera): Camera {
   const last = platforms[platforms.length - 1]
   if (!entry || !first || !last) return into
 
-  const point = pointAt(entry.route, mix(first.at, last.at, t))
+  const at = mix(first.at, last.at, t)
+  const point = pointAt(entry.route, at)
+  const { anchorX, anchorY, flatY } = metrics.value
   into.x = point.x
   into.y = point.y
   into.zoom = 1
-  into.ax = metrics.value.anchorX
-  into.ay = metrics.value.anchorY
+  into.ax = anchorX
+  // Beside the track down the map, above it across — the panel needs the room
+  // on whichever side of the line it is hanging off.
+  into.ay = mix(anchorY, flatY, flatness(entry.route, at))
   return into
 }
 
@@ -330,7 +399,8 @@ function jumpTo(scroll: number) {
 /** Fly to a line: pull back, cross the map, drop in at its first platform. */
 function goTo(index: number, stop = 0) {
   const target = scrollForPlatform(index, stop)
-  const from: Camera = { ...camera }
+  // Where the camera stands now, however sideways the line under it was.
+  const from: Waypoint = { x: camera.x, y: camera.y, ay: camera.ay }
 
   jumpTo(target)
   activeIndex.value = index
@@ -342,7 +412,8 @@ function goTo(index: number, stop = 0) {
     return
   }
 
-  const to = cameraForScroll(target, { ...camera })
+  const landing = cameraForScroll(target, { ...camera })
+  const to: Waypoint = { x: landing.x, y: landing.y, ay: landing.ay }
   flight = { from, to, started: performance.now(), duration: FLIGHT_MS }
   travelling.value = true
 }
@@ -359,7 +430,7 @@ function rebuild() {
 
   metrics.value = measure()
   gain = gainFor(metrics.value.vw <= 760)
-  const map = buildNetwork(metrics.value.spacing)
+  const map = buildNetwork(metrics.value.layout)
   network.value = map
   metrics.value = measure(map.bounds)
 

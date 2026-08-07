@@ -38,6 +38,22 @@ const planeRef = ref<HTMLElement | null>(null)
 
 const skip = () => map.goTo(map.indexOf('about'))
 
+/**
+ * Land on a deep link. The document is only as tall as the rail, and the rail
+ * is only as tall as the journey once the map has measured it — so the first
+ * attempt can be clamped by a layout that has not caught up yet, and how many
+ * frames that takes is the browser's business. Ask until it takes.
+ */
+function land(target: number) {
+  let tries = 12
+  const again = () => {
+    if (tries-- <= 0 || Math.abs(window.scrollY - target) < 2) return
+    window.scrollTo(0, target)
+    requestAnimationFrame(again)
+  }
+  again()
+}
+
 /** A flight is only ever a courtesy — the moment you steer, it stops. */
 const release = () => map.cancelFlight()
 
@@ -49,12 +65,16 @@ onMounted(() => {
   // scroll to. Where the journey starts is ours to decide.
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual'
 
-  const landing = map.indexOf(window.location.hash.slice(1))
+  const { pathname, search, hash } = window.location
+  const landing = map.indexOf(hash.slice(1))
   if (landing > 0) {
-    const target = Math.round(map.scrollForPlatform(landing, 0))
-    window.scrollTo(0, target)
-    // Chrome makes its own attempt at the hash after load; go again behind it.
-    window.addEventListener('load', () => window.scrollTo(0, target), { once: true })
+    // The browser scrolls to the fragment itself, on its own schedule — and a
+    // section here is `display: contents`, so it has no box and that lands at
+    // the top. Spend the fragment: take it out of the URL so there is nothing
+    // left for the browser to aim at, and go where it asked for ourselves.
+    // Nothing writes the hash back as you travel, so it was only ever an entry.
+    history.replaceState(null, '', pathname + search)
+    land(Math.round(map.scrollForPlatform(landing, 0)))
   }
 
   window.addEventListener('wheel', release, { passive: true })

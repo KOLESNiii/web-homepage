@@ -17,11 +17,15 @@ The map's own rules hold throughout:
 - **A line is one colour along its whole length.** Nothing draws a single track
   in two colours, anywhere.
 - **A run is vertical, horizontal or at 45°.** That, more than anything, is
-  what makes a diagram read as Beck's rather than as a road atlas.
+  what makes a diagram read as Beck's rather than as a road atlas. Every line
+  uses all three: a section line runs down its band, swings across a long
+  diagonal between two stations, and every so often turns and strikes out
+  sideways for a stop or two before heading down again.
 - **Two station symbols, and only two.** A stop on one line is a single dash
   across the track in that line's colour — where the dash carries a panel it is
   simply drawn long enough to reach it. An interchange, where two lines
-  actually cross, is a white circle ringed in black.
+  actually cross, is a white circle ringed in black, drawn last and at full
+  strength: on the real map it is solid however faint the lines through it are.
 - **Flat.** No glows, no drop shadows. Beck's diagram is line art.
 - No roundels anywhere.
 
@@ -42,10 +46,17 @@ behind it instead of passing.
 | Contact | Bakerloo   |
 
 The other seven official lines make up the rest of the network: Jubilee,
-Hammersmith & City and Waterloo & City thread between and beyond the section
-bands, and Circle, Metropolitan, DLR and Overground run across them. Every
-place two lines cross becomes an interchange, geometrically — interchanges are
-not placed by hand.
+Hammersmith & City, Metropolitan and Waterloo & City thread between and beyond
+the section bands, and Circle, DLR and Overground run across them. Those carry
+no content, so they wander freely — level runs, climbs, dips and the occasional
+plunge straight down. Every place two lines cross becomes an interchange,
+geometrically — interchanges are not placed by hand.
+
+A stop's content sits where a station name sits on the real map: beside the
+track on a run down, and below it on a run across, where beside would mean on
+top of the line. The camera lifts to leave the room when it is riding one of
+those. A phone has room on neither side, so there the lines you read along stay
+on runs down the map and only the ones carrying nothing turn.
 
 ### Two grounds
 
@@ -77,9 +88,11 @@ All copy lives in **`src/data/portfolio.ts`**. Nothing is hard-coded in componen
   GitLab and deliberately carry no link.
 
 `sections[].stops` is derived from the content, so adding a project grows the
-Elizabeth line a station for it with no layout to update. The About stats
-(project count, average, classification) are derived too, so they can't drift
-out of sync.
+Elizabeth line a station for it, and adding a skill grows the District line
+one, with no layout to update either way. A section marked `close: true` is one
+whose stops are boxed names rather than panels — it calls at about five a
+screen instead of one. The About stats (project count, average, classification) are
+derived too, so they can't drift out of sync.
 
 ## Structure
 
@@ -102,7 +115,7 @@ src/
     HeroSection.vue          Victoria line
     AboutSection.vue         Piccadilly line
     TimelineSection.vue      Central line, ending at the results board
-    SkillsSection.vue        District line
+    SkillsSection.vue        District line, one stop per skill, a name each
     ProjectsSection.vue      Elizabeth line, one station per project
     ContactSection.vue       Bakerloo line, ending at the terminus and the footer
 ```
@@ -119,6 +132,10 @@ The scroll range is laid out as a journey: a run along each line, and a band of
 scroll between two lines during which the camera pulls back, crosses and drops
 in. Picking a line from the legend makes the identical flight on a clock
 instead of on scroll, so the two never read as different mechanisms.
+
+`#work` and the like still work as entry points. The fragment is spent on
+arrival — taken out of the URL — because a section is `display: contents` and
+has no box, so the browser's own attempt to scroll to it lands at the top.
 
 Because the page does not scroll, focus cannot scroll either — so a panel
 brings the camera to itself when focus lands inside it. Panels of lines you are

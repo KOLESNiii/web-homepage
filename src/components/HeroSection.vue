@@ -1,6 +1,6 @@
 <template>
   <MapLine section="home">
-    <MapPanel section="home" :stop="0" bare>
+    <MapPanel section="home" :stop="0" variant="bare">
       <h1 class="hero__title">
         <span v-for="word in titleWords" :key="word" class="hero__word">{{ word }}</span>
       </h1>

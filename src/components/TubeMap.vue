@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { sections } from '../data/portfolio'
-import type { Route, Train } from '../map/network'
+import type { Route, Station, Train } from '../map/network'
 import { advanceTrains } from '../map/trains'
 import { pointAt } from '../map/network'
 import { useMap } from '../map/useMap'
@@ -107,38 +107,24 @@ function drawRoute(route: Route, view: View) {
   ctx.stroke()
 }
 
-function drawStations(route: Route, view: View) {
+const onScreen = (station: Station, view: View) =>
+  station.y >= view.top &&
+  station.y <= view.bottom &&
+  station.x >= view.left &&
+  station.x <= view.right
+
+/** One dash across the track, in the line's own colour. */
+function drawStops(route: Route, view: View) {
   if (!ctx) return
 
   const reach = TRACK * 1.55
-  const dash = gauge(TICK, view.zoom, 1.4)
-  const radius = gauge(TRACK * 0.85, view.zoom, 2.2)
-  const ring = gauge(2.6, view.zoom, 0.9)
-
   ctx.lineCap = 'butt'
+  ctx.strokeStyle = route.colour
+  ctx.lineWidth = gauge(TICK, view.zoom, 1.4)
+  ctx.beginPath()
+
   for (const station of route.stations) {
-    if (
-      station.y < view.top ||
-      station.y > view.bottom ||
-      station.x < view.left ||
-      station.x > view.right
-    ) {
-      continue
-    }
-
-    if (station.change) {
-      ctx.beginPath()
-      ctx.arc(station.x, station.y, radius, 0, Math.PI * 2)
-      ctx.fillStyle = changeFill
-      ctx.fill()
-      ctx.lineWidth = ring
-      ctx.strokeStyle = changeRing
-      ctx.stroke()
-      continue
-    }
-
-    // One dash across the track, in the line's own colour.
-    ctx.beginPath()
+    if (station.change || !onScreen(station, view)) continue
     ctx.moveTo(
       station.x - Math.cos(station.angle) * reach,
       station.y - Math.sin(station.angle) * reach,
@@ -147,8 +133,28 @@ function drawStations(route: Route, view: View) {
       station.x + Math.cos(station.angle) * reach,
       station.y + Math.sin(station.angle) * reach,
     )
-    ctx.strokeStyle = route.colour
-    ctx.lineWidth = dash
+  }
+  ctx.stroke()
+}
+
+/**
+ * A white circle ringed in black. It belongs to both the lines that meet
+ * there, so it is drawn last and at full strength — on the real map an
+ * interchange is solid however faint the lines through it are.
+ */
+function drawInterchanges(route: Route, view: View) {
+  if (!ctx) return
+
+  const radius = gauge(TRACK * 0.85, view.zoom, 2.2)
+  ctx.fillStyle = changeFill
+  ctx.strokeStyle = changeRing
+  ctx.lineWidth = gauge(2.6, view.zoom, 0.9)
+
+  for (const station of route.stations) {
+    if (!station.change || !onScreen(station, view)) continue
+    ctx.beginPath()
+    ctx.arc(station.x, station.y, radius, 0, Math.PI * 2)
+    ctx.fill()
     ctx.stroke()
   }
 }
@@ -219,18 +225,37 @@ function draw() {
   const focus = clamp01((zoom - fit) / (1 - fit || 1))
   const away = 0.9 - 0.52 * focus
   const here = map.activeIndex.value
+  const alphaFor = (index: number) => (index === here && index < sections.length ? 1 : away)
 
+  // One pass per layer, not per line: drawn line by line, the next line's
+  // track paints over the last line's stations.
   network.routes.forEach((route, index) => {
     if (!ctx) return
-    ctx.globalAlpha = index === here && index < sections.length ? 1 : away
+    ctx.globalAlpha = alphaFor(index)
     drawRoute(route, view)
-    if (zoom > 0.3) drawStations(route, view)
-    // Pulled back this far a train is smaller than the gap it cuts in its own
-    // line, so it would read as a break in the track rather than as a train.
-    if (zoom > 0.45) {
-      for (const train of route.trains) drawTrain(route, train, view)
-    }
   })
+
+  // Pulled back this far a train is smaller than the gap it cuts in its own
+  // line, so it would read as a break in the track rather than as a train.
+  if (zoom > 0.45) {
+    network.routes.forEach((route, index) => {
+      if (!ctx) return
+      ctx.globalAlpha = alphaFor(index)
+      for (const train of route.trains) drawTrain(route, train, view)
+    })
+  }
+
+  // Below this the symbols are smaller than the lines carrying them.
+  if (zoom > 0.3) {
+    network.routes.forEach((route, index) => {
+      if (!ctx) return
+      ctx.globalAlpha = alphaFor(index)
+      drawStops(route, view)
+    })
+
+    ctx.globalAlpha = 1
+    for (const route of network.routes) drawInterchanges(route, view)
+  }
 
   ctx.globalAlpha = 1
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0)

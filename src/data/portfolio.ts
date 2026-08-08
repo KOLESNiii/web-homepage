@@ -335,6 +335,7 @@ export const projects: Project[] = [
       'A food planner for students under deadline pressure: give it your budget, your effort ceiling and the week you are dreading, and it proposes a plan you will actually follow — then recalculates the cost and the rest of the week the moment you swap a meal because the day went wrong. A FastAPI service over Postgres and pgvector ranks recipes on taste similarity from sentence-transformer embeddings, ability match, novelty and budget fit, reweighting the lot when you flag a high-stress week. I built the accounts and cross-device session layer, the shopping list, and cost estimation from ingredients.',
     year: '2026',
     tech: ['React', 'TypeScript', 'FastAPI', 'Postgres / pgvector', 'Firebase'],
+    repo: 'https://github.com/KOLESNiii/Fed-Up',
   },
   {
     title: 'WACC Compiler',
@@ -402,6 +403,7 @@ export const projects: Project[] = [
       'A Unity dungeon crawler with procedurally generated levels, built so that progressing through the game teaches you to actually play the guitar rather than press the right button at the right time.',
     year: '2024',
     tech: ['C#', 'Unity', 'Procedural Generation'],
+    repo: 'https://github.com/KOLESNiii/Guitar-Scar',
   },
 ]
 

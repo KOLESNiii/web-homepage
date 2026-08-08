@@ -44,6 +44,9 @@
           Live
         </a>
       </p>
+      <p v-else class="project__links project__links--request">
+        Source available upon request.
+      </p>
     </MapPanel>
   </MapLine>
 </template>

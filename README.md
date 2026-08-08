@@ -11,10 +11,14 @@ In addition to PostHog pageviews, page leaves, autocapture, heatmaps, and
 session replay, the site records these portfolio-specific events:
 
 - `portfolio_section_viewed` and `portfolio_stop_viewed` show which parts of
-  the journey visitors reached.
-- `portfolio_section_time` and `portfolio_stop_time` include a
-  `duration_seconds` property. Summing or averaging it shows engaged time per
-  section or stop; background-tab time is excluded.
+  the journey visitors reached. Every stop event includes stable pane metadata:
+  `pane_id`, `pane_type`, `pane_label`, `pane_index`, and the containing section.
+- `portfolio_section_time` and `portfolio_stop_time` include an exact integer
+  `duration_ms` property (plus `duration_seconds` for convenience). Summing
+  `duration_ms` grouped by `pane_id` gives the total engaged time for each
+  project, timeline entry, skill, results board, or contact pane. Background-tab
+  time and camera-travel time are excluded; map mode uses actual viewport
+  intersection to time every readable pane on screen.
 
 Session replay masks all input values.
 

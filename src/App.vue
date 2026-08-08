@@ -132,7 +132,7 @@ watch(
 
 // Register after the map's mount hook so fragment landings are measured as
 // their real destination rather than briefly appearing as the default line.
-usePortfolioAnalytics(map)
+usePortfolioAnalytics({ ...map, paused: welcome })
 </script>
 
 <style scoped>

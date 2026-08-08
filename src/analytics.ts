@@ -1,4 +1,4 @@
-import posthog from 'posthog-js'
+import posthog, { type CaptureOptions } from 'posthog-js'
 
 const projectToken = import.meta.env.VITE_POSTHOG_KEY?.trim()
 
@@ -26,7 +26,11 @@ export function initAnalytics() {
   })
 }
 
-export function capture(event: string, properties?: Record<string, unknown>) {
+export function capture(
+  event: string,
+  properties?: Record<string, unknown>,
+  options?: CaptureOptions,
+) {
   if (!analyticsEnabled) return
-  posthog.capture(event, properties)
+  posthog.capture(event, properties, options)
 }

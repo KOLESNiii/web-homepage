@@ -3,6 +3,8 @@
     class="panel"
     :class="[`panel--${variant}`, { 'panel--sideways': sideways, 'panel--dense': dense }]"
     :style="style"
+    :data-pane-section="section"
+    :data-pane-index="stop"
     @focusin="onFocus"
   >
     <span class="panel__leader" aria-hidden="true"></span>

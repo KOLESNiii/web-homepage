@@ -51,6 +51,7 @@ import SiteNav from './components/SiteNav.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import TimelineSection from './components/TimelineSection.vue'
 import TubeMap from './components/TubeMap.vue'
+import { usePortfolioAnalytics } from './composables/usePortfolioAnalytics'
 import { useMap } from './map/useMap'
 
 const map = useMap()
@@ -128,6 +129,10 @@ watch(
   (active) => document.documentElement.classList.toggle('is-map-exploring', active),
   { immediate: true, flush: 'sync' },
 )
+
+// Register after the map's mount hook so fragment landings are measured as
+// their real destination rather than briefly appearing as the default line.
+usePortfolioAnalytics(map)
 </script>
 
 <style scoped>

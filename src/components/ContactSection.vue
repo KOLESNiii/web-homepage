@@ -40,7 +40,7 @@
     <MapPanel section="contact" :stop="2">
       <footer class="end">
         <p class="end__title">End of the line.</p>
-        <p class="end__note">© {{ year }} {{ profile.name }} · built with Vue, no trackers</p>
+        <p class="end__note">© {{ year }} {{ profile.name }} · built with Vue</p>
         <button class="link" type="button" @click="map.goTo(0)">Back to the start</button>
       </footer>
     </MapPanel>

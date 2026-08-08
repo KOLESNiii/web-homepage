@@ -1,5 +1,23 @@
 # web-homepage
 
+## Analytics
+
+PostHog is initialized when `VITE_POSTHOG_KEY` is set. Copy
+`.env.example` to `.env.local` for local testing, then replace the token and
+host with the values from the PostHog project settings. Set the same variables
+in the deployment environment.
+
+In addition to PostHog pageviews, page leaves, autocapture, heatmaps, and
+session replay, the site records these portfolio-specific events:
+
+- `portfolio_section_viewed` and `portfolio_stop_viewed` show which parts of
+  the journey visitors reached.
+- `portfolio_section_time` and `portfolio_stop_time` include a
+  `duration_seconds` property. Summing or averaging it shows engaged time per
+  section or stop; background-tab time is excluded.
+
+Session replay masks all input values.
+
 Personal portfolio — Vue 3 + Vite + TypeScript, no UI framework.
 
 ## Theme

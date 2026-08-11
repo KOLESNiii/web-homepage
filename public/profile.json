@@ -2,7 +2,7 @@
   "@context": "https://schema.org",
   "@type": "Person",
   "schemaVersion": "1.0",
-  "name": "Timofey Kolesnichenko",
+  "name": "Tim Kolesnichenko",
   "alternateName": "Tim Kolesnichenko",
   "initials": "TK",
   "jobTitle": "Software Engineer",
@@ -15,7 +15,7 @@
   ],
   "tagline": "Compilers, kernels and interfaces — the whole line, end to end.",
   "availability": {
-    "status": "Good service",
+    "status": "Available",
     "heading": "Open to graduate roles.",
     "graduation": "June 2028",
     "applicationCycle": "2027",

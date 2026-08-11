@@ -3,7 +3,7 @@
     <a class="sleek-skip" href="#content">Skip to content</a>
     <header class="sleek-header">
       <div class="sleek-header__inner">
-        <RouterLink class="sleek-mark" to="/" aria-label="Timofey Kolesnichenko home">
+        <RouterLink class="sleek-mark" to="/" aria-label="Tim Kolesnichenko home">
           <span class="sleek-mark__dot" aria-hidden="true"></span>
           <span>TK</span>
         </RouterLink>
@@ -49,14 +49,13 @@
         <section class="sleek-hero" aria-labelledby="hero-title">
           <div class="sleek-hero__copy">
             <p class="eyebrow">{{ profile.role }} · {{ profile.place }}</p>
-            <h1 id="hero-title">Timofey<br /><em>Kolesnichenko</em></h1>
+            <h1 id="hero-title">Tim<br /><em>Kolesnichenko</em></h1>
             <p class="hero-tagline">{{ profile.tagline }}</p>
             <div class="hero-actions">
               <a class="button button--solid" href="#work">See the work <ArrowUpRight :size="16" aria-hidden="true" /></a>
               <a class="button button--outline" href="#contact">Get in touch</a>
             </div>
           </div>
-          <div class="hero-note"><span class="status-dot"></span>{{ contact.status }} · open to graduate roles</div>
         </section>
 
         <section id="work" class="content-section selected-work" aria-labelledby="work-title">
@@ -86,10 +85,10 @@
 
         <section id="about" class="about-section content-section" aria-labelledby="about-title"><div class="about-section__heading"><p class="eyebrow">About</p><h2 id="about-title">Built low,<br /><em>finished high.</em></h2></div><div class="about-section__copy"><p v-for="paragraph in about" :key="paragraph">{{ paragraph }}</p></div></section>
 
-        <section id="contact" class="contact-section content-section" aria-labelledby="contact-title"><div><p class="eyebrow">Contact</p><h2 id="contact-title">{{ contact.heading }}</h2><p class="contact-status"><span class="status-dot"></span>{{ contact.status }}</p><p class="contact-note">{{ contact.note }}</p></div><div class="contact-actions"><a class="button button--solid" :href="`mailto:${profile.email}`">{{ profile.email }} <ArrowUpRight :size="16" aria-hidden="true" /></a><a class="button button--outline" :href="profile.cv" download>Download CV <Download :size="16" aria-hidden="true" /></a><a class="contact-link" :href="profile.github" target="_blank" rel="noopener">GitHub <ExternalLink :size="15" aria-hidden="true" /></a><a class="contact-link" :href="profile.linkedin" target="_blank" rel="noopener">LinkedIn <ExternalLink :size="15" aria-hidden="true" /></a></div></section>
+        <section id="contact" class="contact-section content-section" aria-labelledby="contact-title"><div><p class="eyebrow">Contact</p><h2 id="contact-title">{{ contact.heading }}</h2><p class="contact-note">{{ contact.note }}</p></div><div class="contact-actions"><p class="eyebrow">Ways through</p><a class="button button--solid" :href="`mailto:${profile.email}`">{{ profile.email }} <ArrowUpRight :size="16" aria-hidden="true" /></a><a class="button button--outline" :href="profile.cv" download>Download CV <Download :size="16" aria-hidden="true" /></a><a class="contact-link" :href="profile.github" target="_blank" rel="noopener">GitHub <ExternalLink :size="15" aria-hidden="true" /></a><a class="contact-link" :href="profile.linkedin" target="_blank" rel="noopener">LinkedIn <ExternalLink :size="15" aria-hidden="true" /></a></div></section>
       </template>
     </main>
-    <footer class="sleek-footer"><span>© {{ year }} {{ profile.name }} · built with Vue</span><button type="button" @click="scrollTop">Back to the start <ArrowUp :size="15" aria-hidden="true" /></button></footer>
+    <footer class="sleek-footer"><span>End of the line. · © {{ year }} Tim Kolesnichenko · built with Vue</span><button type="button" @click="scrollTop">Back to the start <ArrowUp :size="15" aria-hidden="true" /></button></footer>
   </div>
 </template>
 
@@ -132,7 +131,7 @@ const detail = computed(() => {
 function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }) }
 function updateMeta() {
   const project = detail.value.project
-  const title = project ? `${project.title} — Timofey Kolesnichenko` : detail.value.results ? `${detail.value.results.year} results — Timofey Kolesnichenko` : 'Timofey Kolesnichenko — Software Engineer'
+  const title = project ? `${project.title} — Tim Kolesnichenko` : detail.value.results ? `${detail.value.results.year} results — Tim Kolesnichenko` : 'Tim Kolesnichenko — Software Engineer'
   const description = project?.description ?? 'Computing student at Imperial College London building compilers, kernels and interfaces.'
   document.title = title
   document.querySelector('meta[name="description"]')?.setAttribute('content', description)
@@ -195,7 +194,7 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .sleek-header__inner { max-width: 80rem; height: 72px; margin: auto; padding: 0 clamp(20px, 4vw, 64px); display: flex; align-items: center; gap: 32px; }
 .sleek-mark, .sleek-nav a, .sleek-experimental, .sleek-cv, .sleek-mobile-menu a { color: inherit; text-decoration: none; }
 .sleek-mark { display: inline-flex; align-items: center; gap: 9px; font: 500 13px/1 JetBrains Mono, monospace; letter-spacing: .08em; }
-.sleek-mark__dot, .status-dot { width: 9px; height: 9px; border: 2px solid var(--sleek-text); border-radius: 50%; display: inline-block; }
+.sleek-mark__dot { width: 9px; height: 9px; border: 2px solid var(--sleek-text); border-radius: 50%; display: inline-block; }
 .sleek-mark:hover .sleek-mark__dot, .sleek-mark:focus-visible .sleek-mark__dot { border-color: var(--sleek-accent); background: var(--sleek-accent); }
 .sleek-nav { display: flex; gap: 24px; margin-left: auto; }
 .sleek-nav a, .sleek-experimental, .sleek-cv { font-size: 12px; color: var(--sleek-muted); }
@@ -209,7 +208,7 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .sleek-menu-button, .sleek-mobile-menu { display: none; }
 .sleek-skip { position: fixed; z-index: 40; top: 12px; left: 12px; padding: 8px 12px; background: var(--sleek-surface); color: var(--sleek-text); transform: translateY(-150%); }
 .sleek-skip:focus { transform: none; }
-.sleek-hero { max-width: 80rem; min-height: min(64svh, 620px); margin: auto; padding: clamp(60px, 10vw, 110px) clamp(20px, 8vw, 128px) 36px; display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid var(--sleek-rule); }
+.sleek-hero { max-width: 80rem; min-height: calc(72svh - 72px); margin: auto; padding: clamp(72px, 10vw, 122px) clamp(20px, 8vw, 128px) clamp(52px, 7vw, 82px); display: flex; flex-direction: column; justify-content: center; border-bottom: 1px solid var(--sleek-rule); }
 .sleek-hero__copy { max-width: 920px; }
 .eyebrow, .project-meta, .section-count, .timeline-row__period, .academic-record__year { font: 500 11px/1.3 JetBrains Mono, monospace; letter-spacing: .09em; text-transform: uppercase; color: var(--sleek-muted); }
 .sleek-hero h1, .section-heading h2, .about-section h2, .contact-section h2, .detail-hero h1 { margin: 18px 0 0; font: 400 clamp(58px, 8vw, 132px)/.9 'Instrument Serif', Georgia, serif; letter-spacing: 0; }
@@ -222,8 +221,6 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .button--solid:hover { background: var(--sleek-accent); border-color: var(--sleek-accent); color: white; }
 .button--outline { border-color: var(--sleek-rule); }
 .button--outline:hover { border-color: var(--sleek-accent); color: var(--sleek-accent); }
-.hero-note { display: flex; align-items: center; gap: 9px; margin-top: auto; align-self: flex-end; color: var(--sleek-muted); font-size: 12px; }
-.hero-note .status-dot, .contact-status .status-dot { border-color: var(--sleek-green); background: var(--sleek-green); }
 .content-section { max-width: 80rem; margin: auto; padding: clamp(76px, 10vw, 148px) clamp(20px, 6vw, 96px); }
 .selected-work { padding-top: 56px; }
 .selected-work .section-heading { margin-bottom: 26px; }
@@ -279,7 +276,6 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .about-section__copy p + p { margin-top: 24px; }
 .contact-section { display: grid; grid-template-columns: 1.2fr .8fr; gap: 8vw; }
 .contact-section h2 { margin-top: 15px; max-width: 620px; }
-.contact-status { display: flex; align-items: center; gap: 9px; margin-top: 25px; color: var(--sleek-green); font: 500 12px JetBrains Mono, monospace; text-transform: uppercase; letter-spacing: .08em; }
 .contact-note { max-width: 610px; margin-top: 22px; color: var(--sleek-muted); }
 .contact-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; justify-content: flex-end; }
 .contact-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; color: inherit; text-decoration: none; font-size: 14px; }
@@ -316,6 +312,6 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .academic-detail > .button { margin-top: 40px; }
 
 @media (max-width: 900px) { .sleek-nav { display: none; } .sleek-tools { margin-left: auto; } .sleek-menu-button { display: inline-grid; } .sleek-experimental { display: none; } .sleek-mobile-menu { display: grid; gap: 14px; padding: 18px 20px 24px; border-top: 1px solid var(--sleek-rule); } .sleek-mobile-menu a { display: flex; align-items: center; gap: 8px; font-size: 14px; } .feature-grid { grid-template-columns: 1fr; gap: 54px; } .feature-project__media { aspect-ratio: 1.55; } .skills-grid { grid-template-columns: repeat(2, 1fr); } .skills-group:nth-child(3) { border-left: 0; padding-left: 0; } .skills-group:nth-child(n+3) { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .about-section, .contact-section { grid-template-columns: 1fr; gap: 40px; } .contact-actions { justify-content: start; } }
-@media (max-width: 620px) { .sleek-header__inner { height: 62px; padding: 0 16px; } .sleek-cv { display: none; } .sleek-hero { min-height: 60svh; padding: 58px 20px 24px; } .sleek-hero h1 { font-size: 60px; } .hero-tagline { font-size: 16px; } .hero-note { align-self: start; margin-top: 42px; } .content-section { padding: 72px 20px; } .section-heading h2, .contact-section h2 { font-size: 50px; } .work-row { grid-template-columns: 48px minmax(0, 1fr) 18px; gap: 10px; } .work-row__tech { display: none; } .timeline-row { grid-template-columns: 1fr; gap: 8px; } .academic-grid, .skills-grid { grid-template-columns: 1fr; } .academic-record, .academic-record + .academic-record { padding: 22px 0; border-left: 0; } .skills-group, .skills-group + .skills-group { padding-left: 0; border-left: 0; } .skills-group + .skills-group { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .sleek-footer { flex-direction: column; padding: 22px 20px 28px; } .detail-page { padding: 34px 20px 70px; } .detail-page__top { margin-bottom: 55px; } .detail-hero h1 { font-size: 62px; } .detail-grid { grid-template-columns: 1fr; gap: 36px; } .detail-facts { border-left: 0; border-top: 1px solid var(--sleek-rule); padding: 24px 0 0; } .wacc-pipeline { grid-template-columns: 1fr 1fr; } .pipeline-stage { border-bottom: 1px solid var(--sleek-rule); } }
+@media (max-width: 620px) { .sleek-header__inner { height: 62px; padding: 0 16px; } .sleek-cv { display: none; } .sleek-hero { min-height: calc(68svh - 62px); padding: 64px 20px 52px; } .sleek-hero h1 { font-size: 60px; } .hero-tagline { font-size: 16px; } .content-section { padding: 72px 20px; } .selected-work { padding-top: 42px; } .section-heading h2, .contact-section h2 { font-size: 50px; } .work-row { grid-template-columns: 48px minmax(0, 1fr) 18px; gap: 10px; } .work-row__tech { display: none; } .timeline-row { grid-template-columns: 1fr; gap: 8px; } .academic-grid, .skills-grid { grid-template-columns: 1fr; } .academic-record, .academic-record + .academic-record { padding: 22px 0; border-left: 0; } .skills-group, .skills-group + .skills-group { padding-left: 0; border-left: 0; } .skills-group + .skills-group { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .sleek-footer { flex-direction: column; padding: 22px 20px 28px; } .detail-page { padding: 34px 20px 70px; } .detail-page__top { margin-bottom: 55px; } .detail-hero h1 { font-size: 62px; } .detail-grid { grid-template-columns: 1fr; gap: 36px; } .detail-facts { border-left: 0; border-top: 1px solid var(--sleek-rule); padding: 24px 0 0; } .wacc-pipeline { grid-template-columns: 1fr 1fr; } .pipeline-stage { border-bottom: 1px solid var(--sleek-rule); } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
 </style>

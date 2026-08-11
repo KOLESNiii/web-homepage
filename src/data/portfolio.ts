@@ -67,7 +67,7 @@ export interface SectionLine {
    ========================================================================= */
 
 export const profile = {
-  name: 'Timofey Kolesnichenko',
+  name: 'Tim Kolesnichenko',
   shortName: 'Tim',
   initials: 'TK',
   role: 'Software Engineer',
@@ -84,7 +84,7 @@ export const profile = {
 
 export const contact = {
   heading: 'Open to graduate roles.',
-  status: 'Good service',
+  status: 'Available',
   // TODO: confirm the intake wording once you know which cycle you're applying in.
   note: `Graduating in 2028 and applying through the 2027 cycle. I'm after teams working close to
    the metal — compilers, systems, infrastructure — or on interfaces people actually enjoy using.

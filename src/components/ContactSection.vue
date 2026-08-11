@@ -6,7 +6,7 @@
       <!-- Service status row, the shape the board uses: line, then how it runs. -->
       <p class="status">
         <span class="status__bar" aria-hidden="true"></span>
-        <span class="status__line">Graduate roles</span>
+        <span class="status__line">6 month placements</span>
         <span class="status__state">{{ contact.status }}</span>
       </p>
 

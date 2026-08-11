@@ -13,10 +13,6 @@
         </nav>
 
         <div class="sleek-tools">
-          <a class="sleek-experimental" href="/?view=tube" aria-label="Open Experimental tube map">
-            <MapPinned :size="15" aria-hidden="true" />
-            <span>Experimental</span>
-          </a>
           <button class="icon-button" type="button" :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'" @click="toggle">
             <Sun v-if="theme === 'dark'" :size="17" aria-hidden="true" />
             <Moon v-else :size="17" aria-hidden="true" />
@@ -33,7 +29,6 @@
       </div>
       <div v-if="menuOpen" class="sleek-mobile-menu">
         <a v-for="item in navItems" :key="item.id" :href="`/#${item.id}`" @click="menuOpen = false">{{ item.label }}</a>
-        <a href="/?view=tube" @click="menuOpen = false"><MapPinned :size="15" aria-hidden="true" /> Experimental tube map</a>
         <a :href="profile.cv" download @click="menuOpen = false"><Download :size="15" aria-hidden="true" /> Download CV</a>
       </div>
     </header>
@@ -78,11 +73,11 @@
         </section>
 
         <section class="all-work content-section" aria-labelledby="all-work-title">
-          <div class="section-heading section-heading--row"><div><p class="eyebrow">The full line</p><h2 id="all-work-title">All work</h2></div><span class="section-count">{{ projects.length }} projects</span></div>
+          <div class="section-heading section-heading--row"><div><p class="eyebrow">More work</p><h2 id="all-work-title">All work</h2></div><span class="section-count">{{ projects.length }} projects</span></div>
           <div class="work-list"><RouterLink v-for="project in projects" :key="project.title" class="work-row" :to="`/projects/${slug(project.title)}`"><span class="work-row__year">{{ project.year }}</span><span class="work-row__title">{{ project.title }}<small>{{ project.blurb }}</small></span><span class="work-row__tech">{{ project.tech.join(' · ') }}</span><ArrowUpRight :size="18" aria-hidden="true" /></RouterLink></div>
         </section>
 
-        <section id="path" class="path-section content-section" aria-labelledby="path-title"><div class="section-heading"><p class="eyebrow">Path</p><h2 id="path-title">The route so far.</h2></div><div class="timeline-list"><article v-for="entry in timeline" :key="entry.title" class="timeline-row"><p class="timeline-row__period">{{ entry.period }}</p><div><h3>{{ entry.title }}</h3><p class="timeline-row__org">{{ entry.org }}</p><p>{{ entry.detail }}</p></div></article></div></section>
+        <section id="path" class="path-section content-section" aria-labelledby="path-title"><div class="section-heading"><p class="eyebrow">Path</p><h2 id="path-title">Experience so far.</h2></div><div class="timeline-list"><article v-for="entry in timeline" :key="entry.title" class="timeline-row"><p class="timeline-row__period">{{ entry.period }}</p><div><h3>{{ entry.title }}</h3><p class="timeline-row__org">{{ entry.org }}</p><p>{{ entry.detail }}</p></div></article></div></section>
 
         <section id="academics" class="academic-band content-section" aria-labelledby="academic-title"><div class="section-heading"><p class="eyebrow">Academic record</p><h2 id="academic-title">The numbers on the board.</h2></div><div class="academic-grid"><RouterLink v-for="record in academicRecords" :key="record.year" :to="`/academics/${record.year.toLowerCase().replace(' ', '-')}`" class="academic-record"><span class="academic-record__year">{{ record.year }}</span><strong>{{ record.average.toFixed(2) }}%</strong><span>{{ record.classification }} · {{ record.recognition }}</span><span class="text-link">View modules <ArrowUpRight :size="15" aria-hidden="true" /></span></RouterLink></div></section>
 
@@ -90,17 +85,17 @@
 
         <section id="about" class="about-section content-section" aria-labelledby="about-title"><div class="about-section__heading"><p class="eyebrow">About</p><h2 id="about-title">Built low,<br /><em>finished high.</em></h2></div><div class="about-section__copy"><p v-for="paragraph in about" :key="paragraph">{{ paragraph }}</p></div></section>
 
-        <section id="contact" class="contact-section content-section" aria-labelledby="contact-title"><div><p class="eyebrow">Contact</p><h2 id="contact-title">{{ contact.heading }}</h2><p class="contact-note">{{ contact.note }}</p></div><div class="contact-actions"><p class="eyebrow">Ways through</p><a class="button button--solid" :href="`mailto:${profile.email}`">{{ profile.email }} <ArrowUpRight :size="16" aria-hidden="true" /></a><a class="button button--outline" :href="profile.cv" download>Download CV <Download :size="16" aria-hidden="true" /></a><a class="contact-link" :href="profile.github" target="_blank" rel="noopener">GitHub <ExternalLink :size="15" aria-hidden="true" /></a><a class="contact-link" :href="profile.linkedin" target="_blank" rel="noopener">LinkedIn <ExternalLink :size="15" aria-hidden="true" /></a></div></section>
+        <section id="contact" class="contact-section content-section" aria-labelledby="contact-title"><div><p class="eyebrow">Contact</p><h2 id="contact-title">{{ contact.heading }}</h2><p class="contact-note">{{ contact.note }}</p></div><div class="contact-actions"><p class="eyebrow">Contact links</p><a class="button button--solid" :href="`mailto:${profile.email}`">{{ profile.email }} <ArrowUpRight :size="16" aria-hidden="true" /></a><a class="button button--outline" :href="profile.cv" download>Download CV <Download :size="16" aria-hidden="true" /></a><a class="contact-link" :href="profile.github" target="_blank" rel="noopener">GitHub <ExternalLink :size="15" aria-hidden="true" /></a><a class="contact-link" :href="profile.linkedin" target="_blank" rel="noopener">LinkedIn <ExternalLink :size="15" aria-hidden="true" /></a></div></section>
       </template>
     </main>
-    <footer class="sleek-footer"><span>End of the line. · © {{ year }} Tim Kolesnichenko · built with Vue</span><button type="button" @click="scrollTop">Back to the start <ArrowUp :size="15" aria-hidden="true" /></button></footer>
+    <footer class="sleek-footer"><span>© {{ year }} Tim Kolesnichenko · built with Vue</span><button type="button" @click="scrollTop">Back to the start <ArrowUp :size="15" aria-hidden="true" /></button></footer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { ArrowUp, ArrowUpRight, Download, ExternalLink, MapPinned, Menu, Moon, Sun, X } from 'lucide-vue-next'
+import { ArrowUp, ArrowUpRight, Download, ExternalLink, Menu, Moon, Sun, X } from 'lucide-vue-next'
 import { about, academics, contact, firstYearAcademics, profile, projects, skills, timeline } from '../data/portfolio'
 import { useTheme } from '../composables/useTheme'
 import { capture } from '../analytics'
@@ -195,7 +190,7 @@ onUnmounted(() => sectionObserver?.disconnect())
 import { defineComponent, h } from 'vue'
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next'
 import { RouterLink as DetailRouterLink } from 'vue-router'
-import type { AcademicResults, Project } from '../data/portfolio'
+import { formatAcademicMark, type AcademicResults, type Project } from '../data/portfolio'
 import WaccPipeline from './WaccPipeline.vue'
 
 type DetailMedia = { src: string; alt: string; caption: string; contain?: boolean }
@@ -231,7 +226,7 @@ const ProjectDetail = defineComponent({
 const AcademicDetail = defineComponent({
   props: { results: { type: Object as () => AcademicResults, required: true } },
   setup(props) {
-    return () => h('article', { class: 'detail-page academic-detail' }, [h('div', { class: 'detail-page__top' }, [h('a', { href: '/', class: 'text-link' }, [h(ArrowLeft, { size: 15 }), ' Back home'])]), h('header', { class: 'detail-hero' }, [h('p', { class: 'eyebrow' }, 'Academic record'), h('h1', props.results.year), h('p', { class: 'academic-detail__score' }, `${props.results.average.toFixed(2)}% · ${props.results.classification}`), h('p', props.results.recognition)]), h('div', { class: 'results-table-wrap' }, [h('table', [h('caption', `${props.results.year} modules`), h('thead', [h('tr', [h('th', 'Code'), h('th', 'Module'), h('th', 'Mark')])]), h('tbody', props.results.modules.map((module) => h('tr', [h('td', module.code ?? '—'), h('td', [module.title, module.registrationStatus ? h('small', module.registrationStatus) : null]), h('td', String(module.mark))])))])]), h('a', { href: '/', class: 'button button--outline' }, 'Back to the portfolio')])
+    return () => h('article', { class: 'detail-page academic-detail' }, [h('div', { class: 'detail-page__top' }, [h('a', { href: '/', class: 'text-link' }, [h(ArrowLeft, { size: 15 }), ' Back home'])]), h('header', { class: 'detail-hero' }, [h('p', { class: 'eyebrow' }, 'Academic record'), h('h1', props.results.year), h('p', { class: 'academic-detail__score' }, `${props.results.average.toFixed(2)}% · ${props.results.classification}`), h('p', props.results.recognition)]), h('div', { class: 'results-table-wrap' }, [h('table', [h('caption', `${props.results.year} modules`), h('thead', [h('tr', [h('th', 'Code'), h('th', 'Module'), h('th', 'Mark')])]), h('tbody', props.results.modules.map((module) => h('tr', [h('td', module.code ?? '—'), h('td', [module.title, module.registrationStatus ? h('small', module.registrationStatus) : null]), h('td', formatAcademicMark(module.mark))])))])]), h('a', { href: '/', class: 'button button--outline' }, 'Back to the portfolio')])
   },
 })
 
@@ -246,16 +241,15 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .sleek-shell { min-height: 100vh; background: var(--sleek-bg); color: var(--sleek-text); font-family: Manrope, system-ui, sans-serif; font-size: 16px; line-height: 1.6; }
 .sleek-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid color-mix(in srgb, var(--sleek-rule) 80%, transparent); background: color-mix(in srgb, var(--sleek-bg) 92%, transparent); backdrop-filter: blur(14px); }
 .sleek-header__inner { max-width: 80rem; height: 72px; margin: auto; padding: 0 clamp(20px, 4vw, 64px); display: flex; align-items: center; gap: 32px; }
-.sleek-mark, .sleek-nav a, .sleek-experimental, .sleek-cv, .sleek-mobile-menu a { color: inherit; text-decoration: none; }
+.sleek-mark, .sleek-nav a, .sleek-cv, .sleek-mobile-menu a { color: inherit; text-decoration: none; }
 .sleek-mark { display: inline-flex; align-items: center; gap: 9px; font: 500 13px/1 JetBrains Mono, monospace; letter-spacing: .08em; }
 .sleek-mark__dot { width: 9px; height: 9px; border: 2px solid var(--sleek-text); border-radius: 50%; display: inline-block; }
 .sleek-mark:hover .sleek-mark__dot, .sleek-mark:focus-visible .sleek-mark__dot { border-color: var(--sleek-accent); background: var(--sleek-accent); }
 .sleek-nav { display: flex; gap: 24px; margin-left: auto; }
-.sleek-nav a, .sleek-experimental, .sleek-cv { font-size: 12px; color: var(--sleek-muted); }
-.sleek-nav a:hover, .sleek-experimental:hover, .sleek-cv:hover, .contact-link:hover, .text-link:hover { color: var(--sleek-accent); }
+.sleek-nav a, .sleek-cv { font-size: 12px; color: var(--sleek-muted); }
+.sleek-nav a:hover, .sleek-cv:hover, .contact-link:hover, .text-link:hover { color: var(--sleek-accent); }
 .sleek-tools { display: flex; align-items: center; gap: 8px; }
-.sleek-experimental, .sleek-cv { display: inline-flex; align-items: center; gap: 7px; }
-.sleek-experimental { color: var(--sleek-accent); }
+.sleek-cv { display: inline-flex; align-items: center; gap: 7px; }
 .sleek-cv { padding-left: 16px; border-left: 1px solid var(--sleek-rule); }
 .icon-button { width: 38px; height: 38px; display: inline-grid; place-items: center; border: 1px solid var(--sleek-rule); border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
 .icon-button:hover { border-color: var(--sleek-accent); color: var(--sleek-accent); }
@@ -267,7 +261,7 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .eyebrow, .project-meta, .section-count, .timeline-row__period, .academic-record__year { font: 500 11px/1.3 JetBrains Mono, monospace; letter-spacing: .09em; text-transform: uppercase; color: var(--sleek-muted); }
 .sleek-hero h1, .section-heading h2, .about-section h2, .contact-section h2, .detail-hero h1 { margin: 18px 0 0; font: 400 clamp(58px, 8vw, 132px)/.9 'Instrument Serif', Georgia, serif; letter-spacing: 0; }
 .sleek-hero h1 em, .about-section h2 em { color: var(--sleek-accent); font-style: italic; }
-.hero-tagline { max-width: 480px; margin-top: 30px; color: var(--sleek-muted); font-size: 18px; }
+.hero-tagline { max-width: 480px; margin-top: 30px; color: var(--sleek-muted); font-size: 18px; text-wrap: balance; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 34px; }
 .button { display: inline-flex; align-items: center; gap: 9px; min-height: 44px; padding: 10px 16px; border: 1px solid var(--sleek-text); color: inherit; text-decoration: none; font-size: 13px; transition: transform .2s ease, background-color .2s ease, color .2s ease; }
 .button:hover { transform: translateY(-2px); }
@@ -330,7 +324,7 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .about-section__copy { max-width: 560px; color: var(--sleek-muted); font-size: 16px; }
 .about-section__copy p + p { margin-top: 24px; }
 .contact-section { display: grid; grid-template-columns: 1.2fr .8fr; gap: 8vw; }
-.contact-section h2 { margin-top: 15px; max-width: 620px; }
+.contact-section h2 { margin-top: 15px; max-width: 620px; text-wrap: balance; }
 .contact-note { max-width: 610px; margin-top: 22px; color: var(--sleek-muted); }
 .contact-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; justify-content: flex-end; }
 .contact-link { display: inline-flex; align-items: center; gap: 7px; margin-top: 6px; color: inherit; text-decoration: none; font-size: 14px; }
@@ -365,7 +359,7 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .results-table-wrap small { display: block; margin-top: 5px; color: var(--sleek-muted); font-size: 11px; }
 .academic-detail > .button { margin-top: 40px; }
 
-@media (max-width: 900px) { .sleek-nav { display: none; } .sleek-tools { margin-left: auto; } .sleek-menu-button { display: inline-grid; } .sleek-experimental { display: none; } .sleek-mobile-menu { display: grid; gap: 14px; padding: 18px 20px 24px; border-top: 1px solid var(--sleek-rule); } .sleek-mobile-menu a { display: flex; align-items: center; gap: 8px; font-size: 14px; } .feature-grid { grid-template-columns: 1fr; gap: 54px; } .feature-project__media { aspect-ratio: 1.55; } .skills-grid { grid-template-columns: repeat(2, 1fr); } .skills-group:nth-child(3) { border-left: 0; padding-left: 0; } .skills-group:nth-child(n+3) { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .about-section, .contact-section { grid-template-columns: 1fr; gap: 40px; } .contact-actions { justify-content: start; } }
+@media (max-width: 900px) { .sleek-nav { display: none; } .sleek-tools { margin-left: auto; } .sleek-menu-button { display: inline-grid; } .sleek-mobile-menu { display: grid; gap: 14px; padding: 18px 20px 24px; border-top: 1px solid var(--sleek-rule); } .sleek-mobile-menu a { display: flex; align-items: center; gap: 8px; font-size: 14px; } .feature-grid { grid-template-columns: 1fr; gap: 54px; } .feature-project__media { aspect-ratio: 1.55; } .skills-grid { grid-template-columns: repeat(2, 1fr); } .skills-group:nth-child(3) { border-left: 0; padding-left: 0; } .skills-group:nth-child(n+3) { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .about-section, .contact-section { grid-template-columns: 1fr; gap: 40px; } .contact-actions { justify-content: start; } }
 @media (max-width: 620px) { .sleek-header__inner { height: 62px; padding: 0 16px; } .sleek-cv { display: none; } .sleek-hero { min-height: calc(68svh - 62px); padding: 64px 20px 52px; } .sleek-hero h1 { font-size: 60px; } .hero-tagline { font-size: 16px; } .content-section { padding: 72px 20px; } .selected-work { padding-top: 42px; } .section-heading h2, .contact-section h2 { font-size: 50px; } .work-row { grid-template-columns: 48px minmax(0, 1fr) 18px; gap: 10px; } .work-row__tech { display: none; } .timeline-row { grid-template-columns: 1fr; gap: 8px; } .academic-grid, .skills-grid { grid-template-columns: 1fr; } .academic-record, .academic-record + .academic-record { padding: 22px 0; border-left: 0; } .skills-group, .skills-group + .skills-group { padding-left: 0; border-left: 0; } .skills-group + .skills-group { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .sleek-footer { flex-direction: column; padding: 22px 20px 28px; } .detail-page { padding: 34px 20px 70px; } .detail-page__top { margin-bottom: 55px; } .detail-hero h1 { font-size: 62px; } .detail-grid { grid-template-columns: 1fr; gap: 36px; } .detail-facts { border-left: 0; border-top: 1px solid var(--sleek-rule); padding: 24px 0 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
 </style>

@@ -17,7 +17,7 @@ assert.deepEqual(profileJson.projects.map((project) => normalize(project.descrip
 assert.deepEqual(profileJson.skills.map((group) => group.skills), skills.map((group) => group.items))
 assert.equal(profileJson.experience.length, timeline.length - 1)
 assert.deepEqual(profileJson.experience.map((entry) => entry.title), timeline.filter((entry) => entry.kind === 'work' || entry.title === 'A Levels & GCSEs').map((entry) => entry.title))
-assert.equal(academics.modules.length, profileJson.education[0].modules.length)
-assert.equal(firstYearAcademics.modules.length, profileJson.education[1].modules.length)
+assert.deepEqual(profileJson.education[0].modules, academics.modules)
+assert.deepEqual(profileJson.education[1].modules, firstYearAcademics.modules)
 
 console.log(`Content parity passed: ${projects.length} projects, ${timeline.length} timeline entries, ${academics.modules.length + firstYearAcademics.modules.length} modules.`)

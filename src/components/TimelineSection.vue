@@ -40,7 +40,7 @@
             <div class="row__main">
               <span class="row__title">{{ module.title }}</span>
               <span class="row__mark" :style="{ color: markColour(module.mark) }">{{
-                formatMark(module.mark)
+                formatAcademicMark(module.mark)
               }}</span>
             </div>
             <div v-if="module.grade || module.registrationStatus" class="row__details">
@@ -57,11 +57,9 @@
 <script setup lang="ts">
 import MapLine from './MapLine.vue'
 import MapPanel from './MapPanel.vue'
-import { academics, firstYearAcademics, lineInk, timeline } from '../data/portfolio'
+import { academics, firstYearAcademics, formatAcademicMark, lineInk, timeline } from '../data/portfolio'
 
 const resultBoards = [academics, firstYearAcademics]
-
-const formatMark = (mark: number | string) => (typeof mark === 'number' ? mark.toFixed(2) : mark)
 
 const markColour = (mark: number | string) => {
   if (typeof mark !== 'number') return lineInk('district')

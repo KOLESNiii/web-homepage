@@ -8,9 +8,10 @@
       </div>
 
       <label class="gc-toggle">
+        <Recycle :size="24" aria-hidden="true" />
         <span class="gc-toggle__copy">
-          <span>Garbage collection</span>
-          <small>{{ gcEnabled ? 'Stack maps and safe points enabled' : 'Plain allocation path' }}</small>
+          <span>GC extension <b>{{ gcEnabled ? 'ON' : 'OFF' }}</b></span>
+          <small>{{ gcEnabled ? 'Generational runtime joined to the pipeline' : 'Turn on the collector, stack maps and barriers' }}</small>
         </span>
         <input v-model="gcEnabled" type="checkbox" @change="onGcToggle" />
         <span class="gc-toggle__track" aria-hidden="true"><span></span></span>
@@ -315,7 +316,13 @@ function goTo(index: number) {
     stage_index: index,
     gc_enabled: gcEnabled.value,
   })
-  nextTick(() => stageButtons.value[index]?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' }))
+  nextTick(() => {
+    const button = stageButtons.value[index]
+    const container = rail.value
+    if (!button || !container) return
+    const target = button.offsetLeft - (container.clientWidth - button.offsetWidth) / 2
+    container.scrollTo({ left: target, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })
+  })
 }
 
 function previous() {
@@ -380,21 +387,33 @@ watch(activeIndex, () => {
 .gc-toggle {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 13px;
   flex: 0 0 auto;
+  min-width: 330px;
+  padding: 15px 17px;
+  border: 1px solid color-mix(in srgb, var(--sleek-green) 42%, var(--sleek-rule));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--sleek-green) 8%, var(--sleek-surface));
+  color: var(--sleek-green);
   cursor: pointer;
+  transition: background-color .25s ease, border-color .25s ease, transform .25s ease;
 }
+
+.gc-toggle:hover { transform: translateY(-2px); border-color: var(--sleek-green); }
 
 .gc-toggle__copy {
   display: grid;
-  text-align: right;
-  font-size: 12px;
+  flex: 1;
+  text-align: left;
+  font-size: 13px;
   font-weight: 600;
 }
 
+.gc-toggle__copy b { margin-left: 6px; color: var(--sleek-text); font: 700 10px 'JetBrains Mono', monospace; }
+
 .gc-toggle__copy small {
   color: var(--sleek-muted);
-  font: 9px/1.5 'JetBrains Mono', monospace;
+  font: 10px/1.5 'JetBrains Mono', monospace;
 }
 
 .gc-toggle input {
@@ -957,13 +976,13 @@ watch(activeIndex, () => {
 .stage-forward-leave-active,
 .stage-back-enter-active,
 .stage-back-leave-active {
-  transition: opacity .52s ease, transform .78s cubic-bezier(.2, .8, .2, 1);
+  transition: opacity .32s ease, transform .42s cubic-bezier(.2, .8, .2, 1);
 }
 
-.stage-forward-enter-from { opacity: 0; transform: translateX(42px); }
-.stage-forward-leave-to { opacity: 0; transform: translateX(-28px); }
-.stage-back-enter-from { opacity: 0; transform: translateX(-42px); }
-.stage-back-leave-to { opacity: 0; transform: translateX(28px); }
+.stage-forward-enter-from,
+.stage-back-enter-from { opacity: 0; transform: translateY(8px) scale(.995); }
+.stage-forward-leave-to,
+.stage-back-leave-to { opacity: 0; transform: translateY(-5px) scale(.997); }
 
 @keyframes code-line-in {
   from { opacity: 0; transform: translateY(7px); }
@@ -998,6 +1017,7 @@ watch(activeIndex, () => {
 }
 
 @media (max-width: 800px) {
+  .gc-toggle { width: 100%; min-width: 0; }
   .compiler-lab__header { align-items: flex-start; flex-direction: column; }
   .gc-toggle__copy { text-align: left; }
   .compiler-rail { grid-template-columns: repeat(8, 112px); }

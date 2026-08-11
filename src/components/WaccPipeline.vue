@@ -54,103 +54,12 @@
             </span>
           </header>
 
-          <div v-if="currentStage.kind !== 'machine'" class="editor-shell">
-            <div class="editor-chrome">
-              <span class="editor-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span>{{ currentStage.file }}</span>
-              <span class="editor-language">{{ currentStage.language }}</span>
-            </div>
-            <div class="editor-body">
-              <div class="editor-gutter" aria-hidden="true">
-                <span v-for="line in currentCodeLines" :key="`number-${line.number}`">{{ line.number }}</span>
-              </div>
-              <pre><code><span
-                v-for="line in currentCodeLines"
-                :key="`${currentStage.id}-${line.number}`"
-                class="code-line"
-                :style="{ '--line-delay': `${Math.min(line.number * 24, 260)}ms` }"
-                v-html="line.html"
-              ></span></code></pre>
-            </div>
-            <div v-if="currentStage.id === 'assembler'" class="toolchain-boundary">
-              <div>
-                <strong>Toolchain boundary</strong>
-                <p>
-                  GNU <code>as</code> and <code>ld</code> perform this encoding and linking step. They are
-                  external platform tools, not part of our WACC compiler.
-                </p>
-              </div>
-              <RouterLink class="related-project" to="/projects/armv8-emulator-assembler">
-                Our ARMv8 Emulator &amp; Assembler
-                <ArrowUpRight :size="16" aria-hidden="true" />
-                <small>An educational implementation of this neighbouring stage</small>
-              </RouterLink>
-            </div>
-            <p v-else class="stage-note">{{ currentStage.note }}</p>
-          </div>
-
-          <div v-else class="machine-view">
-            <div class="machine-toolbar">
-              <span><Cpu :size="15" aria-hidden="true" /> AArch64 process</span>
-              <button v-if="gcEnabled" type="button" @click="replayCollection">
-                <RotateCcw :size="14" aria-hidden="true" /> Replay collection
-              </button>
-            </div>
-
-            <div class="machine-grid">
-              <section class="machine-panel cpu-panel" aria-label="Processor">
-                <p class="machine-label">Processor</p>
-                <div class="cpu-core">
-                  <Cpu :size="30" aria-hidden="true" />
-                  <span>PC 0x00401c</span>
-                  <strong :class="{ 'is-paused': gcEnabled }">{{ gcEnabled ? 'PAUSED' : 'RUNNING' }}</strong>
-                </div>
-              </section>
-
-              <section class="machine-panel stack-panel" aria-label="Call stack and roots">
-                <p class="machine-label"><MemoryStick :size="13" aria-hidden="true" /> Call stack</p>
-                <div class="stack-frame stack-frame--top">
-                  <span>main()</span>
-                  <code>x19 → object A</code>
-                  <i v-if="gcEnabled" class="root-beam" aria-hidden="true"></i>
-                </div>
-                <div class="stack-frame"><span>println()</span><code>lr 0x004020</code></div>
-                <p class="stack-caption">
-                  {{ gcEnabled ? 'Stack map identifies x19 as a live heap root.' : 'No stack map is emitted.' }}
-                </p>
-              </section>
-
-              <section class="machine-panel heap-panel" aria-label="Heap objects">
-                <p class="machine-label">Heap</p>
-                <div class="heap-grid">
-                  <div class="heap-object heap-object--root"><span>A</span><small>root</small></div>
-                  <div class="heap-object heap-object--kept"><span>B</span><small>reachable</small></div>
-                  <div class="heap-object" :class="gcEnabled ? 'heap-object--garbage' : 'heap-object--leaked'"><span>C</span><small>unreachable</small></div>
-                  <div class="heap-object" :class="gcEnabled ? 'heap-object--garbage heap-object--late' : 'heap-object--leaked'"><span>D</span><small>unreachable</small></div>
-                </div>
-              </section>
-            </div>
-
-            <div v-if="gcEnabled" class="gc-cycle" role="status">
-              <span class="gc-cycle__pulse"><Pause :size="14" aria-hidden="true" /></span>
-              <div class="gc-cycle__copy">
-                <strong>Stop-the-world collection</strong>
-                <span>pause → walk stack roots → mark reachable heap → sweep C and D → resume</span>
-              </div>
-              <div class="gc-cycle__progress" aria-hidden="true"><span></span></div>
-            </div>
-            <div v-else class="gc-cycle gc-cycle--off">
-              <span><Play :size="14" aria-hidden="true" /></span>
-              <div class="gc-cycle__copy">
-                <strong>Execution continues</strong>
-                <span>Objects C and D are unreachable, but remain allocated without the collector.</span>
-              </div>
-            </div>
-
-            <p class="machine-accuracy">
-              The collector walks roots from the stack, but reclaims unreachable objects from the heap—not stack frames.
-            </p>
-          </div>
+          <WaccStageVisuals
+            :stage-id="currentStage.id"
+            :gc-enabled="gcEnabled"
+            :cycle="executionCycle"
+            @replay="replayCollection"
+          />
         </article>
       </Transition>
     </div>
@@ -171,19 +80,9 @@
 
 <script setup lang="ts">
 import { computed, nextTick, ref, watch, type ComponentPublicInstance } from 'vue'
-import { RouterLink } from 'vue-router'
-import {
-  ArrowLeft,
-  ArrowRight,
-  ArrowUpRight,
-  Cpu,
-  MemoryStick,
-  Pause,
-  Play,
-  Recycle,
-  RotateCcw,
-} from 'lucide-vue-next'
+import { ArrowLeft, ArrowRight, Recycle } from 'lucide-vue-next'
 import { capture } from '../analytics'
+import WaccStageVisuals from './WaccStageVisuals.vue'
 
 type Stage = {
   id: string
@@ -400,15 +299,6 @@ const stageButtons = ref<Array<HTMLElement | null>>([])
 const currentStage = computed(() => stages[activeIndex.value]!)
 const previousLabel = computed(() => stages[activeIndex.value - 1]?.shortLabel ?? 'Start')
 const nextLabel = computed(() => stages[activeIndex.value + 1]?.shortLabel ?? 'Complete')
-const currentCode = computed(() =>
-  gcEnabled.value && currentStage.value.gcCode ? currentStage.value.gcCode : currentStage.value.code,
-)
-const currentCodeLines = computed(() =>
-  currentCode.value.split('\n').map((line, index) => ({
-    number: index + 1,
-    html: highlight(line, currentStage.value.language),
-  })),
-)
 
 function setStageButton(element: Element | ComponentPublicInstance | null, index: number) {
   stageButtons.value[index] = element instanceof HTMLElement ? element : null
@@ -449,46 +339,6 @@ function replayCollection() {
 watch(activeIndex, () => {
   rail.value?.style.setProperty('--active-progress', `${(activeIndex.value / (stages.length - 1)) * 100}%`)
 }, { immediate: true, flush: 'post' })
-
-function escapeHtml(value: string) {
-  return value.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-}
-
-function highlight(line: string, language: string) {
-  const escaped = escapeHtml(line)
-  const commentPrefix = language === 'AARCH64' ? '\\/\\/' : language === 'SHELL + BYTES' ? '#' : '(?!)'
-  const keywords = [
-    'begin', 'end', 'pair', 'int', 'newpair', 'fst', 'snd', 'println', 'Program', 'Sequence',
-    'Declare', 'NewPair', 'IntLiteral', 'Add', 'Println', 'Identifier', 'function', 'frame', 'call',
-    'return', 'entry', 'store', 'load', 'stackmap', 'roots', 'safepoint', 'pin', 'global', 'main',
-  ].join('|')
-  const registers = '\\b(?:x(?:[0-9]|[12][0-9]|30)|w(?:[0-9]|[12][0-9]|30)|sp|lr|v\\d+|t\\d+)\\b'
-  const pattern = new RegExp(`("[^"\\n]*")|(${commentPrefix}.*$)|(\\b(?:${keywords})\\b)|(\\b(?:0x[0-9a-fA-F]+|\\d+)\\b)|(${registers})|(✓|Γ|⊢|→)`, 'g')
-  return escaped.replace(pattern, (
-    match: string,
-    stringToken?: string,
-    comment?: string,
-    keyword?: string,
-    number?: string,
-    register?: string,
-    symbol?: string,
-  ) => {
-    const tokenClass = stringToken
-      ? 'token-string'
-      : comment
-        ? 'token-comment'
-        : keyword
-          ? 'token-keyword'
-          : number
-            ? 'token-number'
-            : register
-              ? 'token-register'
-              : symbol
-                ? 'token-symbol'
-                : ''
-    return tokenClass ? `<span class="${tokenClass}">${match}</span>` : match
-  })
-}
 </script>
 
 <style scoped>
@@ -1107,7 +957,7 @@ function highlight(line: string, language: string) {
 .stage-forward-leave-active,
 .stage-back-enter-active,
 .stage-back-leave-active {
-  transition: opacity .34s ease, transform .48s cubic-bezier(.2, .8, .2, 1);
+  transition: opacity .52s ease, transform .78s cubic-bezier(.2, .8, .2, 1);
 }
 
 .stage-forward-enter-from { opacity: 0; transform: translateX(42px); }

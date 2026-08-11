@@ -122,19 +122,27 @@
     <div v-else class="panel gc-runtime" :class="`gc-step-${runtimeStep}`">
       <div class="gc-runtime__bar"><span><Cpu :size="16" /> Generational runtime</span><button type="button" @click="restartRuntime"><RotateCcw :size="15" /> Replay</button></div>
       <div class="gc-scene">
-        <div class="gc-root root-a"><small>stack root</small><code>{{ runtimeStep >= 2 ? 'x19 → A′' : 'x19 → A' }}</code></div><div class="gc-root root-c"><small>stack root</small><code>{{ runtimeStep >= 2 ? 'x20 → C′' : 'x20 → C' }}</code></div>
+        <div class="gc-root root-a"><small>stack root</small><code>{{ rootLabels.a }}</code></div><div class="gc-root root-c"><small>stack root</small><code>{{ rootLabels.c }}</code></div>
         <section class="gc-generation young"><header><h4>Young · 2 MB</h4><small>nursery</small></header></section>
         <section class="gc-generation old"><header><h4>Old · 14 MB</h4><small>free list</small></header></section>
         <span class="object a">A</span><span class="object b">B</span><span class="object c">C</span><span class="object d">D</span>
+        <span class="object e">E</span><span class="object f">F</span><span class="object g">G</span><span class="object h">H</span><span class="object fresh">N</span>
         <span class="object p">P</span><span class="object q">Q</span><span class="object r">R</span><span class="object promoted">A′</span><span class="object promoted-c">C′</span><span class="free-hole">free</span>
-        <div class="pending-allocation">pending request<br><code>&gt; nursery</code></div>
+        <span class="object promoted-e">E′</span><span class="object promoted-g">G′</span>
+        <div class="promotion-failed">old generation full<br><code>promotion blocked</code></div>
         <svg class="gc-links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <path class="root-link link-a" d="M16 18 L13 46"/><path class="root-link link-c" d="M37 18 L35 72"/>
+          <path class="minor-promote minor-promote-a" d="M13 46 C35 38 58 54 76 73" marker-end="url(#gc-arrow)"/><path class="minor-promote minor-promote-c" d="M35 72 C54 64 73 68 89 73" marker-end="url(#gc-arrow)"/>
           <path class="promoted-root promoted-root-a" d="M16 18 C34 19 55 49 76 73"/><path class="promoted-root promoted-root-c" d="M37 18 C55 24 72 53 89 73"/>
+          <path class="failed-promotion failed-a" d="M13 46 C28 43 39 47 48 52" marker-end="url(#gc-blocked)"/><path class="failed-promotion failed-g" d="M35 72 C41 70 45 68 48 65" marker-end="url(#gc-blocked)"/>
+          <path class="major-link hop-ea" d="M13 46 C34 39 58 52 76 73"/><path class="major-link hop-gc" d="M35 72 C54 65 72 68 89 73"/>
           <path class="heap-link hop-ap" d="M76 73 C72 62 67 54 62 48"/><path class="heap-link hop-pr" d="M62 48 C60 60 63 68 67 73"/>
+          <path class="second-promote second-promote-e" d="M13 46 C38 36 64 39 84 48" marker-end="url(#gc-arrow)"/><path class="second-promote second-promote-g" d="M35 72 C43 70 49 71 55 73" marker-end="url(#gc-arrow)"/>
+          <path class="final-root final-root-e" d="M16 18 C42 17 67 32 84 48"/><path class="final-root final-root-g" d="M37 18 C45 39 50 58 55 73"/>
+          <defs><marker id="gc-arrow" markerWidth="5" markerHeight="5" refX="4" refY="2.5" orient="auto"><path d="M0 0 L5 2.5 L0 5Z" /></marker><marker id="gc-blocked" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0 0 L6 6 M6 0 L0 6" /></marker></defs>
         </svg>
         <div class="gc-legend"><span><i></i>unvisited</span><span><i></i>marked</span><span><i></i>reclaimed</span></div>
-        <div v-if="runtimeStep >= 1 && runtimeStep <= 6" class="pause-badge"><Pause :size="16" /><span>mutator paused</span></div>
+        <div v-if="(runtimeStep >= 1 && runtimeStep <= 2) || (runtimeStep >= 4 && runtimeStep <= 8)" class="pause-badge"><Pause :size="16" /><span>mutator paused</span></div>
       </div>
       <div class="gc-readout"><span>{{ String(runtimeStep + 1).padStart(2, '0') }} / {{ String(runtimeSteps.length).padStart(2, '0') }}</span><div><strong>{{ runtimeSteps[runtimeStep]?.title }}</strong><p>{{ runtimeSteps[runtimeStep]?.detail }}</p></div><div class="mini-controls"><button type="button" @click="moveRuntime(-1)"><ChevronLeft :size="15" /></button><button type="button" @click="moveRuntime(1)"><ChevronRight :size="15" /></button></div></div>
     </div>
@@ -259,16 +267,24 @@ const gcLowered: LoweredBlock[] = [
 const loweredBlocks = computed(() => props.gcEnabled ? gcLowered : baseLowered)
 
 const runtimeSteps = [
-  { title: 'Nursery is full', detail: '_gc_malloc_g cannot satisfy the pending allocation in the 2 MB nursery. A minor collection always happens first.' },
-  { title: 'Minor collection traces roots', detail: 'Stack maps identify x19 → A and x20 → C. The collector follows those roots into the nursery.' },
-  { title: 'Survivors move to old generation', detail: 'A and C are copied into old-generation free-list space. Root slots are updated through forwarding pointers; the other nursery cells clear.' },
-  { title: 'Retry the pending allocation', detail: 'The nursery is reset and allocation retries there. In this illustrated edge case, the pending request still cannot fit.' },
-  { title: 'Escalate to a full collection', detail: 'Only after that failed post-minor retry does the collector trace the whole heap, beginning again at stack roots.' },
-  { title: 'Mark through heap links', detail: 'The traversal jumps from the promoted root A′ to P and then R. Mark colour spreads along each followed object edge.' },
-  { title: 'Sweep the unmarked object', detail: 'Q was never reached, so its old-generation slot is returned to the free list. Marked objects remain.' },
-  { title: 'Allocation resumes', detail: 'The pending allocation now uses reclaimed space and execution continues.' },
+  { title: 'First nursery is full', detail: 'A, B, C and D occupy the nursery. _gc_malloc_g pauses the mutator and starts the normal minor-collection path.' },
+  { title: 'Minor collection marks A and C', detail: 'Stack maps identify x19 → A and x20 → C. B and D remain unmarked.' },
+  { title: 'Minor collection succeeds', detail: 'B and D disappear; A and C are copied to old generation as A′ and C′. Roots are forwarded and the nursery resets.' },
+  { title: 'Execution continues', detail: 'The mutator resumes. Later allocations refill the nursery with E, F, G and H.' },
+  { title: 'Second minor collection', detail: 'The nursery fills again. Roots mark E and G; F and H are not reachable.' },
+  { title: 'Minor collection cannot finish', detail: 'F and H are removed, but old generation has no room to promote E and G. Their promotion stops at the generation boundary.' },
+  { title: 'Major collection marks the whole heap', detail: 'Starting at E and G, marking crosses into A′ and C′, then follows A′ → P → R. Q is never reached.' },
+  { title: 'Major sweep reclaims Q', detail: 'The unmarked Q slot returns to the old-generation free list; every marked object remains.' },
+  { title: 'E and G are promoted', detail: 'The newly available old-generation space receives E′ and G′. Stack roots are forwarded and the nursery resets.' },
+  { title: 'Execution resumes again', detail: 'The pending allocation succeeds in the empty nursery and the program continues.' },
 ]
 const runtimeStep = ref(0)
+const rootLabels = computed(() => {
+  if (runtimeStep.value < 2) return { a: 'x19 → A', c: 'x20 → C' }
+  if (runtimeStep.value < 4) return { a: 'x19 → A′', c: 'x20 → C′' }
+  if (runtimeStep.value < 9) return { a: 'x19 → E', c: 'x20 → G' }
+  return { a: 'x19 → E′', c: 'x20 → G′' }
+})
 let runtimeTimer: number | undefined
 function startRuntime() { window.clearInterval(runtimeTimer); if (props.stageId === 'machine' && props.gcEnabled && !matchMedia('(prefers-reduced-motion: reduce)').matches) runtimeTimer = window.setInterval(() => { runtimeStep.value = (runtimeStep.value + 1) % runtimeSteps.length }, 3100) }
 function restartRuntime() { runtimeStep.value = 0; startRuntime() }
@@ -309,5 +325,13 @@ onBeforeUnmount(() => { window.clearInterval(typeTimer); window.clearInterval(ru
 @media(max-width:800px){.type-layout{grid-template-columns:1fr}.type-progress{display:flex;overflow-x:auto;border-right:0;border-bottom:1px solid #2a342e}.type-progress button{flex:0 0 105px}.linker{grid-template-columns:1fr 40px 1fr}.linker__arrow:nth-of-type(2),.linker__binary{display:none}.plain-memory{grid-template-columns:1fr 90px 1.4fr;padding:24px}.gc-root{width:120px}.object{width:48px;height:48px}}
 @media(max-width:560px){.panel-bar{align-items:flex-start;flex-direction:column;justify-content:center;gap:3px;padding:9px 13px}.ast{min-width:720px}.stage-visual--ast .panel{overflow-x:auto}.type-progress{scrollbar-width:none}.type-progress::-webkit-scrollbar{display:none}.type-workbench{overflow:hidden}.type-tree{min-width:0;min-height:350px}.type-node{min-width:88px;max-width:105px;padding:8px;font-size:9px}.type-node small{font-size:7px}.node-lhs{left:22%}.node-add{left:70%}.node-left{left:28%}.node-right{left:75%}.type-readout{grid-template-columns:1fr;padding:13px}.type-readout>span{grid-row:auto;justify-self:start}.type-readout .mini-controls{grid-row:auto;grid-column:auto}.tac{min-width:650px}.tac__entry{width:200px}.tac__then,.tac__else{width:155px}.lowered{padding:25px 18px}.assembly-facts{grid-template-columns:1fr}.assembly-facts span{border-right:0;border-bottom:1px solid #2a342e}.linker{grid-template-columns:1fr;padding:22px}.linker__arrow{transform:rotate(90deg)}.plain-memory{grid-template-columns:1fr;padding:24px}.memory-link{width:2px;height:70px;margin:15px auto}.memory-link::before{left:-3px;top:-2px}.memory-link::after{left:-5px;right:auto;top:auto;bottom:-1px;border-left:6px solid transparent;border-right:6px solid transparent;border-top:10px solid #8fb0ff;border-bottom:0}.gc-scene{min-width:650px}.gc-readout{grid-template-columns:1fr}.gc-readout .mini-controls{grid-column:auto;grid-row:auto}}
 @media(prefers-reduced-motion:reduce){.ast svg path,.ast__node,.type-motion,.tac__block,.lowered__block,.gc-links path{animation:none!important}.ast svg path{stroke-dashoffset:0}.ast__node{opacity:1;transform:translate(-50%,-50%)}}
-.pending-allocation{position:absolute;z-index:5;left:25.5%;top:60%;display:none;width:35%;padding:14px;border:1px solid #d97764;background:rgb(36 25 22 / 92%);color:#ef927b;transform:translate(-50%,-50%);text-align:center;font:8px/1.5 'JetBrains Mono',monospace;text-transform:uppercase}.pending-allocation code{color:#f1b09f}.gc-step-3 .pending-allocation{display:block}
+.edge-label{z-index:5;padding:3px 6px;background:#101512;border:1px solid #314037;border-radius:3px}.edge-label--true{left:24%;top:45%}.edge-label--false{right:22%;top:45%}
+.object.e{left:13%;top:46%;opacity:0}.object.f{left:34%;top:47%;opacity:0}.object.g{left:35%;top:72%;opacity:0}.object.h{left:14%;top:74%;opacity:0}.object.fresh{left:13%;top:46%;opacity:0}.object.promoted-e{left:84%;top:48%;opacity:0}.object.promoted-g{left:55%;top:73%;opacity:0}.promotion-failed{position:absolute;z-index:6;left:50%;top:60%;display:none;padding:10px 12px;border:1px solid #d97764;background:#241916;color:#ef927b;transform:translate(-50%,-50%);text-align:center;font:8px/1.45 'JetBrains Mono',monospace;text-transform:uppercase}.promotion-failed code{color:#f1b09f}
+.gc-step-2 .a,.gc-step-2 .b,.gc-step-2 .c,.gc-step-2 .d,.gc-step-3 .a,.gc-step-3 .b,.gc-step-3 .c,.gc-step-3 .d,.gc-step-4 .a,.gc-step-4 .b,.gc-step-4 .c,.gc-step-4 .d,.gc-step-5 .a,.gc-step-5 .b,.gc-step-5 .c,.gc-step-5 .d,.gc-step-6 .a,.gc-step-6 .b,.gc-step-6 .c,.gc-step-6 .d,.gc-step-7 .a,.gc-step-7 .b,.gc-step-7 .c,.gc-step-7 .d,.gc-step-8 .a,.gc-step-8 .b,.gc-step-8 .c,.gc-step-8 .d,.gc-step-9 .a,.gc-step-9 .b,.gc-step-9 .c,.gc-step-9 .d{opacity:0}
+.gc-step-2 .promoted,.gc-step-2 .promoted-c,.gc-step-3 .promoted,.gc-step-3 .promoted-c,.gc-step-4 .promoted,.gc-step-4 .promoted-c,.gc-step-5 .promoted,.gc-step-5 .promoted-c,.gc-step-6 .promoted,.gc-step-6 .promoted-c,.gc-step-7 .promoted,.gc-step-7 .promoted-c,.gc-step-8 .promoted,.gc-step-8 .promoted-c,.gc-step-9 .promoted,.gc-step-9 .promoted-c{opacity:1}
+.gc-step-3 .e,.gc-step-3 .f,.gc-step-3 .g,.gc-step-3 .h,.gc-step-4 .e,.gc-step-4 .f,.gc-step-4 .g,.gc-step-4 .h{opacity:1}.gc-step-5 .e,.gc-step-5 .g,.gc-step-6 .e,.gc-step-6 .g,.gc-step-7 .e,.gc-step-7 .g{opacity:1}.gc-step-3 .promoted-root{opacity:1}.gc-step-4 .promoted-root,.gc-step-5 .promoted-root,.gc-step-6 .promoted-root,.gc-step-7 .promoted-root,.gc-step-8 .promoted-root,.gc-step-9 .promoted-root{opacity:0}.gc-step-4 .link-a,.gc-step-4 .link-c,.gc-step-5 .link-a,.gc-step-5 .link-c,.gc-step-6 .link-a,.gc-step-6 .link-c,.gc-step-7 .link-a,.gc-step-7 .link-c{opacity:1}
+.gc-step-4 .e,.gc-step-4 .g,.gc-step-5 .e,.gc-step-5 .g,.gc-step-6 .e,.gc-step-6 .g,.gc-step-7 .e,.gc-step-7 .g{border-color:#78b997;background:#193324;box-shadow:0 0 0 5px rgb(120 185 151 / 12%)}.gc-step-5 .failed-promotion{opacity:1}.gc-step-5 .promotion-failed{display:block}.gc-step-5 .heap-link,.gc-step-5 .major-link{opacity:0}.gc-step-5 .p,.gc-step-5 .q,.gc-step-5 .r,.gc-step-5 .promoted,.gc-step-5 .promoted-c{opacity:1;border-color:#5578c2;background:#1b2635;box-shadow:none}
+.gc-step-6 .hop-ea,.gc-step-6 .hop-gc,.gc-step-6 .hop-ap,.gc-step-6 .hop-pr,.gc-step-7 .hop-ea,.gc-step-7 .hop-gc,.gc-step-7 .hop-ap,.gc-step-7 .hop-pr{opacity:1}.gc-step-6 .promoted,.gc-step-6 .promoted-c,.gc-step-6 .p,.gc-step-6 .r,.gc-step-7 .promoted,.gc-step-7 .promoted-c,.gc-step-7 .p,.gc-step-7 .r{border-color:#78b997;background:#193324;box-shadow:0 0 0 5px rgb(120 185 151 / 12%)}.gc-step-6 .q{opacity:1;border-color:#5578c2;background:#1b2635;box-shadow:none}.gc-step-6 .free-hole{opacity:0}.gc-step-7 .q{opacity:0}.gc-step-7 .free-hole{opacity:1}
+.gc-step-8 .e,.gc-step-8 .f,.gc-step-8 .g,.gc-step-8 .h,.gc-step-9 .e,.gc-step-9 .f,.gc-step-9 .g,.gc-step-9 .h{opacity:0}.gc-step-8 .promoted-e,.gc-step-8 .promoted-g,.gc-step-9 .promoted-e,.gc-step-9 .promoted-g{opacity:1;border-color:#78b997;background:#193324;box-shadow:0 0 0 5px rgb(120 185 151 / 12%)}.gc-step-8 .final-root,.gc-step-9 .final-root{opacity:1}.gc-step-8 .free-hole,.gc-step-9 .free-hole{opacity:0}.gc-step-9 .fresh{opacity:1}
+.gc-links marker path{opacity:1;fill:#78b997;stroke:none;animation:none}.gc-links #gc-blocked path{fill:none;stroke:#ef927b;stroke-width:1}.gc-step-2 .minor-promote,.gc-step-8 .second-promote{opacity:1}.gc-step-8 .final-root{opacity:0}.gc-step-9 .final-root{opacity:1}
 </style>

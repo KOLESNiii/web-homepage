@@ -1,4 +1,7 @@
 <template>
+  <SleekPortfolio v-if="view !== 'tube'" />
+
+  <template v-else>
   <a class="skip-link" href="#main-content" @click.prevent="skip">Skip to the content</a>
 
   <TubeMap :blocked="welcome" />
@@ -38,10 +41,11 @@
 
   <!-- The only thing in normal flow: the length of the journey, as scroll. -->
   <div class="rail" :style="{ height: `${railHeight}px` }" aria-hidden="true"></div>
+  </template>
 </template>
 
 <script setup lang="ts">
-import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import AboutSection from './components/AboutSection.vue'
 import ContactSection from './components/ContactSection.vue'
 import JourneyMenu from './components/JourneyMenu.vue'
@@ -51,6 +55,7 @@ import SiteNav from './components/SiteNav.vue'
 import SkillsSection from './components/SkillsSection.vue'
 import TimelineSection from './components/TimelineSection.vue'
 import TubeMap from './components/TubeMap.vue'
+import SleekPortfolio from './components/SleekPortfolio.vue'
 import { usePortfolioAnalytics } from './composables/usePortfolioAnalytics'
 import { useMap } from './map/useMap'
 
@@ -58,6 +63,8 @@ const map = useMap()
 const { travelling, exploring, railHeight } = map
 const planeRef = ref<HTMLElement | null>(null)
 const welcome = ref(false)
+const view = computed(() => new URLSearchParams(window.location.search).get('view'))
+const analyticsPaused = computed(() => view.value !== 'tube' || welcome.value)
 
 const skip = () => {
   map.goTo(map.indexOf('about'), 2)
@@ -88,6 +95,7 @@ function openMenu() {
 const release = () => map.cancelFlight()
 
 onMounted(() => {
+  if (view.value !== 'tube') return
   map.setPlane(planeRef.value)
 
   // The browser would otherwise restore the last scroll position, or try to
@@ -132,7 +140,7 @@ watch(
 
 // Register after the map's mount hook so fragment landings are measured as
 // their real destination rather than briefly appearing as the default line.
-usePortfolioAnalytics({ ...map, paused: welcome })
+usePortfolioAnalytics({ ...map, paused: analyticsPaused })
 </script>
 
 <style scoped>

@@ -29,6 +29,9 @@
       </nav>
 
       <div class="legend__tools">
+        <a class="chip chip--sleek" href="/" aria-label="Return to the sleek portfolio">
+          Sleek
+        </a>
         <button
           class="chip chip--icon"
           type="button"

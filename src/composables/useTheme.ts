@@ -8,14 +8,15 @@ import { ref, watch } from 'vue'
 
 export type Theme = 'light' | 'dark'
 
-const STORAGE_KEY = 'tube-theme'
+const STORAGE_KEY = 'portfolio-theme'
+const LEGACY_STORAGE_KEY = 'tube-theme'
 
 /** Must match --bg in style.css; used for the browser chrome colour. */
-const GROUND: Record<Theme, string> = { light: '#f4f2ec', dark: '#12161d' }
+const GROUND: Record<Theme, string> = { light: '#f7f8f6', dark: '#0e1110' }
 
 const read = (): string | null => {
   try {
-    return localStorage.getItem(STORAGE_KEY)
+    return localStorage.getItem(STORAGE_KEY) ?? localStorage.getItem(LEGACY_STORAGE_KEY)
   } catch {
     return null
   }

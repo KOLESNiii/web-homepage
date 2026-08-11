@@ -40,7 +40,12 @@
 
     <main id="content" :key="route.fullPath">
       <template v-if="detail.kind === 'project'">
-        <ProjectDetail :project="detail.project!" />
+        <ProjectDetail
+          :project="detail.project!"
+          :previous-project="adjacentProjects.previous"
+          :next-project="adjacentProjects.next"
+          :media="mediaFor(detail.project!.title)"
+        />
       </template>
       <template v-else-if="detail.kind === 'academics'">
         <AcademicDetail :results="detail.results!" />
@@ -62,8 +67,8 @@
           <div class="section-heading"><p class="eyebrow">Selected work</p><h2 id="work-title">Things built to hold up.</h2></div>
           <div class="feature-grid">
             <article v-for="project in featuredProjects" :key="project.title" class="feature-project">
-              <RouterLink :to="`/projects/${slug(project.title)}`" class="feature-project__media">
-                <img v-if="mediaFor(project.title)" :src="mediaFor(project.title)" :alt="`${project.title} project capture`" loading="lazy" />
+              <RouterLink :to="`/projects/${slug(project.title)}`" class="feature-project__media" :class="{ 'is-contain': mediaFor(project.title)?.contain }">
+                <img v-if="mediaFor(project.title)" :src="mediaFor(project.title)?.src" :alt="mediaFor(project.title)?.alt" loading="lazy" />
                 <div v-else class="technical-visual" :class="`technical-visual--${slug(project.title)}`" aria-hidden="true"><span>{{ project.tech[0] }}</span><span>{{ project.tech[1] }}</span><span>{{ project.tech[2] }}</span></div>
                 <span class="media-arrow"><ArrowUpRight :size="18" aria-hidden="true" /></span>
               </RouterLink>
@@ -109,10 +114,34 @@ const featuredTitles = new Set(['Fed Up', 'Roomie', 'DemocraTune'])
 const featuredProjects = projects.filter((project) => featuredTitles.has(project.title))
 const academicRecords = [academics, firstYearAcademics]
 const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
-const media: Record<string, string> = {
-  'Fed Up': 'https://raw.githubusercontent.com/KOLESNiii/Fed-Up/master/docs/readme-assets/meal-plan.png',
-  Roomie: 'https://raw.githubusercontent.com/dorianturner/Roomie/master/app/src/main/res/drawable/roomie_name_logo.png',
-  DemocraTune: 'https://raw.githubusercontent.com/KOLESNiii/DemocraTune/develop/src/app/opengraph-image.png',
+type ProjectMedia = { src: string; alt: string; caption: string; contain?: boolean }
+const media: Record<string, ProjectMedia> = {
+  'Fed Up': {
+    src: '/project-media/fed-up.webp',
+    alt: 'Fed Up landing page with the headline Healthy meals that fit around coursework',
+    caption: 'Captured from the project running locally.',
+  },
+  Roomie: {
+    src: '/project-media/roomie.webp',
+    alt: 'Roomie Android application wordmark in olive green',
+    caption: 'Project-owned Android brand asset; an Android runtime was not available for capture.',
+    contain: true,
+  },
+  DemocraTune: {
+    src: '/project-media/democratune.webp',
+    alt: 'DemocraTune landing page with room hosting and room code controls',
+    caption: 'Captured from the project running locally.',
+  },
+  'Interview Practice': {
+    src: '/project-media/interview-practice.webp',
+    alt: 'Interview Practice recording screen with question, timers and notes controls',
+    caption: 'Captured from the project running locally.',
+  },
+  'Guitar Scar': {
+    src: '/project-media/guitar-scar.webp',
+    alt: 'Guitar Scar pixel-art dungeon exploration with the player approaching an enemy',
+    caption: 'Project-owned gameplay capture; Unity was not available for a fresh capture.',
+  },
 }
 const mediaFor = (title: string) => media[title]
 let sectionObserver: IntersectionObserver | null = null
@@ -126,6 +155,15 @@ const detail = computed(() => {
     if (results) return { kind: 'academics' as const, results }
   }
   return { kind: 'home' as const }
+})
+const adjacentProjects = computed(() => {
+  const project = detail.value.kind === 'project' ? detail.value.project : undefined
+  const index = project ? projects.findIndex((item) => item.title === project.title) : -1
+  if (index < 0) return { previous: projects[projects.length - 1]!, next: projects[0]! }
+  return {
+    previous: projects[(index - 1 + projects.length) % projects.length]!,
+    next: projects[(index + 1) % projects.length]!,
+  }
 })
 
 function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }) }
@@ -156,10 +194,18 @@ onUnmounted(() => sectionObserver?.disconnect())
 <script lang="ts">
 import { defineComponent, h, ref as vueRef } from 'vue'
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next'
+import { RouterLink as DetailRouterLink } from 'vue-router'
 import type { AcademicResults, Project } from '../data/portfolio'
 
+type DetailMedia = { src: string; alt: string; caption: string; contain?: boolean }
+
 const ProjectDetail = defineComponent({
-  props: { project: { type: Object as () => Project, required: true } },
+  props: {
+    project: { type: Object as () => Project, required: true },
+    previousProject: { type: Object as () => Project, required: true },
+    nextProject: { type: Object as () => Project, required: true },
+    media: { type: Object as () => DetailMedia, required: false, default: undefined },
+  },
   setup(props) {
     const stages = ['Source', 'Parser + type checker', 'Three-address IR', 'AArch64 / x86-64', 'Garbage collection']
     const active = vueRef(0)
@@ -167,9 +213,19 @@ const ProjectDetail = defineComponent({
       h('div', { class: 'detail-page__top' }, [h('a', { href: '/', class: 'text-link' }, [h(ArrowLeft, { size: 15 }), ' All work'])]),
       h('header', { class: 'detail-hero' }, [h('p', { class: 'eyebrow' }, `${props.project.year} · project detail`), h('h1', props.project.title), h('p', { class: 'detail-hero__blurb' }, props.project.blurb)]),
       props.project.title === 'WACC Compiler' ? h('div', { class: 'wacc-pipeline', role: 'tablist', 'aria-label': 'Compiler stages' }, stages.map((stage, index) => h('button', { class: ['pipeline-stage', { 'is-active': active.value === index }], role: 'tab', 'aria-selected': active.value === index, onClick: () => { active.value = index } }, [h('span', String(index + 1).padStart(2, '0')), stage]))) : null,
-      props.project.title === 'WACC Compiler' ? h('div', { class: 'wacc-output', 'aria-live': 'polite' }, `Stage ${active.value + 1}: ${stages[active.value]}. Trace the compiler from source through optimisation and runtime memory management.`) : h('div', { class: ['detail-visual', `detail-visual--${props.project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`] }, props.project.tech.join('  /  ')),
+      props.project.title === 'WACC Compiler'
+        ? h('div', { class: 'wacc-output', 'aria-live': 'polite' }, `Stage ${active.value + 1}: ${stages[active.value]}. Trace the compiler from source through optimisation and runtime memory management.`)
+        : props.media
+          ? h('figure', { class: ['detail-visual', 'detail-visual--capture', { 'is-contain': props.media.contain }] }, [
+              h('img', { src: props.media.src, alt: props.media.alt, loading: 'eager' }),
+              h('figcaption', props.media.caption),
+            ])
+          : h('div', { class: ['detail-visual', `detail-visual--${props.project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`] }, props.project.tech.join('  /  ')),
       h('div', { class: 'detail-grid' }, [h('div', { class: 'detail-copy' }, [h('p', props.project.description)]), h('aside', { class: 'detail-facts' }, [h('p', { class: 'eyebrow' }, 'Built with'), h('ul', props.project.tech.map((item) => h('li', item))), props.project.repo ? h('a', { class: 'text-link', href: props.project.repo, target: '_blank', rel: 'noopener' }, [h(ExternalLink, { size: 15 }), ' Source']) : h('p', { class: 'detail-request' }, 'Source available upon request.')])]),
-      h('nav', { class: 'detail-next' }, [h('a', { href: '/projects/fed-up', class: 'text-link' }, [h(ArrowLeft, { size: 15 }), ' Previous']), h('a', { href: '/projects/guitar-scar', class: 'text-link' }, ['Next ', h(ArrowRight, { size: 15 })])]),
+      h('nav', { class: 'detail-next', 'aria-label': 'Adjacent projects' }, [
+        h(DetailRouterLink, { to: `/projects/${props.previousProject.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`, class: 'text-link' }, { default: () => [h(ArrowLeft, { size: 15 }), ` Previous: ${props.previousProject.title}`] }),
+        h(DetailRouterLink, { to: `/projects/${props.nextProject.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`, class: 'text-link' }, { default: () => [`Next: ${props.nextProject.title} `, h(ArrowRight, { size: 15 })] }),
+      ]),
     ])
   },
 })
@@ -230,6 +286,7 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .feature-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(20px, 3vw, 48px); }
 .feature-project__media { position: relative; display: block; aspect-ratio: 1.2; overflow: hidden; background: var(--sleek-surface); }
 .feature-project__media img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.feature-project__media.is-contain img { object-fit: contain; padding: 9%; }
 .feature-project__media:hover img { transform: scale(1.03); }
 .media-arrow { position: absolute; right: 14px; bottom: 14px; width: 38px; height: 38px; display: grid; place-items: center; border-radius: 50%; background: var(--sleek-surface); color: var(--sleek-text); }
 .feature-project__copy { padding-top: 17px; }
@@ -289,6 +346,10 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .detail-hero h1 { font-size: clamp(60px, 9vw, 132px); }
 .detail-hero__blurb { max-width: 540px; margin-top: 24px; color: var(--sleek-muted); font-size: 20px; }
 .detail-visual { min-height: 300px; display: grid; place-items: center; margin-bottom: 60px; padding: 30px; background: var(--sleek-surface); border: 1px solid var(--sleek-rule); color: var(--sleek-accent); font: 14px JetBrains Mono, monospace; text-align: center; }
+.detail-visual--capture { position: relative; min-height: 0; aspect-ratio: 16 / 9; overflow: hidden; padding: 0; }
+.detail-visual--capture img { width: 100%; height: 100%; object-fit: cover; }
+.detail-visual--capture.is-contain img { object-fit: contain; padding: clamp(32px, 8vw, 100px); }
+.detail-visual--capture figcaption { position: absolute; right: 12px; bottom: 12px; max-width: calc(100% - 24px); padding: 7px 9px; background: color-mix(in srgb, var(--sleek-bg) 88%, transparent); color: var(--sleek-muted); font: 10px/1.4 JetBrains Mono, monospace; text-align: right; }
 .detail-grid { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(220px, .6fr); gap: 8vw; border-top: 1px solid var(--sleek-rule); padding-top: 32px; }
 .detail-copy { max-width: 680px; font-size: 18px; line-height: 1.75; }
 .detail-facts { border-left: 1px solid var(--sleek-rule); padding-left: 24px; }

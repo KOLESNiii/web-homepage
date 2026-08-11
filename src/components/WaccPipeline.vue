@@ -501,7 +501,7 @@ watch(activeIndex, () => {
   border: 0;
   background: transparent;
   color: var(--sleek-muted);
-  text-align: left;
+  text-align: center;
   cursor: pointer;
 }
 
@@ -523,9 +523,10 @@ watch(activeIndex, () => {
 
 .compiler-stop__dot {
   display: block;
+  box-sizing: border-box;
   width: 10px;
   height: 10px;
-  margin: 16px 0 15px;
+  margin: 16px auto 15px;
   border: 2px solid var(--sleek-rule);
   border-radius: 50%;
   background: var(--sleek-bg);

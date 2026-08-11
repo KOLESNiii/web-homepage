@@ -13,6 +13,10 @@
         </nav>
 
         <div class="sleek-tools">
+          <a class="sleek-experimental" href="/?view=tube" aria-label="Open experimental design">
+            <MapPinned :size="15" aria-hidden="true" />
+            <span>Experimental</span>
+          </a>
           <button class="icon-button" type="button" :aria-label="theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'" @click="toggle">
             <Sun v-if="theme === 'dark'" :size="17" aria-hidden="true" />
             <Moon v-else :size="17" aria-hidden="true" />
@@ -29,6 +33,7 @@
       </div>
       <div v-if="menuOpen" class="sleek-mobile-menu">
         <a v-for="item in navItems" :key="item.id" :href="`/#${item.id}`" @click="menuOpen = false">{{ item.label }}</a>
+        <a href="/?view=tube" @click="menuOpen = false"><MapPinned :size="15" aria-hidden="true" /> Experimental</a>
         <a :href="profile.cv" download @click="menuOpen = false"><Download :size="15" aria-hidden="true" /> Download CV</a>
       </div>
     </header>
@@ -95,7 +100,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
-import { ArrowUp, ArrowUpRight, Download, ExternalLink, Menu, Moon, Sun, X } from 'lucide-vue-next'
+import { ArrowUp, ArrowUpRight, Download, ExternalLink, MapPinned, Menu, Moon, Sun, X } from 'lucide-vue-next'
 import { about, academics, contact, firstYearAcademics, profile, projects, skills, timeline } from '../data/portfolio'
 import { useTheme } from '../composables/useTheme'
 import { capture } from '../analytics'
@@ -241,15 +246,16 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .sleek-shell { min-height: 100vh; background: var(--sleek-bg); color: var(--sleek-text); font-family: Manrope, system-ui, sans-serif; font-size: 16px; line-height: 1.6; }
 .sleek-header { position: sticky; top: 0; z-index: 20; border-bottom: 1px solid color-mix(in srgb, var(--sleek-rule) 80%, transparent); background: color-mix(in srgb, var(--sleek-bg) 92%, transparent); backdrop-filter: blur(14px); }
 .sleek-header__inner { max-width: 80rem; height: 72px; margin: auto; padding: 0 clamp(20px, 4vw, 64px); display: flex; align-items: center; gap: 32px; }
-.sleek-mark, .sleek-nav a, .sleek-cv, .sleek-mobile-menu a { color: inherit; text-decoration: none; }
+.sleek-mark, .sleek-nav a, .sleek-experimental, .sleek-cv, .sleek-mobile-menu a { color: inherit; text-decoration: none; }
 .sleek-mark { display: inline-flex; align-items: center; gap: 9px; font: 500 13px/1 JetBrains Mono, monospace; letter-spacing: .08em; }
 .sleek-mark__dot { width: 9px; height: 9px; border: 2px solid var(--sleek-text); border-radius: 50%; display: inline-block; }
 .sleek-mark:hover .sleek-mark__dot, .sleek-mark:focus-visible .sleek-mark__dot { border-color: var(--sleek-accent); background: var(--sleek-accent); }
 .sleek-nav { display: flex; gap: 24px; margin-left: auto; }
-.sleek-nav a, .sleek-cv { font-size: 12px; color: var(--sleek-muted); }
-.sleek-nav a:hover, .sleek-cv:hover, .contact-link:hover, .text-link:hover { color: var(--sleek-accent); }
+.sleek-nav a, .sleek-experimental, .sleek-cv { font-size: 12px; color: var(--sleek-muted); }
+.sleek-nav a:hover, .sleek-experimental:hover, .sleek-cv:hover, .contact-link:hover, .text-link:hover { color: var(--sleek-accent); }
 .sleek-tools { display: flex; align-items: center; gap: 8px; }
-.sleek-cv { display: inline-flex; align-items: center; gap: 7px; }
+.sleek-experimental, .sleek-cv { display: inline-flex; align-items: center; gap: 7px; }
+.sleek-experimental { color: var(--sleek-accent); }
 .sleek-cv { padding-left: 16px; border-left: 1px solid var(--sleek-rule); }
 .icon-button { width: 38px; height: 38px; display: inline-grid; place-items: center; border: 1px solid var(--sleek-rule); border-radius: 50%; background: transparent; color: inherit; cursor: pointer; }
 .icon-button:hover { border-color: var(--sleek-accent); color: var(--sleek-accent); }
@@ -359,7 +365,7 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .results-table-wrap small { display: block; margin-top: 5px; color: var(--sleek-muted); font-size: 11px; }
 .academic-detail > .button { margin-top: 40px; }
 
-@media (max-width: 900px) { .sleek-nav { display: none; } .sleek-tools { margin-left: auto; } .sleek-menu-button { display: inline-grid; } .sleek-mobile-menu { display: grid; gap: 14px; padding: 18px 20px 24px; border-top: 1px solid var(--sleek-rule); } .sleek-mobile-menu a { display: flex; align-items: center; gap: 8px; font-size: 14px; } .feature-grid { grid-template-columns: 1fr; gap: 54px; } .feature-project__media { aspect-ratio: 1.55; } .skills-grid { grid-template-columns: repeat(2, 1fr); } .skills-group:nth-child(3) { border-left: 0; padding-left: 0; } .skills-group:nth-child(n+3) { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .about-section, .contact-section { grid-template-columns: 1fr; gap: 40px; } .contact-actions { justify-content: start; } }
+@media (max-width: 900px) { .sleek-nav { display: none; } .sleek-tools { margin-left: auto; } .sleek-menu-button { display: inline-grid; } .sleek-experimental { display: none; } .sleek-mobile-menu { display: grid; gap: 14px; padding: 18px 20px 24px; border-top: 1px solid var(--sleek-rule); } .sleek-mobile-menu a { display: flex; align-items: center; gap: 8px; font-size: 14px; } .feature-grid { grid-template-columns: 1fr; gap: 54px; } .feature-project__media { aspect-ratio: 1.55; } .skills-grid { grid-template-columns: repeat(2, 1fr); } .skills-group:nth-child(3) { border-left: 0; padding-left: 0; } .skills-group:nth-child(n+3) { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .about-section, .contact-section { grid-template-columns: 1fr; gap: 40px; } .contact-actions { justify-content: start; } }
 @media (max-width: 620px) { .sleek-header__inner { height: 62px; padding: 0 16px; } .sleek-cv { display: none; } .sleek-hero { min-height: calc(68svh - 62px); padding: 64px 20px 52px; } .sleek-hero h1 { font-size: 60px; } .hero-tagline { font-size: 16px; } .content-section { padding: 72px 20px; } .selected-work { padding-top: 42px; } .section-heading h2, .contact-section h2 { font-size: 50px; } .work-row { grid-template-columns: 48px minmax(0, 1fr) 18px; gap: 10px; } .work-row__tech { display: none; } .timeline-row { grid-template-columns: 1fr; gap: 8px; } .academic-grid, .skills-grid { grid-template-columns: 1fr; } .academic-record, .academic-record + .academic-record { padding: 22px 0; border-left: 0; } .skills-group, .skills-group + .skills-group { padding-left: 0; border-left: 0; } .skills-group + .skills-group { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .sleek-footer { flex-direction: column; padding: 22px 20px 28px; } .detail-page { padding: 34px 20px 70px; } .detail-page__top { margin-bottom: 55px; } .detail-hero h1 { font-size: 62px; } .detail-grid { grid-template-columns: 1fr; gap: 36px; } .detail-facts { border-left: 0; border-top: 1px solid var(--sleek-rule); padding: 24px 0 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
 </style>

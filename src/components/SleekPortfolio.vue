@@ -192,10 +192,11 @@ onUnmounted(() => sectionObserver?.disconnect())
 </script>
 
 <script lang="ts">
-import { defineComponent, h, ref as vueRef } from 'vue'
+import { defineComponent, h } from 'vue'
 import { ArrowLeft, ArrowRight } from 'lucide-vue-next'
 import { RouterLink as DetailRouterLink } from 'vue-router'
 import type { AcademicResults, Project } from '../data/portfolio'
+import WaccPipeline from './WaccPipeline.vue'
 
 type DetailMedia = { src: string; alt: string; caption: string; contain?: boolean }
 
@@ -207,14 +208,11 @@ const ProjectDetail = defineComponent({
     media: { type: Object as () => DetailMedia, required: false, default: undefined },
   },
   setup(props) {
-    const stages = ['Source', 'Parser + type checker', 'Three-address IR', 'AArch64 / x86-64', 'Garbage collection']
-    const active = vueRef(0)
     return () => h('article', { class: 'detail-page' }, [
       h('div', { class: 'detail-page__top' }, [h('a', { href: '/', class: 'text-link' }, [h(ArrowLeft, { size: 15 }), ' All work'])]),
       h('header', { class: 'detail-hero' }, [h('p', { class: 'eyebrow' }, `${props.project.year} · project detail`), h('h1', props.project.title), h('p', { class: 'detail-hero__blurb' }, props.project.blurb)]),
-      props.project.title === 'WACC Compiler' ? h('div', { class: 'wacc-pipeline', role: 'tablist', 'aria-label': 'Compiler stages' }, stages.map((stage, index) => h('button', { class: ['pipeline-stage', { 'is-active': active.value === index }], role: 'tab', 'aria-selected': active.value === index, onClick: () => { active.value = index } }, [h('span', String(index + 1).padStart(2, '0')), stage]))) : null,
       props.project.title === 'WACC Compiler'
-        ? h('div', { class: 'wacc-output', 'aria-live': 'polite' }, `Stage ${active.value + 1}: ${stages[active.value]}. Trace the compiler from source through optimisation and runtime memory management.`)
+        ? h(WaccPipeline)
         : props.media
           ? h('figure', { class: ['detail-visual', 'detail-visual--capture', { 'is-contain': props.media.contain }] }, [
               h('img', { src: props.media.src, alt: props.media.alt, loading: 'eager' }),
@@ -357,11 +355,6 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .detail-facts li + li { margin-top: 6px; }
 .detail-request { color: var(--sleek-muted); font-size: 13px; }
 .detail-next { display: flex; justify-content: space-between; margin-top: 80px; padding-top: 22px; border-top: 1px solid var(--sleek-rule); }
-.wacc-pipeline { display: grid; grid-template-columns: repeat(5, 1fr); border-top: 1px solid var(--sleek-rule); border-bottom: 1px solid var(--sleek-rule); }
-.pipeline-stage { min-height: 92px; padding: 14px; border: 0; border-right: 1px solid var(--sleek-rule); background: transparent; color: var(--sleek-muted); text-align: left; cursor: pointer; font-size: 12px; }
-.pipeline-stage span { display: block; margin-bottom: 18px; font: 11px JetBrains Mono, monospace; color: var(--sleek-accent); }
-.pipeline-stage.is-active, .pipeline-stage:hover { background: var(--sleek-surface); color: var(--sleek-text); }
-.wacc-output { margin: 0 0 60px; padding: 18px 20px; background: var(--sleek-surface); color: var(--sleek-muted); font: 13px/1.6 JetBrains Mono, monospace; }
 .academic-detail__score { margin-top: 22px; font: 28px 'Instrument Serif', Georgia, serif; color: var(--sleek-accent); }
 .results-table-wrap { overflow-x: auto; border-top: 1px solid var(--sleek-rule); }
 .results-table-wrap table { width: 100%; border-collapse: collapse; text-align: left; }
@@ -373,6 +366,6 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .academic-detail > .button { margin-top: 40px; }
 
 @media (max-width: 900px) { .sleek-nav { display: none; } .sleek-tools { margin-left: auto; } .sleek-menu-button { display: inline-grid; } .sleek-experimental { display: none; } .sleek-mobile-menu { display: grid; gap: 14px; padding: 18px 20px 24px; border-top: 1px solid var(--sleek-rule); } .sleek-mobile-menu a { display: flex; align-items: center; gap: 8px; font-size: 14px; } .feature-grid { grid-template-columns: 1fr; gap: 54px; } .feature-project__media { aspect-ratio: 1.55; } .skills-grid { grid-template-columns: repeat(2, 1fr); } .skills-group:nth-child(3) { border-left: 0; padding-left: 0; } .skills-group:nth-child(n+3) { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .about-section, .contact-section { grid-template-columns: 1fr; gap: 40px; } .contact-actions { justify-content: start; } }
-@media (max-width: 620px) { .sleek-header__inner { height: 62px; padding: 0 16px; } .sleek-cv { display: none; } .sleek-hero { min-height: calc(68svh - 62px); padding: 64px 20px 52px; } .sleek-hero h1 { font-size: 60px; } .hero-tagline { font-size: 16px; } .content-section { padding: 72px 20px; } .selected-work { padding-top: 42px; } .section-heading h2, .contact-section h2 { font-size: 50px; } .work-row { grid-template-columns: 48px minmax(0, 1fr) 18px; gap: 10px; } .work-row__tech { display: none; } .timeline-row { grid-template-columns: 1fr; gap: 8px; } .academic-grid, .skills-grid { grid-template-columns: 1fr; } .academic-record, .academic-record + .academic-record { padding: 22px 0; border-left: 0; } .skills-group, .skills-group + .skills-group { padding-left: 0; border-left: 0; } .skills-group + .skills-group { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .sleek-footer { flex-direction: column; padding: 22px 20px 28px; } .detail-page { padding: 34px 20px 70px; } .detail-page__top { margin-bottom: 55px; } .detail-hero h1 { font-size: 62px; } .detail-grid { grid-template-columns: 1fr; gap: 36px; } .detail-facts { border-left: 0; border-top: 1px solid var(--sleek-rule); padding: 24px 0 0; } .wacc-pipeline { grid-template-columns: 1fr 1fr; } .pipeline-stage { border-bottom: 1px solid var(--sleek-rule); } }
+@media (max-width: 620px) { .sleek-header__inner { height: 62px; padding: 0 16px; } .sleek-cv { display: none; } .sleek-hero { min-height: calc(68svh - 62px); padding: 64px 20px 52px; } .sleek-hero h1 { font-size: 60px; } .hero-tagline { font-size: 16px; } .content-section { padding: 72px 20px; } .selected-work { padding-top: 42px; } .section-heading h2, .contact-section h2 { font-size: 50px; } .work-row { grid-template-columns: 48px minmax(0, 1fr) 18px; gap: 10px; } .work-row__tech { display: none; } .timeline-row { grid-template-columns: 1fr; gap: 8px; } .academic-grid, .skills-grid { grid-template-columns: 1fr; } .academic-record, .academic-record + .academic-record { padding: 22px 0; border-left: 0; } .skills-group, .skills-group + .skills-group { padding-left: 0; border-left: 0; } .skills-group + .skills-group { border-top: 1px solid var(--sleek-rule); padding-top: 22px; } .sleek-footer { flex-direction: column; padding: 22px 20px 28px; } .detail-page { padding: 34px 20px 70px; } .detail-page__top { margin-bottom: 55px; } .detail-hero h1 { font-size: 62px; } .detail-grid { grid-template-columns: 1fr; gap: 36px; } .detail-facts { border-left: 0; border-top: 1px solid var(--sleek-rule); padding: 24px 0 0; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; } }
 </style>

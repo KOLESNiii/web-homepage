@@ -87,7 +87,7 @@ const paneDescriptors: Record<string, PaneDescriptor[]> = {
     {
       pane_id: 'contact:open-to-roles',
       pane_type: 'contact',
-      pane_label: 'Open to graduate roles.',
+      pane_label: 'Open to 6 month placements.',
     },
     { pane_id: 'contact:ways-through', pane_type: 'contact', pane_label: 'Ways through.' },
     { pane_id: 'contact:end-of-the-line', pane_type: 'contact', pane_label: 'End of the line.' },

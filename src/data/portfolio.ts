@@ -67,12 +67,12 @@ export interface SectionLine {
    ========================================================================= */
 
 export const profile = {
-  name: 'Timofey Kolesnichenko',
+  name: 'Tim Kolesnichenko',
   shortName: 'Tim',
   initials: 'TK',
   role: 'Software Engineer',
   place: 'Imperial College London',
-  tagline: 'Compilers, kernels and interfaces — the whole line, end to end.',
+  tagline: 'Compilers, kernels and interfaces — from foundations to finished products.',
   email: 'timkolesnichenko05@gmail.com',
   github: 'https://github.com/KOLESNiii',
   linkedin: 'https://www.linkedin.com/in/tim-kolesnichenko',
@@ -83,10 +83,9 @@ export const profile = {
 }
 
 export const contact = {
-  heading: 'Open to graduate roles.',
-  status: 'Good service',
-  // TODO: confirm the intake wording once you know which cycle you're applying in.
-  note: `Graduating in 2028 and applying through the 2027 cycle. I'm after teams working close to
+  heading: 'Open to 6 month placements.',
+  status: 'Available',
+  note: `Available for a six-month placement from April to September. I'm after teams working close to
    the metal — compilers, systems, infrastructure — or on interfaces people actually enjoy using.
    If that sounds like yours, I'd like to hear about it.`,
 }
@@ -121,6 +120,9 @@ export interface AcademicResults {
   modules: Module[]
 }
 
+export const formatAcademicMark = (mark: Module['mark']) =>
+  typeof mark === 'number' ? mark.toFixed(2) : mark
+
 export const academics: AcademicResults = {
   year: 'Year 2',
   average: 80.81,
@@ -131,11 +133,11 @@ export const academics: AcademicResults = {
     { code: 'COMP50002', title: 'Software Engineering Design', mark: 86.84 },
     { code: 'COMP50013', title: 'Machine Learning', mark: 86.59 },
     { code: 'COMP50007', title: 'Computing Practical 2', mark: 82.09 },
-    { code: 'COMP50001', title: 'Algorithm Design and Analysis', mark: 82.0 },
-    { code: 'COMP50011', title: 'Computational Techniques', mark: 81.5 },
+    { code: 'COMP50001', title: 'Algorithm Design and Analysis', mark: 82.00 },
+    { code: 'COMP50011', title: 'Computational Techniques', mark: 81.50 },
     { code: 'COMP50003', title: 'Models of Computation', mark: 79.49 },
     { code: 'COMP50004', title: 'Operating Systems', mark: 76.98 },
-    { code: 'COMP50005', title: 'Networks and Communications', mark: 73.6 },
+    { code: 'COMP50005', title: 'Networks and Communications', mark: 73.60 },
     { code: 'COMP50010', title: 'Designing for Real People', mark: 69.15 },
   ] satisfies Module[],
 }
@@ -176,7 +178,7 @@ export const firstYearAcademics: AcademicResults = {
     },
     {
       title: 'Introduction to Computer Architecture',
-      mark: 64.5,
+      mark: 64.50,
     },
     {
       title: 'Introduction to Philosophy',

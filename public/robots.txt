@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kolesniii.github.io/web-homepage/sitemap.xml
+Sitemap: https://www.timkolesnichenko.me/sitemap.xml

@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://kolesniii.github.io/web-homepage/</loc>
+    <loc>https://www.timkolesnichenko.me/</loc>
+    <priority>1.0</priority>
   </url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/fed-up</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/wacc-compiler</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/pintos</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/roomie</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/armv8-emulator-assembler</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/classy-unit-mixer</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/democratune</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/interview-practice</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/projects/guitar-scar</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/academics/year-1</loc></url>
-  <url><loc>https://kolesniii.github.io/web-homepage/academics/year-2</loc></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/fed-up</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/wacc-compiler</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/pintos</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/roomie</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/armv8-emulator-assembler</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/classy-unit-mixer</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/democratune</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/interview-practice</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/projects/guitar-scar</loc><priority>0.8</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/academics/year-1</loc><priority>0.6</priority></url>
+  <url><loc>https://www.timkolesnichenko.me/academics/year-2</loc><priority>0.6</priority></url>
 </urlset>

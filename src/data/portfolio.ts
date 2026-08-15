@@ -384,10 +384,11 @@ export const projects: Project[] = [
     title: 'DemocraTune',
     blurb: 'The queue, decided by the room',
     description:
-      'A fork of the open-source SongUp queue where the room picks what plays. I wrote the scheduling layer that replaced first-come-first-served: round-robin across contributors, and a variant weighted by each user’s voting record. Also added per-client personal queues, play history and export of that history into a YouTube Music playlist, then moved the FastAPI service out of its nested layout and got it deploying properly behind the Next.js app.',
+      'An open-source shared music queue for parties. Guests join by QR code without an account, add songs, vote and take fair turns using first-come-first-served, round-robin or rating-weighted scheduling. I added room ratings, group skips, fallback playlists, play history with links to streaming services, and private Spotify playlist export.',
     year: '2025',
-    tech: ['TypeScript', 'Next.js', 'React', 'Convex', 'FastAPI'],
+    tech: ['TypeScript', 'Next.js', 'React', 'Convex'],
     repo: 'https://github.com/KOLESNiii/DemocraTune',
+    demo: 'https://democratune.timkolesnichenko.me/',
   },
   {
     title: 'Interview Practice',

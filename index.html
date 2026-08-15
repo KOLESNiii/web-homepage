@@ -7,8 +7,8 @@
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <meta name="theme-color" content="#12161d" />
     <meta name="author" content="Tim Kolesnichenko" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://kolesniii.github.io/web-homepage/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <link rel="canonical" href="https://www.timkolesnichenko.me/" />
     <link
       rel="alternate"
       type="application/json"
@@ -35,49 +35,72 @@
     <title>Tim Kolesnichenko — Software Engineer</title>
     <meta
       name="description"
-      content="Computing student at Imperial College London building compilers, kernels and interfaces. Open to graduate software engineering roles for 2028."
+      content="Computing student at Imperial College London building compilers, operating systems and polished interfaces. Explore projects, experience and academic results."
     />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content="profile" />
+    <meta property="og:url" content="https://www.timkolesnichenko.me/" />
+    <meta property="og:site_name" content="Tim Kolesnichenko" />
+    <meta property="og:locale" content="en_GB" />
     <meta property="og:title" content="Tim Kolesnichenko — Software Engineer" />
     <meta
       property="og:description"
-      content="Computing at Imperial College London. Compilers, kernels and interfaces — from foundations to finished products."
+      content="Computing student at Imperial College London building compilers, operating systems and polished interfaces. Explore projects, experience and academic results."
     />
-    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Tim Kolesnichenko — Software Engineer" />
+    <meta
+      name="twitter:description"
+      content="Computing student at Imperial College London building compilers, operating systems and polished interfaces."
+    />
 
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "Person",
-        "@id": "https://kolesniii.github.io/web-homepage/#person",
-        "name": "Tim Kolesnichenko",
-        "alternateName": "Tim Kolesnichenko",
-        "jobTitle": "Software Engineer",
-        "description": "Computing student at Imperial College London building compilers, kernels and interfaces. Open to graduate software engineering roles for 2028.",
-        "url": "https://kolesniii.github.io/web-homepage/",
-        "email": "timkolesnichenko05@gmail.com",
-        "affiliation": {
-          "@type": "CollegeOrUniversity",
-          "name": "Imperial College London"
-        },
-        "sameAs": [
-          "https://github.com/KOLESNiii",
-          "https://www.linkedin.com/in/tim-kolesnichenko"
-        ],
-        "knowsAbout": [
-          "Compilers",
-          "Operating systems",
-          "Concurrency",
-          "Computer architecture",
-          "Algorithms",
-          "Machine learning",
-          "Human-centred design"
-        ],
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": "https://kolesniii.github.io/web-homepage/"
-        }
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://www.timkolesnichenko.me/#website",
+            "url": "https://www.timkolesnichenko.me/",
+            "name": "Tim Kolesnichenko",
+            "inLanguage": "en-GB",
+            "author": { "@id": "https://www.timkolesnichenko.me/#person" }
+          },
+          {
+            "@type": "ProfilePage",
+            "@id": "https://www.timkolesnichenko.me/#profile",
+            "url": "https://www.timkolesnichenko.me/",
+            "name": "Tim Kolesnichenko — Software Engineer",
+            "mainEntity": { "@id": "https://www.timkolesnichenko.me/#person" },
+            "isPartOf": { "@id": "https://www.timkolesnichenko.me/#website" }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://www.timkolesnichenko.me/#person",
+            "name": "Tim Kolesnichenko",
+            "jobTitle": "Software Engineer",
+            "description": "Computing student at Imperial College London building compilers, operating systems and polished interfaces.",
+            "url": "https://www.timkolesnichenko.me/",
+            "email": "timkolesnichenko05@gmail.com",
+            "affiliation": {
+              "@type": "CollegeOrUniversity",
+              "name": "Imperial College London"
+            },
+            "sameAs": [
+              "https://github.com/KOLESNiii",
+              "https://www.linkedin.com/in/tim-kolesnichenko"
+            ],
+            "knowsAbout": [
+              "Compilers",
+              "Operating systems",
+              "Concurrency",
+              "Computer architecture",
+              "Algorithms",
+              "Machine learning",
+              "Human-centred design"
+            ]
+          }
+        ]
       }
     </script>
 

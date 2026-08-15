@@ -10,7 +10,7 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "build-only": "vite build && bun scripts/generate-seo-pages.ts",
     "content-check": "bun scripts/check-content-parity.ts",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix --cache",

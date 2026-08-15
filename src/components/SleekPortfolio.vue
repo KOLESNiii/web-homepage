@@ -104,6 +104,7 @@ import { ArrowUp, ArrowUpRight, Download, ExternalLink, MapPinned, Menu, Moon, S
 import { about, academics, contact, firstYearAcademics, profile, projects, skills, timeline } from '../data/portfolio'
 import { useTheme } from '../composables/useTheme'
 import { capture } from '../analytics'
+import { SITE_URL, seoForPath, slugify } from '../seo'
 
 const route = useRoute()
 const { theme, toggle } = useTheme()
@@ -113,7 +114,7 @@ const navItems = [{ id: 'work', label: 'Work' }, { id: 'path', label: 'Path' }, 
 const featuredTitles = new Set(['Fed Up', 'Roomie', 'DemocraTune'])
 const featuredProjects = projects.filter((project) => featuredTitles.has(project.title))
 const academicRecords = [academics, firstYearAcademics]
-const slug = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+const slug = slugify
 type ProjectMedia = { src: string; alt: string; caption: string; contain?: boolean }
 const media: Record<string, ProjectMedia> = {
   'Fed Up': {
@@ -168,14 +169,25 @@ const adjacentProjects = computed(() => {
 
 function scrollTop() { window.scrollTo({ top: 0, behavior: 'smooth' }) }
 function updateMeta() {
-  const project = detail.value.project
-  const title = project ? `${project.title} — Tim Kolesnichenko` : detail.value.results ? `${detail.value.results.year} results — Tim Kolesnichenko` : 'Tim Kolesnichenko — Software Engineer'
-  const description = project?.description ?? 'Computing student at Imperial College London building compilers, kernels and interfaces.'
+  const seo = seoForPath(route.path)
+  const canonical = `${SITE_URL}${route.path === '/' ? '/' : route.path}`
+  const title = seo?.title ?? 'Page not found — Tim Kolesnichenko'
+  const description = seo?.description ?? 'Personal portfolio of software engineer Tim Kolesnichenko.'
+  const setMeta = (selector: string, content: string) =>
+    document.querySelector(selector)?.setAttribute('content', content)
+
   document.title = title
-  document.querySelector('meta[name="description"]')?.setAttribute('content', description)
-  document.querySelector('meta[property="og:title"]')?.setAttribute('content', title)
-  document.querySelector('meta[property="og:description"]')?.setAttribute('content', description)
-  document.querySelector('link[rel="canonical"]')?.setAttribute('href', `${window.location.origin}${route.fullPath}`)
+  setMeta('meta[name="description"]', description)
+  setMeta('meta[name="robots"]', seo ? 'index, follow, max-image-preview:large' : 'noindex, follow')
+  setMeta('meta[property="og:type"]', seo?.type ?? 'website')
+  setMeta('meta[property="og:title"]', title)
+  setMeta('meta[property="og:description"]', description)
+  setMeta('meta[property="og:url"]', canonical)
+  setMeta('meta[name="twitter:title"]', title)
+  setMeta('meta[name="twitter:description"]', description)
+  document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonical)
+
+  const project = detail.value.project
   if (detail.value.kind !== 'home') capture('portfolio_detail_viewed', { view_mode: 'sleek', route: route.fullPath, detail_type: detail.value.kind, detail_label: project?.title ?? detail.value.results?.year })
 }
 watch(() => route.fullPath, updateMeta, { immediate: true })

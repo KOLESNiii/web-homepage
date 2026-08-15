@@ -1,4 +1,8 @@
-# web-homepage
+# Tim Kolesnichenko — personal website
+
+Source for [timkolesnichenko.me](https://www.timkolesnichenko.me/), the portfolio of software engineer and Imperial College London Computing student [Tim Kolesnichenko](https://github.com/KOLESNiii).
+
+Featured work includes [DemocraTune](https://democratune.timkolesnichenko.me/), an open-source shared music queue for parties ([source](https://github.com/KOLESNiii/DemocraTune)).
 
 ## Analytics
 

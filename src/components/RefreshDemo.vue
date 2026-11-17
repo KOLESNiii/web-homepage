@@ -28,7 +28,7 @@
           <Play :size="18" aria-hidden="true" />
           Launch the demo
         </span>
-        <span class="refresh-demo__note">About 17 MB · best on a laptop or desktop</span>
+        <span class="refresh-demo__note">About 17 MB · works on phones too</span>
       </button>
     </div>
 

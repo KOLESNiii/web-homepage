@@ -331,6 +331,16 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    title: 'Refresh',
+    blurb: 'Your home, rearranged by an agent that measures',
+    description:
+      'Built with three teammates at the Imperial AI Soc AI Hackathon 2026, where it placed second in the Voice, Vision & Generative Media track. Photograph an estate-agent floor plan and film a walkthrough on your phone: Refresh reads the plan into rooms with real-metre walls, doors and windows, cuts your actual furniture out of the video with SAM 3 and rebuilds each piece in 3D with TRELLIS.2, rescaled to its true size. Ask a Claude agent to rearrange the room and a Shapely geometry engine checks every move for collisions, blocked doors, clearance and walkable floor before you see it. Then walk the result in first person, or shop 100 real IKEA pieces at their published sizes.',
+    year: '2026',
+    tech: ['React', 'Three.js', 'FastAPI', 'Claude', 'fal.ai'],
+    repo: 'https://github.com/KOLESNiii/AI_HACKATHON_PROJECT',
+    demo: '/demos/refresh/',
+  },
+  {
     title: 'Fed Up',
     blurb: 'Food planning built around plans failing',
     description:

@@ -4,6 +4,7 @@
     <loc>https://www.timkolesnichenko.me/</loc>
     <priority>1.0</priority>
   </url>
+  <url><loc>https://www.timkolesnichenko.me/projects/refresh</loc><priority>0.8</priority></url>
   <url><loc>https://www.timkolesnichenko.me/projects/fed-up</loc><priority>0.8</priority></url>
   <url><loc>https://www.timkolesnichenko.me/projects/wacc-compiler</loc><priority>0.8</priority></url>
   <url><loc>https://www.timkolesnichenko.me/projects/pintos</loc><priority>0.8</priority></url>

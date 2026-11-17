@@ -138,6 +138,11 @@ const media: Record<string, ProjectMedia> = {
     alt: 'Interview Practice recording screen with question, timers and notes controls',
     caption: 'Captured from the project running locally.',
   },
+  Refresh: {
+    src: '/project-media/refresh.webp',
+    alt: 'The Refresh editor: a 3D bedroom beside an agent proposal that raises the Feng Shui score from 50 to 99',
+    caption: 'Captured from the live demo.',
+  },
   'Guitar Scar': {
     src: '/project-media/guitar-scar.webp',
     alt: 'Guitar Scar pixel-art dungeon exploration with the player approaching an enemy',
@@ -209,6 +214,7 @@ import { ArrowLeft, ArrowRight } from 'lucide-vue-next'
 import { RouterLink as DetailRouterLink } from 'vue-router'
 import { formatAcademicMark, type AcademicResults, type Project } from '../data/portfolio'
 import WaccPipeline from './WaccPipeline.vue'
+import RefreshDemo from './RefreshDemo.vue'
 
 type DetailMedia = { src: string; alt: string; caption: string; contain?: boolean }
 
@@ -225,13 +231,15 @@ const ProjectDetail = defineComponent({
       h('header', { class: 'detail-hero' }, [h('p', { class: 'eyebrow' }, `${props.project.year} · project detail`), h('h1', props.project.title), h('p', { class: 'detail-hero__blurb' }, props.project.blurb)]),
       props.project.title === 'WACC Compiler'
         ? h(WaccPipeline)
-        : props.media
+        : props.project.title === 'Refresh'
+          ? h(RefreshDemo)
+          : props.media
           ? h('figure', { class: ['detail-visual', 'detail-visual--capture', { 'is-contain': props.media.contain }] }, [
               h('img', { src: props.media.src, alt: props.media.alt, loading: 'eager' }),
               h('figcaption', props.media.caption),
             ])
           : h('div', { class: ['detail-visual', `detail-visual--${props.project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`] }, props.project.tech.join('  /  ')),
-      h('div', { class: 'detail-grid' }, [h('div', { class: 'detail-copy' }, [h('p', props.project.description)]), h('aside', { class: 'detail-facts' }, [h('p', { class: 'eyebrow' }, 'Built with'), h('ul', props.project.tech.map((item) => h('li', item))), props.project.repo ? h('a', { class: 'text-link', href: props.project.repo, target: '_blank', rel: 'noopener' }, [h(ExternalLink, { size: 15 }), ' Source']) : h('p', { class: 'detail-request' }, 'Source available upon request.')])]),
+      h('div', { class: 'detail-grid' }, [h('div', { class: 'detail-copy' }, [h('p', props.project.description)]), h('aside', { class: 'detail-facts' }, [h('p', { class: 'eyebrow' }, 'Built with'), h('ul', props.project.tech.map((item) => h('li', item))), props.project.repo ? h('a', { class: 'text-link', href: props.project.repo, target: '_blank', rel: 'noopener' }, [h(ExternalLink, { size: 15 }), ' Source']) : h('p', { class: 'detail-request' }, 'Source available upon request.'), props.project.demo ? h('a', { class: 'text-link detail-demo-link', href: props.project.demo, target: '_blank', rel: 'noopener' }, [h(ExternalLink, { size: 15 }), ' Live demo']) : null])]),
       h('nav', { class: 'detail-next', 'aria-label': 'Adjacent projects' }, [
         h(DetailRouterLink, { to: `/projects/${props.previousProject.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`, class: 'text-link' }, { default: () => [h(ArrowLeft, { size: 15 }), ` Previous: ${props.previousProject.title}`] }),
         h(DetailRouterLink, { to: `/projects/${props.nextProject.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`, class: 'text-link' }, { default: () => [`Next: ${props.nextProject.title} `, h(ArrowRight, { size: 15 })] }),
@@ -330,6 +338,7 @@ export default { components: { ProjectDetail, AcademicDetail } }
 .academic-record > span:not(.academic-record__year):not(.text-link) { color: var(--sleek-muted); font-size: 13px; }
 .text-link { display: inline-flex; align-items: center; gap: 7px; color: var(--sleek-accent); text-decoration: none; font-size: 13px; }
 .academic-record .text-link { margin-top: 16px; }
+.detail-facts .detail-demo-link { margin-left: 18px; }
 .skills-section { border-top: 1px solid var(--sleek-rule); }
 .skills-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--sleek-rule); }
 .skills-group { padding: 22px 20px 0 0; }

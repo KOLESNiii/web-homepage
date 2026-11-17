@@ -2,9 +2,6 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { SITE_URL, seoPages } from '../src/seo'
 
-const outputDirectory = join(import.meta.dir, '..', 'dist')
-const rootHtml = await readFile(join(outputDirectory, 'index.html'), 'utf8')
-
 const escapeAttribute = (value: string) =>
   value
     .replaceAll('&', '&amp;')
@@ -23,7 +20,13 @@ function replaceMeta(html: string, attribute: 'name' | 'property', key: string, 
     : html.replace('</head>', `    ${tag}\n  </head>`)
 }
 
-function pageHtml(path: string, title: string, description: string, type: string) {
+function pageHtml(
+  rootHtml: string,
+  path: string,
+  title: string,
+  description: string,
+  type: string,
+) {
   const canonical = `${SITE_URL}${path === '/' ? '/' : path}`
   let html = rootHtml
     .replace(/<title>.*?<\/title>/is, `<title>${escapeAttribute(title)}</title>`)
@@ -43,13 +46,23 @@ function pageHtml(path: string, title: string, description: string, type: string
   return html
 }
 
-for (const page of seoPages.filter(({ path }) => path !== '/')) {
-  const directory = join(outputDirectory, page.path.slice(1))
-  await mkdir(directory, { recursive: true })
-  await writeFile(
-    join(directory, 'index.html'),
-    pageHtml(page.path, page.title, page.description, page.type),
-  )
-}
+/**
+ * Writes a prerendered index.html (with route-specific metadata) for every
+ * project and academics route into the build output. Runs from the Vite build
+ * itself (see vite.config.ts) so it happens whatever build command the host uses.
+ */
+export async function generateSeoPages(outputDirectory: string) {
+  const rootHtml = await readFile(join(outputDirectory, 'index.html'), 'utf8')
+  const pages = seoPages.filter(({ path }) => path !== '/')
 
-console.log(`Generated ${seoPages.length - 1} crawlable detail pages with route-specific metadata.`)
+  for (const page of pages) {
+    const directory = join(outputDirectory, page.path.slice(1))
+    await mkdir(directory, { recursive: true })
+    await writeFile(
+      join(directory, 'index.html'),
+      pageHtml(rootHtml, page.path, page.title, page.description, page.type),
+    )
+  }
+
+  return pages.length
+}

@@ -2,13 +2,28 @@
   "redirects": [
     {
       "source": "/:path*",
-      "has": [{ "type": "host", "value": "timkolesnichenko.me" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "timkolesnichenko.me"
+        }
+      ],
       "destination": "https://www.timkolesnichenko.me/:path*",
       "permanent": true
     }
   ],
   "rewrites": [
-    { "source": "/projects/:slug", "destination": "/projects/:slug/index.html" },
-    { "source": "/academics/:year", "destination": "/academics/:year/index.html" }
+    {
+      "source": "/projects/:slug",
+      "destination": "/projects/:slug/index.html"
+    },
+    {
+      "source": "/academics/:year",
+      "destination": "/academics/:year/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
